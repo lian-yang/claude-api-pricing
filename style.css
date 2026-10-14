@@ -47,7 +47,7 @@ input[type=range]{width:100%;margin-top:10px;accent-color:var(--acc);height:28px
 .verdict.api{border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.08)}
 .verdict.plan{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.08)}
 .bars{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
-.bar{display:grid;grid-template-columns:92px 1fr 74px;align-items:center;gap:10px;font-size:13px}
+.bar{display:grid;grid-template-columns:112px 1fr 74px;align-items:center;gap:10px;font-size:13px}
 .bar .bl{color:var(--tx2);font-weight:600}
 .bar .bf{height:22px;border-radius:5px;background:var(--line);min-width:6px}
 .bar .bf.api{background:linear-gradient(90deg,#0ea5e9,#38bdf8)}
