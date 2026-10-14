@@ -22,6 +22,10 @@
 {"@type":"Question","name":"Is Claude Code cheaper on a subscription or the API?","acceptedAnswer":{"@type":"Answer","text":"For interactive daily coding inside the caps, the subscription is dramatically cheaper — a flat $20–200 covers what would be $70–500+ of API tokens. The API wins for unattended automation, 24/7 agents, workloads that can't pause for 5-hour windows, and caching-heavy pipelines (cached Sonnet 5.5 input is $0.10 per million tokens). Our homepage calculator computes the exact breakeven for your token mix."}},
 {"@type":"Question","name":"Why does Claude Code burn through limits so fast?","acceptedAnswer":{"@type":"Answer","text":"Claude Code re-reads project context on every turn, so coding workloads are input-heavy — often 10 tokens of input for every 1 of output. That inflates token consumption against a fixed per-window allowance. Leveraging CLAUDE.md concisely, prompt caching, and picking Haiku 5.5 or Sonnet 5.5 over Opus for routine edits all stretch a window further."}}]}
 </script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
 </head>
 <body>
 <header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/claude-code-pricing">Claude Code</a><a href="/#api-prices">Claude Prices</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a></nav></div></header>
