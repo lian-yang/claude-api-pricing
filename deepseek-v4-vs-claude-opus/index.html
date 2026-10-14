@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
 <title>DeepSeek V4 Pro vs Claude Opus 5.5: Price & Cost Math (2026)</title>
-<meta name="description" content="DeepSeek V4 Pro vs Claude Opus 5.5: $3.96 vs $20 per million output tokens, 1M vs 200K context, off-peak half pricing — which workloads each model wins.">
+<meta name="description" content="DeepSeek V4 Pro & V4.1 vs Claude Opus 5.5: $3.96 vs $20 per million output tokens (V4.1-Flash: 17x cheaper), 1M vs 200K context, off-peak half pricing — which workloads each model wins.">
 <link rel="canonical" href="https://claude-api-pricing.vercel.app/deepseek-v4-vs-claude-opus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DeepSeek V4 Pro vs Claude Opus 5.5 (2026)">
@@ -17,7 +17,8 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Is DeepSeek V4 Pro cheaper than Claude Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"Yes — about 3x cheaper on input ($1.32 vs $4.00 per million tokens at peak) and about 5x cheaper on output ($3.96 vs $20.00). During DeepSeek's off-peak hours the gap widens to roughly 6x on input and 10x on output, since off-peak rates are half of peak while Claude's prices are flat."}},
 {"@type":"Question","name":"Does DeepSeek V4 Pro have a bigger context window than Claude Opus?","acceptedAnswer":{"@type":"Answer","text":"Yes: DeepSeek V4 models take 1,000,000-token contexts with up to 384K output tokens, versus roughly 200K tokens on Claude Opus 5.5. For whole-codebase analysis or very long documents, DeepSeek fits 5x more into a single request — which also avoids the cost of splitting and re-sending context."}},
-{"@type":"Question","name":"When should I still pay for Claude Opus over DeepSeek V4 Pro?","acceptedAnswer":{"@type":"Answer","text":"Price is not the whole story: Opus-class models are typically stronger on long-horizon agentic work, nuanced writing and complex tool use, and Claude's prompt caching, batch discounts and ecosystem maturity reduce real-world costs. Benchmark both on your own workload — a 5x price gap can vanish if the cheaper model needs 3x more attempts to get a task right."}}]}
+{"@type":"Question","name":"When should I still pay for Claude Opus over DeepSeek V4 Pro?","acceptedAnswer":{"@type":"Answer","text":"Price is not the whole story: Opus-class models are typically stronger on long-horizon agentic work, nuanced writing and complex tool use, and Claude's prompt caching, batch discounts and ecosystem maturity reduce real-world costs. Benchmark both on your own workload — a 5x price gap can vanish if the cheaper model needs 3x more attempts to get a task right."}},
+{"@type":"Question","name":"DeepSeek V4.1 vs Claude Opus 5.5 — how big is the gap?","acceptedAnswer":{"@type":"Answer","text":"DeepSeek V4.1-Flash bills $0.30 input / $1.20 output per million tokens at peak, half that off-peak, versus Claude Opus 5.5's $4/$20 — about 13x cheaper on input and 17x on output (up to ~27x on off-peak input). V4.1-Flash is also the multimodal sibling carrying DeepSeek's vision. The trade-off is capability tier: for long-horizon agentic work and high-stakes writing, Opus-class models still justify their premium per attempt."}}]}
 </script>
 </head>
 <body>
@@ -42,6 +43,16 @@
     <tr><td>Max output</td><td class="win">384K tokens</td><td>64K-class</td><td>6x</td></tr>
   </table></div>
   <p class="hint">DeepSeek peak/off-peak defined on our <a href="/deepseek-v4-pricing">DeepSeek V4 pricing page</a>. Claude prices per the official API pricing as of Oct 2026; prompt-cached Claude input on Opus-class models runs ~10% of list.</p>
+
+  <h3 id="v41-flash">The budget face: DeepSeek V4.1-Flash vs Opus 5.5</h3>
+  <p>If you're comparing Claude Opus against DeepSeek's <b>V4.1</b> generation rather than V4 Pro, the gap gets extreme. V4.1-Flash — the multimodal sibling that also carries DeepSeek's vision — bills <b>$0.30 input / $1.20 output per million at peak</b> (half that off-peak):</p>
+  <div class="tbl"><table>
+    <tr><th></th><th>DeepSeek V4.1-Flash</th><th>Claude Opus 5.5</th><th>Gap</th></tr>
+    <tr><td>Input (peak)</td><td>$0.30</td><td>$4.00</td><td>13.3x</td></tr>
+    <tr><td>Output (peak)</td><td>$1.20</td><td>$20.00</td><td>16.7x</td></tr>
+    <tr><td>Off-peak input</td><td class="win">$0.15</td><td>$4.00</td><td>26.7x</td></tr>
+  </table></div>
+  <p>At the workload below (30M input + 5M output daily), a month on V4.1-Flash costs <b>~$450 at peak, ~$225 off-peak — about what one to two Opus days cost</b>. The catch is capability tier, not price: V4.1-Flash is a fast, cheap, multimodal workhorse — for long-horizon agentic chains, delicate refactors and high-stakes writing, Opus-class models still justify their premium per attempt.</p>
 
   <h2>What a real workload costs</h2>
   <p>Take a heavy daily agent: <b>30M input + 5M output tokens per day</b> (large codebase context, long runs).</p>
@@ -73,6 +84,7 @@
     <details><summary>Is DeepSeek V4 Pro cheaper than Claude Opus 5.5?</summary><div class="a">Yes: ~3x on input and ~5x on output at peak list prices ($1.32/$3.96 vs $4/$20 per million tokens), widening to ~6x/~10x during DeepSeek's off-peak half-price hours.</div></details>
     <details><summary>Which has the bigger context window?</summary><div class="a">DeepSeek V4: 1M tokens in, up to 384K out — roughly 5x Claude Opus 5.5's ~200K context. Long-context jobs also avoid the repeated-context cost of splitting into multiple requests.</div></details>
     <details><summary>Does DeepSeek V4 Pro support images?</summary><div class="a">No — V4-Pro is text-only. Vision lives on DeepSeek V4.1-Flash ($0.30/$1.20 peak per million) and on the retired-but-routed v4-flash-vision-exp naming. Claude Opus 5.5 is natively multimodal.</div></details>
+    <details><summary>DeepSeek V4.1 vs Claude Opus 5.5 — how big is the gap?</summary><div class="a">V4.1-Flash bills $0.30/$1.20 per million tokens at peak ($0.15/$0.60 off-peak) versus Opus 5.5's $4/$20 — roughly 13x on input and 17x on output, widening to ~27x on off-peak input. V4.1-Flash is also the multimodal sibling (it carries DeepSeek's vision); the trade-off is capability tier, not price.</div></details>
     <details><summary>When is paying for Opus worth it?</summary><div class="a">When capability per attempt dominates: complex agentic chains, high-stakes writing, or tasks where the cheaper model's retry rate erases its discount. Benchmark both on your real workload before routing.</div></details>
     <details><summary>How do I cut a Claude bill without switching models?</summary><div class="a">Prompt caching (cached input from a fraction of list), batch APIs, and — for interactive use — checking whether a subscription plan beats API billing at your volume: run your numbers in our <a href="/#calculator">breakeven calculator</a>.</div></details>
   </div>
