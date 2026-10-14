@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Claude API Pricing vs Subscription (2026) — Breakeven Calculator</title>
+<meta name="description" content="Free calculator: Claude API vs Pro vs Max subscription costs. Per-model token prices for Opus, Sonnet, Haiku + breakeven math. Updated Oct 2026.">
+<meta property="og:title" content="Claude API Pricing vs Subscription (2026) — Breakeven Calculator">
+<meta property="og:description" content="Interactive calculator: how much does the Claude API really cost vs Pro $20 and Max plans? Live per-model token prices, breakeven math, and when each plan wins.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is the Claude API cheaper than a Claude Pro subscription?","acceptedAnswer":{"@type":"Answer","text":"It depends on volume. On Sonnet 5.5 pricing ($2 per million input, $10 per million output tokens), the API breaks even with the $20/mo Pro plan at roughly 220K input and 22K output tokens per day. Below that, Pro is cheaper; above it, API costs scale linearly while Pro stays flat until you hit its 5-hour and weekly usage caps."}},
+{"@type":"Question","name":"How much does the Claude API cost per million tokens?","acceptedAnswer":{"@type":"Answer","text":"As of October 2026: Claude Opus 5.5 costs $4 input / $20 output per million tokens, Claude Opus 5 costs $5/$25, Claude Sonnet 5.5 and Sonnet 5 cost $2/$10, Claude Haiku 4.5 costs $1/$5, and Claude Haiku 5.5 costs $0.10/$0.50. Prompt caching cuts input costs dramatically — cached input starts at $0.01 per million tokens on Haiku 5.5."}},
+{"@type":"Question","name":"What are Claude's subscription plans in 2026?","acceptedAnswer":{"@type":"Answer","text":"Claude offers Free ($0), Pro at $20/month monthly or $17/month billed annually, Max 5x at $100/month, Max 20x at $200/month, and Team seats from $25/month monthly ($20 annual) up to $125/month for Premium seats. All paid plans draw from one usage pool across web, desktop, mobile and Claude Code, measured in rolling 5-hour session windows plus weekly limits."}},
+{"@type":"Question","name":"Do Claude Max plans include API credits?","acceptedAnswer":{"@type":"Answer","text":"Max plans raise your usage caps and add priority access at peak times. When you hit your limits, you can keep working by enabling extra usage that is billed at standard API rates. Team plans can pool up to $500/month in API credits. The subscription itself does not convert into unrestricted API access."}},
+{"@type":"Question","name":"How do Claude's 5-hour limits work?","acceptedAnswer":{"@type":"Answer","text":"Usage resets in rolling 5-hour session windows, and paid plans add weekly limits on top. Every surface — claude.ai chat, desktop app, mobile and Claude Code — draws from the same pool. Heavy Claude Code sessions can exhaust a window in under an hour, which is why API access matters for automation."}},
+{"@type":"Question","name":"When does the Claude API win vs a subscription?","acceptedAnswer":{"@type":"Answer","text":"The API wins for unattended automation and agents that run past 5-hour windows, high daily token volume, caching-heavy pipelines (cached input from $0.01/MTok), and any workload that cannot tolerate rate limits. The subscription wins for interactive daily use inside the caps — a flat $20 covers what would be hundreds of dollars of API tokens."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Claude API vs Subscription Breakeven Calculator","url":"https://claude-api-pricing.vercel.app","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free interactive calculator that compares Claude API token costs against Pro and Max subscription prices, with per-model pricing for Opus, Sonnet and Haiku and a daily breakeven estimate."}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="#calculator">Calculator</a><a href="#api-prices">API Prices</a><a href="#plans">Plans</a><a href="#math">The Math</a><a href="#faq">FAQ</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Free · No signup · Prices updated Oct 14, 2026</div>
+  <h1>Claude API pricing vs subscription — where's your breakeven?</h1>
+  <p class="sub">A flat $20 Pro plan can cover <b>hundreds of dollars</b> of API tokens — until you hit the caps. Enter your daily usage and see exactly where the API overtakes Pro and Max, with live per-model prices for Opus, Sonnet and Haiku.</p>
+</div></div>
+
+<section id="calculator" style="padding-top:8px"><div class="wrap">
+<div class="calc">
+  <div class="calc-inputs">
+    <h2>Your usage</h2>
+    <div class="presets" role="group" aria-label="Usage presets">
+      <button data-preset="light">Light chat</button>
+      <button data-preset="coding" class="on">Daily Claude Code</button>
+      <button data-preset="agent">Agent / automation</button>
+    </div>
+    <label>Model
+      <select id="model">
+        <option value="sonnet55" selected>Claude Sonnet 5.5 — $2 / $10 per MTok</option>
+        <option value="opus55">Claude Opus 5.5 — $4 / $20 per MTok</option>
+        <option value="opus5">Claude Opus 5 — $5 / $25 per MTok</option>
+        <option value="haiku45">Claude Haiku 4.5 — $1 / $5 per MTok</option>
+        <option value="haiku55">Claude Haiku 5.5 — $0.10 / $0.50 per MTok</option>
+      </select>
+    </label>
+    <label>Input tokens per day <output id="inVal">800K</output>
+      <input type="range" id="inTok" min="10000" max="20000000" step="10000" value="800000">
+    </label>
+    <label>Output tokens per day <output id="outVal">80K</output>
+      <input type="range" id="outTok" min="1000" max="4000000" step="1000" value="80000">
+    </label>
+    <p class="hint">Claude Code and agent workloads are input-heavy: context gets re-read every turn, so input tokens typically outnumber output 10:1. Drag both sliders to match your traffic.</p>
+  </div>
+  <div class="calc-out">
+    <div class="verdict" id="verdict">…</div>
+    <div class="bars" id="bars"></div>
+    <div class="breakeven" id="breakeven"></div>
+    <p class="hint">Subscriptions include claude.ai, desktop, mobile and Claude Code under 5-hour session windows plus weekly caps. The API has no usage caps — you build the harness and pay per token. Cached input (from $0.01/MTok) can cut API input costs by 90–99% on repetitive prompts.</p>
+  </div>
+</div>
+</div></section>
+
+<section id="api-prices"><div class="wrap prose">
+<h2>Claude API pricing per million tokens (October 2026)</h2>
+<p>Anthropic charges the API per token, separately for input and output. These are the standard rates; prompt caching prices apply to cached input tokens and are dramatically cheaper on the newest models.</p>
+<div class="tbl"><table>
+<thead><tr><th>Model</th><th>Input / MTok</th><th>Cached input / MTok</th><th>Output / MTok</th><th>Context</th></tr></thead>
+<tbody>
+<tr><td>Claude Opus 5.5</td><td>$4.00</td><td>$0.20</td><td>$20.00</td><td>1M</td></tr>
+<tr><td>Claude Opus 5</td><td>$5.00</td><td>$0.50</td><td>$25.00</td><td>1M</td></tr>
+<tr><td>Claude Opus 4.8 / 4.7 / 4.6 / 4.5</td><td>$5.00</td><td>—</td><td>$25.00</td><td>200K–1M</td></tr>
+<tr><td>Claude Sonnet 5.5</td><td>$2.00</td><td>$0.10</td><td>$10.00</td><td>1M</td></tr>
+<tr><td>Claude Sonnet 5</td><td>$2.00</td><td>$0.20</td><td>$10.00</td><td>1M</td></tr>
+<tr><td>Claude Sonnet 4.6 / 4.5 / 4</td><td>$3.00</td><td>—</td><td>$15.00</td><td>200K</td></tr>
+<tr><td>Claude Haiku 4.5</td><td>$1.00</td><td>$0.10</td><td>$5.00</td><td>200K</td></tr>
+<tr><td>Claude Haiku 5.5</td><td>$0.10</td><td>$0.01</td><td>$0.50</td><td>1M</td></tr>
+</tbody>
+</table></div>
+<p class="hint">Opus 5.5 landed at $4/$20 — roughly a 20% cut from Opus 5's $5/$25 — and Sonnet 5.5 added a $0.10 cached-input tier. Preview research models (Mythos, Fable) run $10–$25 input and are rarely the right pick for cost math. Prices sourced from public trackers and Anthropic's docs on Oct 14, 2026 — always confirm on the official pricing page before budgeting.</p>
+
+<h2>Claude subscription plans and what they include</h2>
+<div class="tbl"><table>
+<thead><tr><th>Plan</th><th>Price</th><th>Usage</th><th>Best for</th></tr></thead>
+<tbody>
+<tr><td>Free</td><td>$0</td><td>Standard window, lowest priority</td><td>Trying Claude</td></tr>
+<tr><td>Pro</td><td>$20/mo ($17/mo annual)</td><td>≥5× Free per 5-hour session + weekly caps</td><td>Daily interactive use, Claude Code side projects</td></tr>
+<tr><td>Max 5x</td><td>$100/mo</td><td>5× Pro per 5-hour session, priority at peak</td><td>Heavy daily drivers</td></tr>
+<tr><td>Max 20x</td><td>$200/mo</td><td>20× Pro per 5-hour session, priority at peak</td><td>Power users who still want guardrails</td></tr>
+<tr><td>Team</td><td>$25–125/seat/mo</td><td>Standard ≥ Pro; Premium 5× standard; up to $500/mo pooled API credits</td><td>2–150 people, billing + admin</td></tr>
+</tbody>
+</table></div>
+</div></section>
+
+<section id="math"><div class="wrap prose">
+<h2>The real math: API vs Pro vs Max, three worked examples</h2>
+<p>All three examples use <b>Sonnet 5.5</b> at $2 per million input and $10 per million output tokens, billed over 30 days.</p>
+<h3>1 · Light chat — 60K input, 6K output per day</h3>
+<p>Daily cost: (0.06M × $2) + (0.006M × $10) = <b>$0.18</b> → about <b>$5.40/month</b>. The $20 Pro plan wins outright, and you get claude.ai, Projects, Claude Code and the desktop app on top. Nobody should pay API rates for pure chat.</p>
+<h3>2 · Daily Claude Code — 800K input, 80K output per day</h3>
+<p>Daily cost: (0.8M × $2) + (0.08M × $10) = <b>$2.40</b> → about <b>$72/month</b>. Pro's $20 is far cheaper <i>if your usage fits inside the 5-hour and weekly caps</i>. Heavy Claude Code users routinely burn a Pro window in a morning — that's exactly who Max 5x ($100) targets: still flat-rate, ~4× the token budget of this example.</p>
+<h3>3 · Agent / automation — 6M input, 600K output per day</h3>
+<p>Daily cost: (6M × $2) + (0.6M × $10) = <b>$18</b> → about <b>$540/month</b>. Max 20x ($200) is nominally cheaper but its caps assume interactive rhythms, not 24/7 runs — unattended agents blow through weekly limits in days. At this volume the API is the only honest answer, and prompt caching is the next lever: a cached-heavy pipeline at $0.10/MTok input drops the input line from $360 to $18 a month.</p>
+<h3>The breakeven, in one sentence</h3>
+<p>On Sonnet 5.5 with a typical 10:1 input/output mix, <b>the API overtakes Pro at roughly 220K input tokens per day (~22K output)</b>, and it overtakes Max 5x near 1.1M input per day. The calculator above computes this for your exact mix and model — the sliders <i>are</i> the model.</p>
+
+<h2>Which should you pick?</h2>
+<ul>
+<li><b>Pick Pro ($20)</b> if you use Claude interactively a few hours a day and can live inside the windows. It's the cheapest tokens on the market, period.</li>
+<li><b>Pick Max 5x / 20x</b> if you love flat pricing but keep hitting weekly caps — you're buying headroom, not different economics.</li>
+<li><b>Pick the API</b> if any of these are true: your workload runs unattended or overnight; you need zero rate limits; you already have (or want) programmatic access; or caching covers most of your input. Above the breakeven, every extra token is the same price — predictability beats caps.</li>
+<li><b>Hybrid</b>: many teams run Claude Code on a Max seat for interactive work and shift batch jobs to the API with Haiku 5.5 or cached Sonnet — the calculator's preset slider shows both bills at once.</li>
+</ul>
+</div></section>
+
+<section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
+<details open><summary>Is the Claude API cheaper than a Claude Pro subscription?</summary><div class="a">It depends on volume. On Sonnet 5.5 pricing ($2/M input, $10/M output), the API breaks even with $20 Pro at roughly 220K input and 22K output tokens per day. Below that, Pro wins; above it, API costs scale linearly while Pro stays flat until you hit the 5-hour and weekly caps.</div></details>
+<details><summary>How much does the Claude API cost per million tokens?</summary><div class="a">October 2026 rates: Opus 5.5 $4 in / $20 out; Opus 5 $5/$25; Sonnet 5.5 and Sonnet 5 $2/$10; Haiku 4.5 $1/$5; Haiku 5.5 $0.10/$0.50. Cached input runs from $0.01/MTok (Haiku 5.5) to $0.50/MTok (Opus 5).</div></details>
+<details><summary>What are Claude's subscription plans in 2026?</summary><div class="a">Free $0; Pro $20/month ($17 monthly-billed annually); Max 5x $100; Max 20x $200; Team $20–25/seat standard and $100–125 premium. All paid plans share one usage pool across web, desktop, mobile and Claude Code, measured in rolling 5-hour windows plus weekly limits.</div></details>
+<details><summary>Do Claude Max plans include API credits?</summary><div class="a">Max raises caps and adds peak-time priority. Once you hit limits you can enable extra usage billed at standard API rates, and Team plans can pool up to $500/month of API credits — but a Max subscription is not unrestricted API access.</div></details>
+<details><summary>How do Claude's 5-hour limits work?</summary><div class="a">Usage resets in rolling 5-hour session windows, with weekly limits stacked on top for paid plans. Chat, desktop, mobile and Claude Code all draw the same pool. A heavy Claude Code session can drain a Pro window in under an hour.</div></details>
+<details><summary>When does the Claude API win vs a subscription?</summary><div class="a">Unattended automation, 24/7 agents, high daily volume, caching-heavy pipelines, and anything that can't tolerate rate limits. If your work fits in interactive windows, the subscription's flat rate is unbeatable.</div></details>
+<details><summary>Did Claude API prices change recently?</summary><div class="a">Yes — Opus 5.5 launched at $4/$20, about 20% below Opus 5's $5/$25, and Sonnet 5.5 introduced a $0.10 cached-input tier. The trend across 2026 has been flagship prices drifting down while subscription caps tighten.</div></details>
+</div></div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with or endorsed by Anthropic. “Claude” is a trademark of Anthropic, PBC. Prices collected from public sources on Oct 14, 2026 — verify current rates at <a rel="nofollow" href="https://claude.com/pricing">claude.com/pricing</a> and the <a rel="nofollow" href="https://platform.claude.com/docs/en/about-claude/pricing">official API pricing docs</a>.</div>
+</div></footer>
+
+<script>
+(function(){
+  var MODELS={
+    sonnet55:{name:"Sonnet 5.5",pin:2,pout:10},
+    opus55:{name:"Opus 5.5",pin:4,pout:20},
+    opus5:{name:"Opus 5",pin:5,pout:25},
+    haiku45:{name:"Haiku 4.5",pin:1,pout:5},
+    haiku55:{name:"Haiku 5.5",pin:0.10,pout:0.50}
+  };
+  var PLANS=[{name:"Pro",price:20},{name:"Max 5x",price:100},{name:"Max 20x",price:200}];
+  var $=function(id){return document.getElementById(id)};
+  function fmtTok(n){
+    if(n>=1e6) return (n/1e6).toFixed(n%1e6?1:0)+"M";
+    if(n>=1e3) return Math.round(n/1e3)+"K";
+    return String(n);
+  }
+  function fmtUSD(n){
+    if(n>=100) return "$"+Math.round(n).toLocaleString();
+    if(n>=10) return "$"+n.toFixed(0);
+    return "$"+n.toFixed(2);
+  }
+  function dailyCost(m,inp,out){ return (inp/1e6)*m.pin + (out/1e6)*m.pout; }
+  function render(){
+    var m=MODELS[$("model").value], inp=+$("inTok").value, out=+$("outTok").value, days=30;
+    $("inVal").textContent=fmtTok(inp); $("outVal").textContent=fmtTok(out);
+    var api=dailyCost(m,inp,out)*days;
+    var rows=[{name:"API ("+m.name+")",price:api,api:true}].concat(PLANS.map(function(p){return{name:p.name,price:p.price}}));
+    var min=rows.reduce(function(a,b){return a.price<b.price?a:b});
+    var v=$("verdict");
+    if(min.api){ v.innerHTML="🏆 <b>API wins</b> at "+fmtUSD(api)+"/mo — cheaper than every plan, with zero caps."; v.className="verdict api"; }
+    else{ v.innerHTML="🏆 <b>"+min.name+" wins</b> at "+fmtUSD(min.price)+"/mo — API would cost "+fmtUSD(api)+" for this volume."; v.className="verdict plan"; }
+    var max=Math.max.apply(null,rows.map(function(r){return r.price}));
+    $("bars").innerHTML=rows.map(function(r){
+      var pct=Math.max(4,Math.round(r.price/max*100));
+      return '<div class="bar"><span class="bl">'+r.name+'</span><span class="bf'+(r.api?' api':'')+(r===min?' win':'')+'" style="width:'+pct+'%"></span><span class="bp">'+fmtUSD(r.price)+'/mo</span></div>';
+    }).join("");
+    var be=$("breakeven"), daily=dailyCost(m,inp,out);
+    if(daily>0){
+      var lines=PLANS.map(function(p){
+        var s=(p.price/days)/daily;
+        if(s<=1) return '<span class="over">Past <b>'+p.name+'</b> ('+fmtUSD(p.price)+'/mo) already — your usage exceeds its breakeven.</span>';
+        return 'API overtakes <b>'+p.name+'</b> above ~<b>'+fmtTok(inp*s)+'</b> input / <b>'+fmtTok(out*s)+'</b> output tokens/day.';
+      });
+      be.innerHTML=lines.join("<br>");
+    }
+  }
+  var PRESETS={light:[60000,6000],coding:[800000,80000],agent:[6000000,600000]};
+  document.querySelectorAll(".presets button").forEach(function(b){
+    b.addEventListener("click",function(){
+      document.querySelectorAll(".presets button").forEach(function(x){x.classList.remove("on")});
+      b.classList.add("on");
+      var p=PRESETS[b.dataset.preset];
+      $("inTok").value=p[0]; $("outTok").value=p[1]; render();
+    });
+  });
+  ["model","inTok","outTok"].forEach(function(id){$(id).addEventListener("input",render)});
+  render();
+})();
+</script>
+</body>
+</html>
