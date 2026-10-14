@@ -10,6 +10,9 @@
 
 ## Pages
 - [/](https://claude-api-pricing.vercel.app/): breakeven calculator + full price tables + decision guide + FAQ
+- [/claude-code-pricing](https://claude-api-pricing.vercel.app/claude-code-pricing): Claude Code cost —
+  included in Pro $20 / Max 5x $100 / Max 20x $200 (no separate fee), shared 5-hour windows + weekly caps,
+  API-key mode rates, three worked monthly budgets.
 
 ## Model pricing guides (Oct 2026)
 
