@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>DeepSeek V4 API Pricing (2026): V4-Pro & V4.1-Flash per-Million Costs</title>
+<meta name="description" content="DeepSeek V4 API pricing explained: official V4-Pro and V4.1-Flash rates per 1M tokens, off-peak half-price windows, aggregator comparison, and vs Claude costs.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/deepseek-v4-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek V4 API Pricing (2026) — V4-Pro & V4.1-Flash">
+<meta property="og:description" content="Official DeepSeek V4 API rates per 1M tokens: V4-Pro from $0.66 input, V4.1-Flash from $0.15 — plus off-peak half-price windows and how they compare to Claude.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/deepseek-v4-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the DeepSeek V4 API cost?","acceptedAnswer":{"@type":"Answer","text":"Per 1M tokens at peak rates: DeepSeek V4-Pro costs $1.32 input (cache miss) and $3.96 output; DeepSeek V4.1-Flash costs $0.30 input and $1.20 output. Cache-hit input is far cheaper — $0.044 for V4-Pro and $0.006 for V4.1-Flash — and all rates drop to half price during off-peak hours."}},
+{"@type":"Question","name":"What are DeepSeek's off-peak hours?","acceptedAnswer":{"@type":"Answer","text":"Off-peak is everything except 01:00–04:00 and 06:00–10:00 UTC, Monday to Friday, excluding Chinese public holidays. Weekends and those holidays are always off-peak, and off-peak rates are exactly half of peak rates — so scheduling batch jobs on weekends halves your DeepSeek bill."}},
+{"@type":"Question","name":"Is DeepSeek V4 cheaper than Claude?","acceptedAnswer":{"@type":"Answer","text":"Yes, substantially at list price: DeepSeek V4-Pro output is $1.98–$3.96 per million tokens vs Claude Opus 5.5's $20 — roughly 5–10x cheaper. Against Claude Sonnet 5.5 ($2/$10) the gap narrows but DeepSeek V4-Pro is still ~3x cheaper on output. See our DeepSeek V4 vs Claude Opus comparison for the full math."}},
+{"@type":"Question","name":"What happened to DeepSeek V4-Flash?","acceptedAnswer":{"@type":"Answer","text":"The original deepseek-v4-flash and deepseek-v4-flash-vision-exp model names are retired. Requests using those names still work but are routed to DeepSeek-V4.1-Flash at Flash pricing — so old integrations keep running with no code change, and V4.1-Flash adds vision support."}}]}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/kling-3-0-pricing">Kling 3.0</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Prices verified against official docs · Oct 14, 2026</div>
+  <h1>DeepSeek V4 API pricing — V4-Pro and V4.1-Flash, explained</h1>
+  <p class="sub">Two live models, a <b>half-price off-peak window</b>, and cache-hit input as low as <b>$0.003 per million</b>. Here are the official rates, what aggregators charge, and how the math compares to Claude.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official DeepSeek V4 prices (per 1M tokens)</h2>
+  <p>DeepSeek's API currently serves two models: <b>deepseek-v4-pro</b> (DeepSeek-V4-Pro-0813) and <b>deepseek-flash</b> (DeepSeek-V4.1-Flash). Both take 1M-token contexts with up to 384K output tokens.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input (cache hit)</th><th>Input (cache miss)</th><th>Output</th><th>Vision</th></tr>
+    <tr><td>DeepSeek-V4.1-Flash <span style="color:var(--tx2);font-weight:400">(deepseek-flash)</span></td><td>$0.003 off-peak / $0.006 peak</td><td>$0.15 off-peak / $0.30 peak</td><td>$0.60 off-peak / $1.20 peak</td><td>Yes</td></tr>
+    <tr><td>DeepSeek-V4-Pro <span style="color:var(--tx2);font-weight:400">(deepseek-v4-pro)</span></td><td>$0.022 off-peak / $0.044 peak</td><td>$0.66 off-peak / $1.32 peak</td><td>$1.98 off-peak / $3.96 peak</td><td>No</td></tr>
+  </table></div>
+  <p class="hint">Source: official DeepSeek API pricing docs, verified Oct 14, 2026. Concurrency limits: 2,500 for Flash, 500 for V4-Pro.</p>
+
+  <h3>The off-peak trick: half price, on a schedule</h3>
+  <p>Peak windows are <b>01:00–04:00 and 06:00–10:00 UTC, Monday–Friday</b> (excluding Chinese public holidays). Everything else — evenings, weekends, and those holidays — bills at exactly <b>50% of peak rates</b>. A batch job that runs Saturday instead of Wednesday morning costs half as much on the same model. This is unique among major API providers; Claude and Gemini price flat around the clock.</p>
+
+  <h3>What third-party platforms charge for V4-Pro</h3>
+  <div class="tbl"><table>
+    <tr><th>Platform</th><th>Input / 1M</th><th>Output / 1M</th><th>Notes</th></tr>
+    <tr><td>DeepSeek official</td><td>$0.66–$1.32</td><td>$1.98–$3.96</td><td>Off-peak/peak; cache-hit input $0.022–$0.044</td></tr>
+    <tr><td>OpenRouter</td><td>$0.45</td><td>$3.48</td><td>Cache read $0.10; playground included</td></tr>
+    <tr><td>Vercel AI Gateway</td><td>$0.66</td><td>$1.98</td><td>$5 free credits every 30 days</td></tr>
+    <tr><td>AIML API</td><td>$0.5655</td><td>$1.131</td><td>Flat rate</td></tr>
+    <tr><td>DeepInfra</td><td>$1.74</td><td>$3.48</td><td>Cached input $0.145</td></tr>
+  </table></div>
+  <p class="hint">Aggregator rates as listed on their model pages, Oct 14, 2026 — they change often; verify before committing. The official API is usually the cheapest for cache-heavy and off-peak workloads.</p>
+
+  <h3>DeepSeek V4 vs Claude at a glance</h3>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input / 1M</th><th>Output / 1M</th><th>Context</th></tr>
+    <tr><td>DeepSeek V4.1-Flash (peak)</td><td>$0.30</td><td>$1.20</td><td>1M</td></tr>
+    <tr><td>DeepSeek V4-Pro (peak)</td><td>$1.32</td><td>$3.96</td><td>1M</td></tr>
+    <tr><td>Claude Haiku 5.5</td><td>$0.10</td><td>$0.50</td><td>200K</td></tr>
+    <tr><td>Claude Sonnet 5.5</td><td>$2.00</td><td>$10.00</td><td>200K</td></tr>
+    <tr><td>Claude Opus 5.5</td><td>$4.00</td><td>$20.00</td><td>200K</td></tr>
+  </table></div>
+  <p>Read that carefully: <b>Claude Haiku 5.5 is actually cheaper than DeepSeek V4.1-Flash at list price</b> ($0.10/$0.50 vs $0.30/$1.20). DeepSeek's Flash edge is the 1M context window, vision support, and the off-peak/cache discounts — not raw list price. Where DeepSeek really undercuts Claude is the frontier tier: <b>V4-Pro output is ~5x cheaper than Opus 5.5</b> ($3.96 vs $20 peak). Full workload math in our <a href="/deepseek-v4-vs-claude-opus">V4 Pro vs Opus 5.5 comparison</a>.</p>
+
+  <h3>Worked examples (peak rates, cache miss)</h3>
+  <ul>
+    <li><b>10M input + 2M output on V4.1-Flash:</b> 10×$0.30 + 2×$1.20 = <b>$5.40</b> peak, <b>$2.70</b> off-peak</li>
+    <li><b>Same on V4-Pro:</b> 10×$1.32 + 2×$3.96 = <b>$21.12</b> peak, <b>$10.56</b> off-peak</li>
+    <li><b>Cache-heavy agent (90% cache-hit input) on V4-Pro:</b> input effectively $0.044×9 + $1.32×1 ≈ <b>$1.72</b> per 10M — the cache discount is the single biggest lever</li>
+    <li><b>Same workload on Claude Sonnet 5.5:</b> 10×$2 + 2×$10 = <b>$40</b> (cached input where applicable is cheaper per token but the context window is 5x smaller)</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>How much does the DeepSeek V4 API cost?</summary><div class="a">Peak per 1M tokens: V4-Pro is $1.32 input (cache miss) / $3.96 output; V4.1-Flash is $0.30 / $1.20. Cache-hit input drops to $0.044 (Pro) and $0.006 (Flash), and off-peak hours halve everything.</div></details>
+    <details><summary>What are DeepSeek's off-peak hours?</summary><div class="a">All hours except 01:00–04:00 and 06:00–10:00 UTC Mon–Fri (excluding Chinese public holidays). Weekends are always off-peak, and off-peak rates are exactly half of peak.</div></details>
+    <details><summary>Is DeepSeek V4 cheaper than Claude?</summary><div class="a">At the frontier tier, yes: V4-Pro output is $1.98–$3.96 vs Opus 5.5's $20 (~5–10x cheaper). At the small-model tier Claude Haiku 5.5 ($0.10/$0.50) actually undercuts DeepSeek Flash at list price — DeepSeek wins on context length and off-peak discounts instead. See the <a href="/deepseek-v4-vs-claude-opus">full comparison</a>.</div></details>
+    <details><summary>What happened to DeepSeek V4-Flash?</summary><div class="a">Retired. The old <code>deepseek-v4-flash</code> and <code>deepseek-v4-flash-vision-exp</code> names still work but route to DeepSeek-V4.1-Flash at the same Flash pricing — no code change needed, and vision support is retained on Flash.</div></details>
+    <details><summary>Is there a DeepSeek V4 free tier?</summary><div class="a">The official API has no free tier, but third-party gateways do: Vercel AI Gateway includes $5 of free credits every 30 days, and OpenRouter's playground lets you test models without a commitment. DeepSeek's own chat app is free to use.</div></details>
+  </div>
+
+  <p class="hint">Next: <a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 Pro vs Claude Opus 5.5 — full cost math</a> · <a href="/kling-3-0-pricing">Kling 3.0 pricing explained</a> · <a href="/#calculator">Claude API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent pricing guides. Not affiliated with DeepSeek, Anthropic or any provider. Prices collected from official docs and public platform pages on Oct 14, 2026 — verify current rates at the official <a rel="nofollow" href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek pricing page</a>.</div>
+</div></footer>
+</body>
+</html>

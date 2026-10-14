@@ -10,3 +10,14 @@
 
 ## Pages
 - [/](https://claude-api-pricing.vercel.app/): breakeven calculator + full price tables + decision guide + FAQ
+
+## Model pricing guides (Oct 2026)
+
+- [/deepseek-v4-pricing](https://claude-api-pricing.vercel.app/deepseek-v4-pricing): DeepSeek V4 API pricing —
+  V4-Pro $0.66-1.32 in / $1.98-3.96 out per 1M; V4.1-Flash $0.15-0.30 / $0.60-1.20; off-peak (all hours except
+  01:00-04:00 & 06:00-10:00 UTC Mon-Fri) = half price; cache-hit input from $0.003; aggregator comparison.
+- [/deepseek-v4-vs-claude-opus](https://claude-api-pricing.vercel.app/deepseek-v4-vs-claude-opus): V4 Pro vs
+  Claude Opus 5.5 cost math — ~3-10x price gaps by component, 1M vs 200K context, worked workload costs,
+  when each model wins.
+- [/kling-3-0-pricing](https://claude-api-pricing.vercel.app/kling-3-0-pricing): Kling 3.0 cost — per-second
+  credits (6/s at 720p, 12/s at 1080p+audio), plans from $6.99 first month, ~45 credits for a 5s 720p clip.

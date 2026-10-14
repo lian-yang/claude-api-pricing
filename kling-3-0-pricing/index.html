@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Kling 3.0 Pricing: Plans, Credits & Cost per Video (2026)</title>
+<meta name="description" content="How much Kling 3.0 costs: plan prices from $6.99, credit rates (6–12 credits/second), what a 5-second video really costs, and whether the free tier is enough.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/kling-3-0-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kling 3.0 Pricing — Plans, Credits & Cost per Video">
+<meta property="og:description" content="Kling 3.0 costs explained: Standard $6.99 first month, per-second credit rates, real cost per 5-second video, and free-tier reality. Updated Oct 2026.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/kling-3-0-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Kling 3.0 cost?","acceptedAnswer":{"@type":"Answer","text":"Kling 3.0 bills per second of video through credits: about 6 credits per second at 720p without audio and about 12 credits per second at 1080p with native audio. At the standard rate of roughly $1 per 66 credits, a 5-second 720p clip (~45 credits) costs about $0.68 — less on discounted subscription plans."}},
+{"@type":"Question","name":"What does the Kling AI subscription cost?","acceptedAnswer":{"@type":"Answer","text":"On kling.ai, the Standard plan is $6.99 for the first month (then about $8.80/month) with 660 credits; Pro is about $25.99/month with roughly 3,000 credits; higher tiers reach about 4,500 credits per month with 1080p output, audio sync, permanent storage and commercial rights. First-purchase discounts apply once and monthly plans can be canceled anytime."}},
+{"@type":"Question","name":"Is Kling 3.0 free to use?","acceptedAnswer":{"@type":"Answer","text":"There is no unlimited free tier. Kling gives new users free trial credits and occasional promo credits, and 3.0 generations draw from that same credit pool at normal rates — enough for a few short test clips, not for regular production. Heavy use needs a subscription or pay-as-you-go credits."}},
+{"@type":"Question","name":"Is Kling 3.0 cheaper via third-party APIs?","acceptedAnswer":{"@type":"Answer","text":"It can be. API aggregators like kie.ai advertise running Kling 3.0 at per-video rates that undercut app credit pricing for bulk jobs, and developer platforms package it with their own pricing. For a few videos the app is simpler; for pipelines, compare API rates against your effective per-credit subscription cost."}}]}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/kling-3-0-pricing">Kling 3.0</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Credit rates verified · Oct 14, 2026</div>
+  <h1>Kling 3.0 pricing — plans, credits and real cost per video</h1>
+  <p class="sub">Kling 3.0 doesn't have a per-video price — it bills <b>per second, in credits</b>. Here's what that means for a 5-second clip, which plan actually fits your volume, and the free-tier reality.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Plans on kling.ai</h2>
+  <div class="tbl"><table>
+    <tr><th>Plan</th><th>Price</th><th>Credits / month</th><th>Notes</th></tr>
+    <tr><td>Standard</td><td>$6.99 first month, then ~$8.80/mo</td><td>660</td><td>First-purchase offer applies once; cancel anytime</td></tr>
+    <tr><td>Pro</td><td>~$25.99/mo (first-purchase discount)</td><td>~3,000</td><td>Higher limits</td></tr>
+    <tr><td>Higher tiers</td><td>~$92–130/mo class</td><td>up to ~4,500</td><td>1080p, audio sync, permanent storage, commercial rights</td></tr>
+  </table></div>
+  <p class="hint">Baseline exchange rate ≈ <b>$1 = 66 credits</b> at list price. Promotions and regional pricing vary — check kling.ai's membership page for current numbers.</p>
+
+  <h2>What Kling 3.0 costs per video</h2>
+  <p>Kling 3.0 draws <b>~6 credits per second at 720p without audio</b>, and <b>~12 credits per second at 1080p with native audio</b>. The math for common lengths:</p>
+  <div class="tbl"><table>
+    <tr><th>Clip</th><th>Credits</th><th>Cost at list (~$1/66cr)</th><th>On Standard plan ($8.80 / 660cr)</th></tr>
+    <tr><td>5 s · 720p · no audio</td><td>~45</td><td>~$0.68</td><td>~$0.60</td></tr>
+    <tr><td>10 s · 720p · no audio</td><td>~60–90</td><td>~$0.91–1.36</td><td>~$0.80–1.20</td></tr>
+    <tr><td>5 s · 1080p · with audio</td><td>~60</td><td>~$0.91</td><td>~$0.80</td></tr>
+    <tr><td>10 s · 1080p · with audio</td><td>~120</td><td>~$1.82</td><td>~$1.60</td></tr>
+  </table></div>
+  <p>Two things move the real number: <b>failed generations still burn credits</b> on many prompt types (budget for retries), and top-tier plans drop the effective per-video cost further — some breakdowns put high-volume 720p clips near <b>$0.13–0.30</b>. Third-party API resellers (kie.ai and similar) quote their own per-video rates that can undercut app credits for bulk pipelines.</p>
+
+  <h3>Is Kling 3.0 free?</h3>
+  <p>Not in any unlimited sense. The app grants <b>free trial credits</b> at signup plus occasional promo/login credits — enough for a handful of short test clips at normal credit rates. For regular use you need a plan or top-ups. If you see a "free Kling 3.0 generator" site, it's reselling API access behind ads or its own credits.</p>
+
+  <h3>How that compares with other AI video</h3>
+  <ul>
+    <li>Per-second credit billing makes Kling cost scale with length — a 10-second 1080p clip costs about 4x a 5-second 720p one</li>
+    <li>Native-audio 1080p doubles the credit rate vs silent 720p, so only pay for 1080p+audio when you need both</li>
+    <li>Bulk and automated pipelines: compare the per-second credit math against API reseller rates before subscribing — heavy users often land cheaper outside the app</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>How much does Kling 3.0 cost?</summary><div class="a">Per-second in credits: ~6 credits/s at 720p (no audio), ~12 credits/s at 1080p (with audio). A 5-second 720p clip is ~45 credits ≈ $0.68 at the ~$1/66-credit list rate, less inside discounted plans.</div></details>
+    <details><summary>What are Kling's subscription plans?</summary><div class="a">Standard $6.99 first month then ~$8.80/mo (660 credits), Pro ~$25.99/mo (~3,000 credits), and higher tiers up to ~4,500 credits with 1080p, audio sync and commercial rights. Monthly plans cancel anytime.</div></details>
+    <details><summary>Is there a free tier?</summary><div class="a">Only trial/promo credits — a few short clips' worth. There's no unlimited free generation; recurring use needs a plan or credit top-ups.</div></details>
+    <details><summary>Do failed generations cost credits?</summary><div class="a">In many cases yes — moderation rejections usually don't, but failed renders on certain prompts can still draw credits. Budget ~10–20% for retries on experimental prompts.</div></details>
+    <details><summary>Kling 3.0 vs 2.x — does the new model cost more?</summary><div class="a">3.0 bills at the same per-second credit structure introduced for the 3.0 generation (roughly 2x the older silent-720p rate when you enable 1080p native audio). The capability jump — better motion consistency and synced audio — is where the extra credits go.</div></details>
+  </div>
+
+  <p class="hint">Related: <a href="/deepseek-v4-pricing">DeepSeek V4 API pricing</a> · <a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 vs Claude Opus</a> · <a href="/#calculator">Claude API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent pricing guides. Not affiliated with Kuaishou or Kling. Credit rates collected from kling.ai public pages and pricing breakdowns on Oct 14, 2026 — verify current rates on <a rel="nofollow" href="https://kling.ai/app/membership/membership-plan">Kling's membership page</a>.</div>
+</div></footer>
+</body>
+</html>

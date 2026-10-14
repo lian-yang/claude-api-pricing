@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>DeepSeek V4 Pro vs Claude Opus 5.5: Price & Cost Math (2026)</title>
+<meta name="description" content="DeepSeek V4 Pro vs Claude Opus 5.5 compared: $3.96 vs $20 per million output tokens, 1M vs 200K context, off-peak half pricing, and which workloads each model wins.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/deepseek-v4-vs-claude-opus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek V4 Pro vs Claude Opus 5.5 (2026)">
+<meta property="og:description" content="Per-million token math: DeepSeek V4 Pro costs ~5x less than Claude Opus 5.5 on output, with 1M context and off-peak half pricing — where each model actually wins.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/deepseek-v4-vs-claude-opus">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is DeepSeek V4 Pro cheaper than Claude Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"Yes — about 3x cheaper on input ($1.32 vs $4.00 per million tokens at peak) and about 5x cheaper on output ($3.96 vs $20.00). During DeepSeek's off-peak hours the gap widens to roughly 6x on input and 10x on output, since off-peak rates are half of peak while Claude's prices are flat."}},
+{"@type":"Question","name":"Does DeepSeek V4 Pro have a bigger context window than Claude Opus?","acceptedAnswer":{"@type":"Answer","text":"Yes: DeepSeek V4 models take 1,000,000-token contexts with up to 384K output tokens, versus roughly 200K tokens on Claude Opus 5.5. For whole-codebase analysis or very long documents, DeepSeek fits 5x more into a single request — which also avoids the cost of splitting and re-sending context."}},
+{"@type":"Question","name":"When should I still pay for Claude Opus over DeepSeek V4 Pro?","acceptedAnswer":{"@type":"Answer","text":"Price is not the whole story: Opus-class models are typically stronger on long-horizon agentic work, nuanced writing and complex tool use, and Claude's prompt caching, batch discounts and ecosystem maturity reduce real-world costs. Benchmark both on your own workload — a 5x price gap can vanish if the cheaper model needs 3x more attempts to get a task right."}}]}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/kling-3-0-pricing">Kling 3.0</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Price math verified Oct 14, 2026</div>
+  <h1>DeepSeek V4 Pro vs Claude Opus 5.5 — the cost math</h1>
+  <p class="sub">Same job, two frontiers: <b>$3.96 vs $20.00</b> per million output tokens. Here's the full per-token math, the context-window angle, and when the pricier model is still worth it.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Price per million tokens</h2>
+  <div class="tbl"><table>
+    <tr><th></th><th>DeepSeek V4 Pro</th><th>Claude Opus 5.5</th><th>Gap</th></tr>
+    <tr><td>Input (cache miss, peak)</td><td>$1.32</td><td>$4.00</td><td>3.0x</td></tr>
+    <tr><td>Input (off-peak)</td><td>$0.66</td><td>$4.00</td><td>6.1x</td></tr>
+    <tr><td>Input (cache hit, peak)</td><td>$0.044</td><td>from ~$0.40</td><td>~9x</td></tr>
+    <tr><td>Output (peak)</td><td>$3.96</td><td>$20.00</td><td>5.1x</td></tr>
+    <tr><td>Output (off-peak)</td><td>$1.98</td><td>$20.00</td><td>10.1x</td></tr>
+    <tr><td>Context window</td><td class="win">1M tokens</td><td>~200K tokens</td><td>5x</td></tr>
+    <tr><td>Max output</td><td class="win">384K tokens</td><td>64K-class</td><td>6x</td></tr>
+  </table></div>
+  <p class="hint">DeepSeek peak/off-peak defined on our <a href="/deepseek-v4-pricing">DeepSeek V4 pricing page</a>. Claude prices per the official API pricing as of Oct 2026; prompt-cached Claude input on Opus-class models runs ~10% of list.</p>
+
+  <h2>What a real workload costs</h2>
+  <p>Take a heavy daily agent: <b>30M input + 5M output tokens per day</b> (large codebase context, long runs).</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Daily cost</th><th>30-day month</th></tr>
+    <tr><td>Claude Opus 5.5</td><td>30×$4 + 5×$20 = $220</td><td><b>$6,600</b></td></tr>
+    <tr><td>DeepSeek V4 Pro (peak)</td><td>30×$1.32 + 5×$3.96 = $59.40</td><td><b>$1,782</b></td></tr>
+    <tr><td>DeepSeek V4 Pro (off-peak)</td><td>30×$0.66 + 5×$1.98 = $29.70</td><td><b>$891</b></td></tr>
+    <tr><td>Claude Sonnet 5.5 (mid-tier alt)</td><td>30×$2 + 5×$10 = $110</td><td><b>$3,300</b></td></tr>
+  </table></div>
+  <p>A month of that agent on DeepSeek V4 Pro costs about what <b>four days</b> costs on Opus 5.5. Even against Claude's mid-tier Sonnet 5.5, V4-Pro peak pricing is ~half, and off-peak is ~quarter.</p>
+
+  <h3>The context-window multiplier</h3>
+  <p>Price per token understates DeepSeek's advantage on long-context jobs. With a 200K window, a task needing 600K of context on Opus means <b>three requests</b> — paying for the overlapping context three times. On V4's 1M window it's <b>one request</b>. For whole-repo review, long transcript analysis, or massive document QA, the effective gap is wider than the sticker prices suggest.</p>
+
+  <h3>Where Claude Opus still earns its 5x</h3>
+  <ul>
+    <li><b>Hard agentic work:</b> long-horizon planning, multi-tool orchestration and delicate code refactors are where frontier Claude models typically lead — if the cheaper model needs 2–3x more retries, the price gap shrinks or flips</li>
+    <li><b>Writing quality:</b> nuanced, brand-safe long-form output remains Opus territory</li>
+    <li><b>Ecosystem maturity:</b> prompt caching, batch API discounts, computer use, and first-party tooling are battle-tested at scale</li>
+    <li><b>No schedule:</b> Claude prices flat 24/7; DeepSeek's best rates require off-peak scheduling or accepting peak pricing</li>
+    <li><b>Vision:</b> note that DeepSeek's V4-Pro has <b>no vision</b> — image inputs require V4.1-Flash (cheap) or another provider</li>
+  </ul>
+
+  <div class="verdict api"><b>Practical split:</b> route bulk, schedulable, long-context work (summarization, extraction, code analysis, batch agents) to <b>DeepSeek V4 Pro</b> — off-peak weekends if possible. Keep <b>Opus 5.5</b> for the interactive frontier slice where capability per attempt matters more than cost per token. A 90/10 split by token volume typically cuts a frontier-model bill by 70–85%.</div>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>Is DeepSeek V4 Pro cheaper than Claude Opus 5.5?</summary><div class="a">Yes: ~3x on input and ~5x on output at peak list prices ($1.32/$3.96 vs $4/$20 per million tokens), widening to ~6x/~10x during DeepSeek's off-peak half-price hours.</div></details>
+    <details><summary>Which has the bigger context window?</summary><div class="a">DeepSeek V4: 1M tokens in, up to 384K out — roughly 5x Claude Opus 5.5's ~200K context. Long-context jobs also avoid the repeated-context cost of splitting into multiple requests.</div></details>
+    <details><summary>Does DeepSeek V4 Pro support images?</summary><div class="a">No — V4-Pro is text-only. Vision lives on DeepSeek V4.1-Flash ($0.30/$1.20 peak per million) and on the retired-but-routed v4-flash-vision-exp naming. Claude Opus 5.5 is natively multimodal.</div></details>
+    <details><summary>When is paying for Opus worth it?</summary><div class="a">When capability per attempt dominates: complex agentic chains, high-stakes writing, or tasks where the cheaper model's retry rate erases its discount. Benchmark both on your real workload before routing.</div></details>
+    <details><summary>How do I cut a Claude bill without switching models?</summary><div class="a">Prompt caching (cached input from a fraction of list), batch APIs, and — for interactive use — checking whether a subscription plan beats API billing at your volume: run your numbers in our <a href="/#calculator">breakeven calculator</a>.</div></details>
+  </div>
+
+  <p class="hint">Related: <a href="/deepseek-v4-pricing">DeepSeek V4 API pricing</a> · <a href="/kling-3-0-pricing">Kling 3.0 pricing</a> · <a href="/#calculator">Claude API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent pricing guides. Not affiliated with DeepSeek or Anthropic. "Claude" is a trademark of Anthropic, PBC. Prices from official docs and public pages, Oct 14, 2026 — verify at <a rel="nofollow" href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek pricing</a> and <a rel="nofollow" href="https://platform.claude.com/docs/en/about-claude/pricing">Claude API pricing</a>.</div>
+</div></footer>
+</body>
+</html>
