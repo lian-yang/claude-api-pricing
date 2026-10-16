@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Gemini 4 Argon API Pricing: Intro Rates, Dec 1 Price Increase & Cost Math (2026)</title>
+<meta name="description" content="Gemini 4 Argon API costs $2/M input and $10/M output until Nov 30, 2026 — then doubles to $4/$20. Batch is half price, cached input $0.10, no free tier. Plus cost math vs Claude Opus 5.5 and Gemini 3.8 Flash.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gemini-4-argon-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gemini 4 Argon API Pricing — Intro Rates & the Dec 1 Increase">
+<meta property="og:description" content="Gemini 4 Argon costs $2/$10 per 1M tokens through Nov 30, 2026, then doubles to $4/$20. Batch half price, cached input $0.10, no free tier. Cost math vs Opus 5.5 and 3.8 Flash. Updated Oct 2026.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gemini-4-argon-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the Gemini 4 Argon API cost?","acceptedAnswer":{"@type":"Answer","text":"Intro pricing through November 30, 2026 is $2 per 1M input tokens and $10 per 1M output tokens (output price includes thinking tokens). From December 1, 2026 the standard rate doubles to $4 / $20. Context caching is $0.10 per 1M cached-input tokens until Nov 30, then $0.20. There is no free tier for Argon."}},
+{"@type":"Question","name":"Does the Gemini 4 Argon intro price really double on December 1?","acceptedAnswer":{"@type":"Answer","text":"Yes. Google's rate card lists $2 / $10 per 1M tokens as an introductory price through November 30, 2026, and $4 / $20 from December 1, 2026 — a straight 2x on both input and output. Batch and caching rates double on the same date. Workloads that can pre-run or shift to batch before the deadline pay half the post-increase rate."}},
+{"@type":"Question","name":"Is there a free tier for Gemini 4 Argon?","acceptedAnswer":{"@type":"Answer","text":"No. Argon is paid-tier only — unlike Gemini Flash models, which keep a free tier. Creating a Gemini API key is free, but to call gemini-4-argon you need a billing account attached to the project. The cheapest paid path is Batch at half the standard rate."}},
+{"@type":"Question","name":"How do I make Gemini 4 Argon cheaper — batch and caching?","acceptedAnswer":{"@type":"Answer","text":"Two levers. Batch API runs at 50% off: $1 / $5 per 1M tokens during the intro window, $2 / $10 after Dec 1 — worth it for any job that tolerates a completion window of up to 24 hours. Implicit context caching bills repeated input at $0.10 per 1M tokens (95% off the $2 fresh-input rate, $0.20 after Dec 1), which is the lever for agents that resend long system prompts."}},
+{"@type":"Question","name":"Gemini 4 Argon vs Claude Opus 5.5 — which costs more?","acceptedAnswer":{"@type":"Answer","text":"During the intro window Argon is exactly half of Opus 5.5: $2 / $10 vs $4 / $20 per 1M tokens. From December 1, 2026 the two converge — Argon's $4 / $20 matches Opus 5.5's current list price exactly. Argon's counter is its ~1M-token context window vs Opus 5.5's 200K, which cuts re-feeding costs on long-document work."}},
+{"@type":"Question","name":"Gemini 4 Argon vs Gemini 3.8 Flash — what's the price gap?","acceptedAnswer":{"@type":"Answer","text":"About 2.7x: Argon runs $2 / $10 (intro) against Flash's $0.75 / $3.75, and after both increases — Argon $4 / $20 from Dec 1, Flash $1.50 / $7.50 from Jan 1, 2027 — the 2.7x ratio holds. Flash keeps a free tier and is the rational default for high-volume, latency-sensitive jobs; Argon is for hard reasoning where the flagship pays for itself."}},
+{"@type":"Question","name":"Does a Gemini API key cost money?","acceptedAnswer":{"@type":"Answer","text":"The key itself is free — you pay per token. On Flash-tier models a free tier exists with rate limits; on Gemini 4 Argon there is no free tier, so a billing-enabled project is required before the first call. Grounding with Google Search or Maps adds 5,000 free requests per month across Gemini 3+ models, then $14 per 1,000 requests."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates verified on Google's rate card · Oct 16, 2026</div>
+  <h1>Gemini 4 Argon API pricing — and the Dec 1 price increase</h1>
+  <p class="sub">Google's flagship reasoning model bills <b>$2 / $10 per 1M tokens</b> (input / output) as an introductory rate <b>through November 30, 2026 — then doubles to $4 / $20</b>. Here's the full rate card, what a real workload costs before and after, and the two levers (batch, caching) that cut the bill.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>The Gemini 4 Argon rate card</h2>
+  <p>Argon (<code>gemini-4-argon</code>) went global on <b>October 13, 2026</b> with a ~1M-token context window (shared across input, thinking and output). It is <b>paid-tier only</b> — no free tier, unlike the Flash models. Every price below doubles on December 1, 2026:</p>
+  <div class="tbl"><table>
+    <tr><th>Tier</th><th>Input / 1M</th><th>Output / 1M (incl. thinking)</th><th>Cached input / 1M</th></tr>
+    <tr><td>Standard — until Nov 30, 2026</td><td><b>$2.00</b></td><td><b>$10.00</b></td><td>$0.10</td></tr>
+    <tr><td>Standard — from Dec 1, 2026</td><td>$4.00</td><td>$20.00</td><td>$0.20</td></tr>
+    <tr><td class="win">Batch (50% off) — until Nov 30</td><td>$1.00</td><td>$5.00</td><td>$0.05</td></tr>
+    <tr><td>Batch — from Dec 1</td><td>$2.00</td><td>$10.00</td><td>$0.10</td></tr>
+    <tr><td>Priority (faster) — until Nov 30</td><td>$3.60</td><td>$18.00</td><td>$0.18</td></tr>
+    <tr><td>Priority — from Dec 1</td><td>$7.20</td><td>$36.00</td><td>$0.36</td></tr>
+  </table></div>
+  <p class="hint">Caching is implicit-only on Argon (no explicit cache control). Grounding with Google Search or Maps: 5,000 free requests/month shared across Gemini 3+ models, then $14 per 1,000. The same rate card flags another increase on some models from <b>January 1, 2027</b> — that one hits Flash, not Argon.</p>
+
+  <h2>What a real workload costs — before and after Dec 1</h2>
+  <p>Using the same worked workload as our <a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 vs Opus comparison</a> — a coding-agent-style 30M input + 5M output tokens per day at roughly 10:1 — the deadline math:</p>
+  <div class="tbl"><table>
+    <tr><th>Model / window</th><th>Daily</th><th>Monthly (30 days)</th></tr>
+    <tr><td class="win">Argon standard, intro (until Nov 30)</td><td>$110</td><td><b>$3,300</b></td></tr>
+    <tr><td>Argon standard, from Dec 1</td><td>$220</td><td>$6,600</td></tr>
+    <tr><td>Argon batch, intro (until Nov 30)</td><td>$55</td><td><b>$1,650</b></td></tr>
+    <tr><td>Claude Opus 5.5 (current list)</td><td>$220</td><td>$6,600</td></tr>
+    <tr><td>Gemini 3.8 Flash (until Dec 31)</td><td>$41.25</td><td>$1,238</td></tr>
+    <tr><td>Gemini 3.8 Flash (from Jan 1, 2027)</td><td>$82.50</td><td>$2,475</td></tr>
+  </table></div>
+  <p>Two conclusions fall out of that table. First, <b>from December 1, Argon's standard price converges to exactly Opus 5.5's current list price</b> ($4 / $20) — the intro window is the only period Argon is genuinely the cheaper flagship. Second, the Batch column is not a rounding error: a batch-tolerant pipeline that locks the intro rate runs at <b>$1,650/month for work that costs Opus 5.5 $6,600</b> — 4x cheaper — and still $3,300/month after the increase.</p>
+
+  <h3>The caching lever, concretely</h3>
+  <p>Agents that resend a long system prompt on every call pay full input price for tokens the model has already seen. Argon's implicit caching bills those repeats at <b>$0.10 per 1M tokens — 95% off the $2 fresh rate</b> (95% off still holds after Dec 1: $0.20 vs $4). A support-agent workload resending a 50K-token system prompt 1,000 times a day pays $100/day at fresh rates, but $5/day once the prompt is served from cache. No configuration is needed — the API reuses cached prefixes automatically — but only exact shared prefixes qualify, so put stable content first and per-request content last.</p>
+
+  <h2 id="vs">Argon vs Opus 5.5 vs 3.8 Flash — picking by cost</h2>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Price / 1M (in / out)</th><th>Context</th><th>Free tier</th><th>Rational pick</th></tr>
+    <tr><td>Gemini 4 Argon (intro → Dec 1)</td><td>$2 / $10 → $4 / $20</td><td>~1M</td><td>No</td><td>Hard reasoning at flagship depth; lock workloads in before Dec 1</td></tr>
+    <tr><td>Claude Opus 5.5</td><td>$4 / $20 (cached in $0.20)</td><td>200K</td><td>No</td><td>Deep coding and agentic work inside 200K; matches post-increase Argon pricing</td></tr>
+    <tr><td>Gemini 3.8 Flash</td><td>$0.75 / $3.75 → $1.50 / $7.50 (Jan 1, 2027)</td><td>1M-class</td><td>Yes</td><td>High-volume, latency-sensitive jobs at ~2.7x cheaper than Argon</td></tr>
+    <tr><td>DeepSeek V4-Pro (off-peak)</td><td>$0.33–0.66 / $0.99–1.98</td><td>1M</td><td>No</td><td>Cost floor — 3–10x cheaper where the quality bar allows</td></tr>
+  </table></div>
+  <div class="verdict api"><b>Upgrade math:</b> through November 30, Argon is the price/performance pick among flagships — half of Opus 5.5 with a 5x bigger context window. From December 1 the price doubles and the decision collapses to ecosystem and context: $4 / $20 on both sides of the Argon-vs-Opus fence, with Argon's 1M context winning long-document and whole-repo work and Opus keeping its coding-agent track record. Volume jobs that can wait up to 24 hours should sit on Batch either way.</div>
+
+  <h3>Does the Gemini API key itself cost money?</h3>
+  <p>No — keys are free and you pay per token. On Flash models a free tier covers experiments; on Argon you need a billing-enabled project before the first call. Third-party aggregators (OpenRouter and similar) resell Argon at their own per-token rates — worth a look for testing, but for production the official Batch + caching stack is usually the cheapest compliant path.</p>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>How much does the Gemini 4 Argon API cost?</summary><div class="a">$2 per 1M input and $10 per 1M output tokens (output includes thinking tokens) through November 30, 2026; $4 / $20 from December 1. Cached input is $0.10 per 1M until Nov 30, then $0.20. No free tier.</div></details>
+    <details><summary>Does the intro price really double on December 1?</summary><div class="a">Yes — Google's rate card lists $2 / $10 as introductory through Nov 30, 2026 and $4 / $20 from Dec 1, a straight 2x on input and output. Batch and caching double on the same date.</div></details>
+    <details><summary>Is there a free tier for Gemini 4 Argon?</summary><div class="a">No — Argon is paid-only, unlike Flash models. The key is free to create but calls need a billing account. Cheapest paid path is Batch at half rate.</div></details>
+    <details><summary>How do I make Argon cheaper?</summary><div class="a">Batch API: 50% off ($1 / $5 intro, $2 / $10 after) for jobs tolerating up-to-24-hour completion. Implicit caching: repeated input prefixes at $0.10 / 1M — 95% off fresh input. Together they compound: a cached-prefix batch call runs at roughly 2.5% of the fresh standard input rate.</div></details>
+    <details><summary>Argon vs Claude Opus 5.5 — which costs more?</summary><div class="a">Intro Argon is half of Opus ($2 / $10 vs $4 / $20). From Dec 1 they're identical at $4 / $20; the tiebreaker becomes context (1M vs 200K) and ecosystem. On the 30M+5M daily workload above, that's $3,300 vs $6,600/month before Dec 1, then $6,600 vs $6,600.</div></details>
+    <details><summary>Argon vs Gemini 3.8 Flash — what's the gap?</summary><div class="a">About 2.7x on both input and output, and the ratio survives both price increases (Argon Dec 1, Flash Jan 1, 2027). Flash keeps a free tier. Default to Flash for volume and latency; pay the 2.7x when reasoning depth is the deliverable.</div></details>
+    <details><summary>Does a Gemini API key cost money?</summary><div class="a">The key is free; you pay per token. Argon requires a billing-enabled project (no free tier). Google Search/Maps grounding adds 5,000 free requests/month across Gemini 3+ models, then $14 per 1,000.</div></details>
+  </div>
+
+  <p class="hint">Related: <a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 vs Claude Opus cost math</a> · <a href="/deepseek-v4-pricing">DeepSeek V4 API pricing</a> · <a href="/#calculator">Claude API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent pricing guides. Not affiliated with Google. Rates collected from Google's official Gemini API rate card on Oct 16, 2026 — verify current prices on <a rel="nofollow" href="https://ai.google.dev/gemini-api/docs/pricing">Google's pricing page</a>.</div>
+</div></footer>
+</body>
+</html>

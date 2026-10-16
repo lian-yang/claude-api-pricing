@@ -24,3 +24,9 @@
   when each model wins. Budget face added: V4.1-Flash vs Opus 5.5 — $0.30/$1.20 peak (13x/17x cheaper, ~27x off-peak input); ~$450/month vs $6,600/month at 30M+5M tokens/day.
 - [/kling-3-0-pricing](https://claude-api-pricing.vercel.app/kling-3-0-pricing): Kling 3.0 cost — per-second
   credits (6/s at 720p, 12/s at 1080p+audio), plans from $6.99 first month, ~45 credits for a 5s 720p clip. Version ladder added: 1.5 (legacy, cheapest) → 2.1 Master/2.5 Turbo (~70cr/5s 1080p) → 2.6 (cost/quality sweet spot) → 3.0 (audio+4K+multi-shot, ~2-5x credits of 2.x era) → 3.0 Omni (reference workflows); upgrade math = pay 3.0 premium only when audio/realism is the deliverable.
+- [/gemini-4-argon-pricing](https://claude-api-pricing.vercel.app/gemini-4-argon-pricing): Gemini 4 Argon API pricing —
+  intro $2 in / $10 out per 1M (output incl. thinking) through Nov 30 2026, doubling to $4/$20 from Dec 1 2026;
+  Batch always 50% off ($1/$5 → $2/$10); implicit cached input $0.10 → $0.20 (95% off fresh); Priority $3.60/$18 → $7.20/$36;
+  no free tier (paid-only, unlike 3.8 Flash at $0.75/$3.75 → $1.50/$7.50 from Jan 1 2027); ~1M context, released Oct 13 2026;
+  worked workload (30M+5M tokens/day): $3,300/mo intro → $6,600/mo after Dec 1 = exactly Opus 5.5's current price;
+  grounding 5,000 free Search/Maps req/mo then $14/1K. Rates verified on ai.google.dev rate card Oct 16 2026.
