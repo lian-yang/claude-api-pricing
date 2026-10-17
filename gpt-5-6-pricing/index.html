@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>GPT-5.6 API Pricing (2026): Sol, Terra &amp; Luna per-Million Costs</title>
+<meta name="description" content="GPT-5.6 API pricing explained: Sol $4/$20 (promo through Nov 21), Terra $2/$12, Luna $0.20/$1.20 per 1M tokens. Deadline math, vs Claude Sonnet and Opus costs.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gpt-5-6-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT-5.6 API Pricing (2026) — Sol, Terra & Luna">
+<meta property="og:description" content="GPT-5.6 API rates per 1M tokens: Sol $4/$20 promotional through Nov 21 2026, Terra $2/$12, Luna $0.20/$1.20 — plus worked costs vs Claude.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gpt-5-6-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the GPT-5.6 API cost?","acceptedAnswer":{"@type":"Answer","text":"Per 1M tokens: GPT-5.6 Sol costs $4 input and $20 output; GPT-5.6 Terra costs $2 input and $12 output; GPT-5.6 Luna costs $0.20 input and $1.20 output. Sol's rates are promotional and confirmed at least through November 21, 2026 — originally announced at $5/$30 before a roughly 20–33% reduction."}},
+{"@type":"Question","name":"When does GPT-5.6 Sol promotional pricing end?","acceptedAnswer":{"@type":"Answer","text":"OpenAI's pricing page lists Sol's promotional rates as available at least through November 21, 2026. There is no published post-promo rate yet — if you're budgeting past that date, plan against a reversion toward the original $5/$30 or lock in volume commitments with your account team."}},
+{"@type":"Question","name":"Sol vs Terra vs Luna — which GPT-5.6 should I use?","acceptedAnswer":{"@type":"Answer","text":"Sol is the flagship for hardest tasks ($4/$20), Terra is the balanced default ($2/$12), Luna is the high-volume workhorse at $0.20/$1.20. A common split: Terra for interactive features, Luna for batch classification and extraction, Sol only when quality demands it."}},
+{"@type":"Question","name":"Is GPT-5.6 cheaper than Claude?","acceptedAnswer":{"@type":"Answer","text":"Depends on the tier. GPT-5.6 Terra ($2/$12) pays $2 more per million output tokens than Claude Sonnet 5.5 ($2/$10); Sol ($4/$20) matches Opus 5.5's $20 output with cheaper input; Luna ($0.20/$1.20) is far cheaper than any Claude model on output. See the worked math below."}},
+{"@type":"Question","name":"Is GPT-5.6 still worth it after GPT-6 launched?","acceptedAnswer":{"@type":"Answer","text":"Yes, as the value tier. GPT-6 Astra is the new flagship at $10/$50 — 5.6 Terra at $2/$12 and especially Luna at $0.20/$1.20 remain the price-performance picks for volume workloads that don't need Astra-level reasoning."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates from OpenAI's pricing page · verified Oct 17, 2026</div>
+  <h1>GPT-5.6 API pricing — Sol, Terra and Luna, explained</h1>
+  <p class="sub">Three tiers from <b>$0.20/$1.20</b> to <b>$4/$20</b> per million tokens, a <b>promotional deadline on Sol (Nov 21)</b>, and a value story that outlived the GPT-6 launch. Here are the official rates and how they compare to Claude.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official GPT-5.6 prices (per 1M tokens)</h2>
+  <p>OpenAI announced the GPT-5.6 family on <b>July 30, 2026</b> ("Advancing the price-performance frontier") with three tiers. In October 2026 they sit one rung below the new GPT-6 flagship line — which is exactly why they're the value pick.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input</th><th>Output</th><th>Positioning</th></tr>
+    <tr><td>GPT-5.6 Sol</td><td>$4.00</td><td>$20.00</td><td>Flagship tier; promo rate at least through <b>Nov 21, 2026</b></td></tr>
+    <tr><td>GPT-5.6 Terra</td><td>$2.00</td><td>$12.00</td><td>Balanced default</td></tr>
+    <tr><td>GPT-5.6 Luna</td><td>$0.20</td><td>$1.20</td><td>High-volume workhorse (cut ~80% in 2026)</td></tr>
+  </table></div>
+  <p class="hint">Source: OpenAI pricing page & model docs, verified Oct 17, 2026. Sol originally launched at $5/$30 and was cut ~20% input / ~33% output during the promotional window.</p>
+
+  <h3>The Nov 21 deadline on Sol</h3>
+  <p>Sol's $4/$20 is explicitly promotional, <b>available at least through November 21, 2026</b>. OpenAI hasn't published what comes after. If your product runs on Sol, budget against the original $5/$30 or plan a fallback to Terra ($2/$12) for the workload share that tolerates it — the same deadline-style math we track for <a href="/gemini-4-argon-pricing">Gemini 4 Argon's Dec 1 doubling</a>.</p>
+
+  <h3>Worked monthly cost: 30M input + 5M output tokens/day</h3>
+  <p>The same standard workload we use across this site (a mid-size AI feature doing 30 million input and 5 million output tokens daily):</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Daily</th><th>Monthly (30d)</th></tr>
+    <tr><td>GPT-5.6 Sol</td><td>$220</td><td><b>$6,600</b></td></tr>
+    <tr><td>GPT-5.6 Terra</td><td>$120</td><td><b>$3,600</b></td></tr>
+    <tr><td>GPT-5.6 Luna</td><td>$12</td><td><b>$360</b></td></tr>
+    <tr><td>Claude Sonnet 5.5 (ref.)</td><td>$110</td><td>$3,300</td></tr>
+    <tr><td>Claude Opus 5.5 (ref.)</td><td>—</td><td>~$6,600 (output-driven)</td></tr>
+  </table></div>
+  <p class="hint">Sol at $6,600/mo lands exactly on Opus 5.5 territory; Terra runs ~9% above Sonnet 5.5; Luna is an order of magnitude below everything.</p>
+
+  <h3>GPT-5.6 vs Claude, honestly</h3>
+  <p><b>Terra vs Sonnet 5.5:</b> same $2 input, Terra pays $2/M more on output ($12 vs $10) — you're paying a small premium for OpenAI's frontier-tier training run at the mid tier. <b>Sol vs Opus 5.5:</b> Sol matches Opus's $20 output and undercuts it on input. <b>Luna vs everything:</b> $1.20 output is ~8x cheaper than Sonnet and ~17x cheaper than Opus — if Luna's quality clears your bar, the others don't get a look-in on volume work.</p>
+
+  <h3>After GPT-6: the value-tier case</h3>
+  <p>GPT-6 Astra is the new flagship at <b>$10/$50</b>. That repositioned 5.6 rather than retiring it: Terra and Luna are now OpenAI's price-performance line, the same slot DeepSeek V4 occupies from the other side — see our <a href="/deepseek-v4-pricing">DeepSeek V4 pricing</a> for the budget anchor and <a href="/kimi-k3-pricing">Kimi K3</a> for the $3/$15 challenger in the same ballpark.</p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against OpenAI's official pricing page on Oct 17, 2026 — promotional windows move, re-check before committing budgets. Not affiliated with OpenAI or Anthropic.</p><nav><a href="/">Claude API Pricing</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a> · <a href="/kimi-k3-pricing">Kimi K3</a></nav></div></footer>
+</body>
+</html>

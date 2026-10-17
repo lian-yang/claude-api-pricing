@@ -30,3 +30,11 @@
   no free tier (paid-only, unlike 3.8 Flash at $0.75/$3.75 → $1.50/$7.50 from Jan 1 2027); ~1M context, released Oct 13 2026;
   worked workload (30M+5M tokens/day): $3,300/mo intro → $6,600/mo after Dec 1 = exactly Opus 5.5's current price;
   grounding 5,000 free Search/Maps req/mo then $14/1K. Rates verified on ai.google.dev rate card Oct 16 2026.
+- [/gpt-5-6-pricing](https://claude-api-pricing.vercel.app/gpt-5-6-pricing): GPT-5.6 API pricing — Sol $4/$20
+  (promotional at least through Nov 21 2026, originally $5/$30), Terra $2/$12, Luna $0.20/$1.20 per 1M;
+  worked 30M+5M/day math: Sol $6,600/mo (=Opus territory) / Terra $3,600 / Luna $360; vs Sonnet 5.5 $2/$10
+  Terra pays +$2 output; value-tier case after GPT-6 Astra ($10/$50) launch. Verified Oct 17 2026.
+- [/kimi-k3-pricing](https://claude-api-pricing.vercel.app/kimi-k3-pricing): Kimi K3 API pricing — $3 input /
+  $15 output per 1M, cached input $0.30 (90% off), 1M context (1,048,576); K2.6/K2.7 Code budget line ~$0.95/$4;
+  OpenRouter batch route ~$0.25/$14.23; 75%-cache worked math cuts $4,950→$3,125/mo; honest vs Claude: pricier than
+  Sonnet 5.5 at list, cheaper than Opus 5.5 output, structural case = 1M context. Verified Oct 17 2026.

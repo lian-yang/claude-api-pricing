@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Kimi K3 API Pricing (2026): $3/$15 per Million, Cached Input $0.30</title>
+<meta name="description" content="Kimi K3 API pricing explained: $3 input / $15 output per 1M tokens, cached input at $0.30 (90% off), 1M context. K2.6 budget line, OpenRouter rates, and vs Claude costs.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/kimi-k3-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kimi K3 API Pricing (2026) — $3/$15 + Cache at $0.30">
+<meta property="og:description" content="Official Kimi K3 rates per 1M tokens: $3 input, $15 output, cached input $0.30 with a 1M-token context — plus the K2.6 budget line and vs Claude math.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/kimi-k3-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the Kimi K3 API cost?","acceptedAnswer":{"@type":"Answer","text":"Per 1M tokens, kimi-k3 costs $3.00 input and $15.00 output on Moonshot's official platform, with a 1,048,576-token (1M) context window. Cached input drops to $0.30 per million — a 90% discount that matters a lot on long-context workloads."}},
+{"@type":"Question","name":"Is Kimi K3 cheaper than Claude?","acceptedAnswer":{"@type":"Answer","text":"At list price, no — K3 ($3/$15) is pricier than Claude Sonnet 5.5 ($2/$10) on both axes, though cheaper than Claude Opus 5.5's $20 output. The equalizer is caching: with a high cache-hit rate K3's effective input cost falls toward $0.30/M, which flips the math for repeated-prompt workloads."}},
+{"@type":"Question","name":"What's the difference between Kimi K2 and K3 pricing?","acceptedAnswer":{"@type":"Answer","text":"K3 is the flagship at $3/$15. The K2 value line stays much cheaper — K2.6 and K2.7 Code run about $0.95 input / $4.00 output per million. K3's pricing surprised some users coming from the budget-friendly K2 era, but it lands in the same ballpark as GPT-5.6 Terra ($2/$12)."}},
+{"@type":"Question","name":"Can I get Kimi K3 cheaper than list?","acceptedAnswer":{"@type":"Answer","text":"OpenRouter lists K3 at roughly $0.25 input / $14.23 output per million — batching discounts make the input side dramatically cheaper than the official $3. If your workload batches well, route through an aggregator; if you need real-time latency, official platform rates apply."}},
+{"@type":"Question","name":"What context window does Kimi K3 support?","acceptedAnswer":{"@type":"Answer","text":"1,048,576 tokens — a full 1M context, matching DeepSeek V4's 1M tier and exceeding Claude's 200K default. That's the main structural argument for K3: entire codebases or document sets in one call, with cached input keeping the repeat passes affordable."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates from Moonshot's platform docs · verified Oct 17, 2026</div>
+  <h1>Kimi K3 API pricing — $3/$15, with cache doing the heavy lifting</h1>
+  <p class="sub">Moonshot's flagship lands at <b>$3 input / $15 output</b> per million with a <b>1M-token context</b> — pricier than the K2 line everyone loved, competitive with GPT-5.6 Terra, and with <b>cached input at $0.30</b> (90% off) that quietly changes the math.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Kimi K3 prices (per 1M tokens)</h2>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input (fresh)</th><th>Input (cached)</th><th>Output</th><th>Context</th></tr>
+    <tr><td>kimi-k3</td><td>$3.00</td><td>$0.30</td><td>$15.00</td><td>1M (1,048,576)</td></tr>
+    <tr><td>Kimi K2.6 / K2.7 Code</td><td>~$0.95</td><td>—</td><td>~$4.00</td><td>—</td></tr>
+  </table></div>
+  <p class="hint">Source: Kimi API Platform pricing docs, verified Oct 17, 2026. K2 line rates as listed by aggregators in Oct 2026.</p>
+
+  <h3>The positioning story: flagship prices after a budget era</h3>
+  <p>K3's $3/$15 put it in the same ballpark as <a href="/gpt-5-6-pricing">GPT-5.6 Terra ($2/$12)</a> — and sparked genuine debate among developers who came to Kimi precisely because K2 was cheap. The honest read: K3 is a flagship-tier bid (1M context included), not a budget play. For budget workloads the K2 line at ~$0.95/$4 is still there, and <a href="/deepseek-v4-pricing">DeepSeek V4.1-Flash at $0.30/$1.20</a> undercuts everything.</p>
+
+  <h3>Cache economics: where K3 actually wins</h3>
+  <p>Cached input at <b>$0.30/M is a 90% discount</b>. On workloads that re-send long prompts — agent loops, document Q&amp;A, codebase chat — the input side of the bill collapses. Worked example at 30M input + 5M output/day: full-fresh costs <b>$165/day (~$4,950/mo)</b>, but with 75% cache hits the same volume runs <b>~$104/day (~$3,125/mo)</b> — a 37% cut from caching alone.</p>
+
+  <h3>Kimi K3 vs Claude</h3>
+  <p>At list, K3 ($3/$15) is <b>pricier than Claude Sonnet 5.5 ($2/$10)</b> on both axes and cheaper than Opus 5.5's $20 output. The structural case for K3 is the 1M context (vs Claude's 200K default) — entire codebases in one call. The structural case against: for most sub-200K tasks, Sonnet 5.5 is both cheaper and adjacent in quality; for volume tasks, K2.6 or DeepSeek V4.1-Flash cost 4–12x less.</p>
+
+  <h3>Cheaper than list: the aggregator route</h3>
+  <p>OpenRouter lists K3 at roughly <b>$0.25 input / $14.23 output</b> — batching discounts make the input side dramatically cheaper than the official $3. If your workload tolerates batch latency, that's the play; real-time product features stay on the official platform.</p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Moonshot's official platform docs on Oct 17, 2026. Not affiliated with Moonshot AI or Anthropic.</p><nav><a href="/">Claude API Pricing</a> · <a href="/gpt-5-6-pricing">GPT-5.6</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon</a></nav></div></footer>
+</body>
+</html>
