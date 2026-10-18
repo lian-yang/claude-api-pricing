@@ -38,3 +38,9 @@
   $15 output per 1M, cached input $0.30 (90% off), 1M context (1,048,576); K2.6/K2.7 Code budget line ~$0.95/$4;
   OpenRouter batch route ~$0.25/$14.23; 75%-cache worked math cuts $4,950→$3,125/mo; honest vs Claude: pricier than
   Sonnet 5.5 at list, cheaper than Opus 5.5 output, structural case = 1M context. Verified Oct 17 2026.
+- [/muse-spark-vs-claude-app](https://claude-api-pricing.vercel.app/muse-spark-vs-claude-app): Muse Spark vs
+  Claude app & API — Meta's open-weight 816B MoE (42B active, 1M context, Oct 15 2026) at $1.25/$4.25 via
+  OpenRouter vs Opus 5.5 $4/$20; worked 30M+5M/day math: $1,763/mo vs $6,600 Opus / $3,300 Sonnet;
+  self-host reality check (816B needs 512GB-class hardware at $15-25/hr); benchmark honesty: Opus leads
+  SWE-bench Verified/Pro, Muse Spark 1.2 86.6% at $0.55-1.25 per solved task, 1.3 edges Opus 5 on DeepSWE;
+  verdict: bulk long-context work to Muse Spark, frontier agentic slice to Opus. Verified Oct 18 2026.

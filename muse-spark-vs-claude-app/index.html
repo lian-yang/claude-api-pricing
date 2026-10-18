@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Muse Spark vs Claude App (2026): Open-Weights Cost Math vs the Claude API</title>
+<meta name="description" content="Meta's Muse Spark Open (816B MoE, 1M context, free weights) vs Claude: $1.25/$4.25 via OpenRouter vs Opus 5.5 $4/$20 per million tokens, self-host economics, SWE-bench standing — which wins for coding and chat.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/muse-spark-vs-claude-app">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Muse Spark vs Claude App & API (2026)">
+<meta property="og:description" content="Open-weights cost math: Muse Spark Open runs $1.25/$4.25 per million tokens via OpenRouter (or free if you self-host the 816B MoE), vs Opus 5.5's $4/$20 — with the SWE-bench reality check on where Claude still leads.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/muse-spark-vs-claude-app">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Muse Spark cheaper than Claude?","acceptedAnswer":{"@type":"Answer","text":"Yes, at list API prices: Muse Spark Open runs about $1.25 input / $4.25 output per million tokens via OpenRouter versus Claude Opus 5.5's $4/$20 — roughly 3x cheaper on input and 4.7x on output. Against Claude Sonnet 5.5 ($2/$10) the gap narrows to about 1.6x/2.4x. Self-hosting the open weights drops the token price to zero, but only after you pay for hardware that can serve an 816B-parameter MoE."}},
+{"@type":"Question","name":"Is the Muse Spark app free like the Claude app?","acceptedAnswer":{"@type":"Answer","text":"Both Meta's Muse Spark app and Claude's app have free tiers. The meaningful difference is upstream: Muse Spark's engine is an open-weight model Meta released on Oct 15, 2026, so developers can self-host or route it through aggregators, while Claude is closed and API-only. The apps themselves are similar freemium products — the cost divergence happens at the API."}},
+{"@type":"Question","name":"Can Muse Spark Open run locally on a Mac?","acceptedAnswer":{"@type":"Answer","text":"Meta claims the 816B mixture-of-experts (about 42B active per token) can run on high-end Apple Silicon, and community guides cover quantized local setups. Realistically you need a large unified-memory machine (512GB-class) or a multi-GPU server. For most developers, renting the hosted version at $1.25/$4.25 per million tokens is far cheaper than owning hardware for an 816B model."}},
+{"@type":"Question","name":"How does Muse Spark compare to Claude on coding benchmarks?","acceptedAnswer":{"@type":"Answer","text":"Claude's Opus models still lead the most rigorous boards: Opus 5 tops the SWE-bench Verified leaderboard, Opus 5.5 leads Muse Spark ~86.6% to ~60.5% on benchlm's head-to-head, and Opus leads on SWE-Bench Pro (69.2% vs 61.5% for Muse Spark 1.1). Muse Spark 1.3 edges Opus 5 on the community-run DeepSWE board (75.4% vs 74.0%), and Muse Spark 1.2 posts 86.6% on SWE-bench Verified at a fraction of the per-task cost ($0.55–$1.25). Expect Claude to win hard agentic work per attempt; Muse Spark to win on cost per solved task."}},
+{"@type":"Question","name":"How big is Muse Spark's context window vs Claude?","acceptedAnswer":{"@type":"Answer","text":"Muse Spark Open takes 1,000,000-token contexts, roughly 5x Claude Opus 5.5's ~200K window (Claude counters with prompt caching to cut repeated-context costs). For whole-codebase analysis or very long documents, the bigger window avoids splitting tasks — and the repeated-context fees — into multiple requests."}},
+{"@type":"Question","name":"When is paying for Claude still worth it?","acceptedAnswer":{"@type":"Answer","text":"When capability per attempt dominates: long-horizon agentic chains, delicate refactors and high-stakes writing are where Opus-class models hold a measurable lead — a 3–5x price premium vanishes if the cheaper model needs 3x more retries. Prompt caching, batch discounts and Claude Code maturity also cut Claude's effective price well below list for heavy users."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/muse-spark-vs-claude-app">Muse Spark</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Price math verified Oct 18, 2026</div>
+  <h1>Muse Spark vs Claude — the open-weights cost math</h1>
+  <p class="sub">Meta's Muse Spark Open is the newest front in the open-weight price war: <b>$1.25 vs $4.00</b> per million input tokens, and free weights if you bring your own hardware. Here's the full per-token math against the Claude API, the self-host reality check, and where Opus still earns its premium.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Price per million tokens</h2>
+  <div class="tbl"><table>
+    <tr><th></th><th>Muse Spark Open (OpenRouter)</th><th>Claude Opus 5.5</th><th>Claude Sonnet 5.5</th></tr>
+    <tr><td>Input</td><td class="win">$1.25</td><td>$4.00</td><td>$2.00</td></tr>
+    <tr><td>Output</td><td class="win">$4.25</td><td>$20.00</td><td>$10.00</td></tr>
+    <tr><td>vs Opus 5.5 (input / output)</td><td class="win">3.2x / 4.7x cheaper</td><td>—</td><td>2x / 2x cheaper</td></tr>
+    <tr><td>Context window</td><td class="win">1M tokens</td><td>~200K tokens</td><td>~200K tokens</td></tr>
+    <tr><td>Weights</td><td class="win">Open (self-host = $0/token)</td><td>Closed</td><td>Closed</td></tr>
+    <tr><td>Vision</td><td>Text, image, video, audio in</td><td>Multimodal</td><td>Multimodal</td></tr>
+  </table></div>
+  <p class="hint">Muse Spark Open pricing via OpenRouter listing, Oct 18, 2026; weights are free on Hugging Face under Meta's community license. Claude prices per the official API pricing; prompt-cached Opus input runs ~$0.20/M (5% of list).</p>
+
+  <h3 id="app">App vs app: the free-tier tiebreak</h3>
+  <p>If you're comparing the <b>consumer apps</b>, it's close: both Meta's Muse Spark app and the Claude app are freemium products with usable free tiers and ~$20/month Pro plans. The structural difference is underneath — Muse Spark's engine ships as <b>open weights</b> (released Oct 15, 2026), so third parties route it through aggregators like OpenRouter and anyone can self-host. Claude is closed and API-only. For a developer, "Muse Spark vs Claude" is really <b>open-weights economics vs the Claude API</b> — which is the math below.</p>
+
+  <h2>What a real workload costs</h2>
+  <p>Same heavy daily agent we use across our comparisons: <b>30M input + 5M output tokens per day</b>.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Daily cost</th><th>30-day month</th></tr>
+    <tr><td>Claude Opus 5.5</td><td>30×$4 + 5×$20 = $220</td><td><b>$6,600</b></td></tr>
+    <tr><td>Claude Sonnet 5.5</td><td>30×$2 + 5×$10 = $110</td><td><b>$3,300</b></td></tr>
+    <tr><td>Muse Spark Open (OpenRouter)</td><td>30×$1.25 + 5×$4.25 = $58.75</td><td><b>$1,763</b></td></tr>
+  </table></div>
+  <p>A month of that agent on hosted Muse Spark costs about what <b>eight days</b> costs on Opus 5.5. Against Sonnet 5.5 it's roughly half — closer than DeepSeek's gap, so Muse Spark's case leans harder on its open weights and 1M context than on raw price alone.</p>
+
+  <h3>The self-host reality check</h3>
+  <p>"Free weights" is not free inference. Muse Spark Open is an <b>816B-parameter mixture-of-experts with ~42B active per token</b> — the sparsity is why Meta claims it runs on high-end Macs, but you're still looking at a 512GB-class unified-memory machine or a multi-GPU server. Renting that hardware runs <b>$15–25/hour</b>, which at low-to-moderate volume exceeds the $1.25/$4.25 hosted price many times over. Self-hosting only wins at sustained high throughput, data-sovereignty requirements, or heavy prompt reuse — for everyone else, the aggregator price already captures most of the open-weights discount.</p>
+
+  <h3>The context-window multiplier</h3>
+  <p>Muse Spark Open carries the same <b>1M-token window</b> as DeepSeek V4 and Kimi K3 — about 5x Opus 5.5's ~200K. A task needing 600K of context on Claude means three requests and three overlapping-context bills; on Muse Spark it's one. Claude's mitigations are prompt caching (cached Opus input ~$0.20/M) and better per-attempt quality. Whole-repo review and massive document QA still favor the big-window models on raw economics.</p>
+
+  <h3>Where Claude still earns the 3–5x</h3>
+  <ul>
+    <li><b>Coding per attempt:</b> Opus 5 tops the SWE-bench Verified leaderboard; benchlm's head-to-head has Opus 5.5 at ~86.6% vs Muse Spark ~60.5%, and Opus leads SWE-Bench Pro 69.2% vs 61.5% (Muse Spark 1.1)</li>
+    <li><b>But the gap is closing:</b> Muse Spark 1.3 edges Opus 5 on the community DeepSWE board (75.4% vs 74.0%), and Muse Spark 1.2 posts 86.6% on SWE-bench Verified at <b>$0.55–$1.25 per solved task</b> — the cost-per-solved-task number is where open weights bite</li>
+    <li><b>Agentic maturity:</b> Claude Code, computer use, prompt caching and batch APIs are battle-tested; Muse Spark's tooling is weeks old</li>
+    <li><b>Retry math:</b> if the cheaper model needs 2–3x more attempts on your workload, the 4.7x output discount evaporates — benchmark both before routing</li>
+  </ul>
+
+  <div class="verdict api"><b>Practical split:</b> route bulk, long-context, retry-tolerant work (summarization, extraction, code analysis, batch agents) to <b>Muse Spark Open at $1.25/$4.25</b> — a ~70% cut versus Opus 5.5 at list. Keep <b>Opus 5.5</b> for the frontier slice where success per attempt matters: hard agentic chains, delicate refactors, high-stakes writing. That's the same 90/10 split we recommend in every open-weight comparison — Muse Spark just moves the bulk tier's price closer to DeepSeek territory with a 1M window attached.</div>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>Is Muse Spark cheaper than Claude?</summary><div class="a">At list API prices, yes: ~$1.25/$4.25 per million tokens via OpenRouter vs Opus 5.5's $4/$20 — about 3x cheaper on input, 4.7x on output. Versus Sonnet 5.5 ($2/$10) it's ~1.6x/2.4x. Self-hosting drops the token price to zero but only after hardware that can serve an 816B MoE.</div></details>
+    <details><summary>Is the Muse Spark app free like the Claude app?</summary><div class="a">Both have free tiers and ~$20/month Pro plans — as apps they're similar freemium products. The real difference is structural: Muse Spark's engine is open-weight (self-host or aggregator routing possible), Claude's is closed and API-only.</div></details>
+    <details><summary>Can Muse Spark Open run locally on a Mac?</summary><div class="a">Meta claims Mac feasibility thanks to the sparse 42B-active MoE design, and quantized community guides exist — but realistically you want a 512GB-class unified-memory machine or multi-GPU server. At $15–25/hour for that hardware, most developers are better off paying $1.25/$4.25 hosted.</div></details>
+    <details><summary>How does Muse Spark compare to Claude on coding benchmarks?</summary><div class="a">Opus 5 leads SWE-bench Verified overall; Opus 5.5 leads Muse Spark ~86.6% vs ~60.5% on benchlm's head-to-head, and Opus wins SWE-Bench Pro 69.2% vs 61.5%. Muse Spark 1.3 edges Opus 5 on community DeepSWE (75.4% vs 74.0%), and Muse Spark 1.2 hits 86.6% on SWE-bench Verified at $0.55–$1.25 per solved task. Claude wins per attempt; Muse Spark wins per dollar.</div></details>
+    <details><summary>How big is Muse Spark's context window vs Claude's?</summary><div class="a">1M tokens vs Opus 5.5's ~200K — roughly 5x. Long-context jobs avoid being split into multiple requests, saving both latency and repeated-context token fees. Claude's counterweights: prompt caching and stronger per-attempt quality.</div></details>
+    <details><summary>When is paying for Claude still worth it?</summary><div class="a">When capability per attempt dominates: long-horizon agentic work, delicate refactors, high-stakes writing — plus caching and batch discounts that cut Claude's effective price for heavy users. Run both on your real workload before routing; retry rates decide the math.</div></details>
+  </div>
+
+  <p class="hint">Related: <a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 vs Opus cost math</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon pricing</a> · <a href="/kimi-k3-pricing">Kimi K3 pricing</a> · <a href="/#calculator">Claude API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent pricing guides. Not affiliated with Meta or Anthropic. "Claude" is a trademark of Anthropic, PBC. Muse Spark Open figures from its Hugging Face release and OpenRouter listing, Oct 18, 2026 — verify at <a rel="nofollow" href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B">model weights</a>, <a rel="nofollow" href="https://openrouter.ai">OpenRouter pricing</a> and <a rel="nofollow" href="https://platform.claude.com/docs/en/about-claude/pricing">Claude API pricing</a>.</div>
+</div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
