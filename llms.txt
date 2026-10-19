@@ -38,6 +38,11 @@
   $15 output per 1M, cached input $0.30 (90% off), 1M context (1,048,576); K2.6/K2.7 Code budget line ~$0.95/$4;
   OpenRouter batch route ~$0.25/$14.23; 75%-cache worked math cuts $4,950→$3,125/mo; honest vs Claude: pricier than
   Sonnet 5.5 at list, cheaper than Opus 5.5 output, structural case = 1M context. Verified Oct 17 2026.
+- [/qwen-3-8-pricing](https://claude-api-pricing.vercel.app/qwen-3-8-pricing): Qwen 3.8 API pricing — Qwen3.8-Max $2 in / $6 out per 1M
+  (flat 0-1M tokens, cache hits 10% = $0.20, explicit cache creation 125%, 1M-token free quota), Flash $0.15/$0.47,
+  open-weight 27B $0.50/$3 (Cerebras alt $0.99/$1.49); no long-context surcharge (unlike 3.5-3.7 tiered lines),
+  no qwen3.8-plus SKU; vs Claude: Sonnet 5.5 output -40% at same $2 input, Opus 5.5 2x/3.3x cheaper;
+  worked 30M+5M/day: $2,700/mo fresh → $1,485/mo at 75% cache. Released Aug 2 2026. Verified Oct 19 2026.
 - [/muse-spark-vs-claude-app](https://claude-api-pricing.vercel.app/muse-spark-vs-claude-app): Muse Spark vs
   Claude app & API — Meta's open-weight 816B MoE (42B active, 1M context, Oct 15 2026) at $1.25/$4.25 via
   OpenRouter vs Opus 5.5 $4/$20; worked 30M+5M/day math: $1,763/mo vs $6,600 Opus / $3,300 Sonnet;

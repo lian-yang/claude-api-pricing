@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Qwen 3.8 API Pricing (2026): Max $2/$6, Flash $0.15/$0.47 per Million</title>
+<meta name="description" content="Qwen 3.8 API pricing: Qwen3.8-Max $2 input / $6 output per 1M tokens (flat up to 1M-token prompts, cache hits at 10%), Flash $0.15/$0.47, open-weight 27B $0.50/$3. Alibaba Cloud Model Studio rates verified Oct 19 2026, with vs Claude cost math.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/qwen-3-8-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qwen 3.8 API Pricing (2026) — Max $2/$6, Flash $0.15/$0.47">
+<meta property="og:description" content="Official Alibaba Cloud Model Studio rates for Qwen 3.8: Max $2/$6 per 1M with 10% cache hits, Flash $0.15/$0.47, open-weight 27B $0.50/$3 — plus vs Claude cost math.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/qwen-3-8-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the Qwen 3.8 API cost?","acceptedAnswer":{"@type":"Answer","text":"Per 1M tokens on Alibaba Cloud Model Studio (international/Singapore region, verified Oct 19 2026): Qwen3.8-Max costs $2.00 input and $6.00 output; Qwen3.8-Flash costs $0.15 input and $0.47 output. Both are priced flat across prompt sizes up to 1M tokens, and each model comes with a 1-million-token free quota. The open-weight Qwen3.8-27B API runs $0.50/$3.00."}},
+{"@type":"Question","name":"Is Qwen 3.8 cheaper than Claude?","acceptedAnswer":{"@type":"Answer","text":"Yes, on both axes at list price. Qwen3.8-Max matches Claude Sonnet 5.5's $2 input but charges $6 output vs Sonnet's $10 (40% less), and Qwen3.8-Flash ($0.15/$0.47) undercuts Sonnet by 13x on input and 21x on output. Only DeepSeek's V4.1-Flash ($0.15-0.30/$0.60-1.20) is cheaper still. Against Claude Opus 5.5 ($4/$20), Max is 2x cheaper on input and 3.3x on output."}},
+{"@type":"Question","name":"What is Qwen 3.8's cache pricing?","acceptedAnswer":{"@type":"Answer","text":"Alibaba Cloud bills implicit cache hits at 10% of the standard input price — $0.20 per million on Qwen3.8-Max's $2 input. Explicit cache creation is billed at 125% of the normal input rate. On cache-heavy workloads (agent loops, document Q&A) that turns a $2 input into $0.20, which is where most of the real-world savings come from."}},
+{"@type":"Question","name":"Qwen3.8-Max vs Qwen3.8-Flash — which should I use?","acceptedAnswer":{"@type":"Answer","text":"Max ($2/$6) is the flagship, released Aug 2 2026 and aimed at coding and agentic cowork tasks. Flash ($0.15/$0.47) is the high-volume line — roughly 13x cheaper on input and 12.8x on output. A practical split: prototype and run batch/high-volume paths on Flash, promote the slices that actually need flagship reasoning to Max, and cap reasoning_effort on Max since thinking tokens are billed as output."}},
+{"@type":"Question","name":"Does Qwen 3.8 have a long-context surcharge?","acceptedAnswer":{"@type":"Answer","text":"No — unlike the older Qwen 3.5/3.6/3.7 lines, which add tiered pricing (up to 4x on Flash models past 128K), the Qwen3.8-Max and Flash listings are flat across the full 0-to-1M token range. A 900K-token prompt bills at the same per-token rate as a 900-token one. Note that qwen3.8-plus does not exist: the Plus line currently tops out at Qwen3.7-Plus."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates from Alibaba Cloud Model Studio · verified Oct 19, 2026</div>
+  <h1>Qwen 3.8 API pricing — $2/$6 flagship, with a $0.15 budget line</h1>
+  <p class="sub">Alibaba's August 2026 flagship lands at <b>$2 input / $6 output</b> per million — same input as Claude Sonnet 5.5, 40% cheaper output — with <b>cache hits at 10%</b>, flat pricing all the way to 1M-token prompts, and a <b>Qwen3.8-Flash line at $0.15/$0.47</b> for high-volume work.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Qwen 3.8 prices (per 1M tokens, international region)</h2>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input</th><th>Input (cache hit)</th><th>Output</th><th>Free quota</th></tr>
+    <tr><td>qwen3.8-max (flagship)</td><td>$2.00</td><td>$0.20</td><td>$6.00</td><td>1M tokens</td></tr>
+    <tr><td>qwen3.8-flash</td><td>$0.15</td><td>$0.015</td><td>$0.47</td><td>1M tokens</td></tr>
+    <tr><td>qwen3.8-27b (open weights)</td><td>$0.50</td><td>$0.05</td><td>$3.00</td><td>—</td></tr>
+    <tr><td>qwen3.8-2.4t-a95b (open weights)</td><td>$2.00</td><td>$0.20</td><td>$6.00</td><td>—</td></tr>
+  </table></div>
+  <p class="hint">Source: Alibaba Cloud Model Studio pricing page (Singapore/international deployment), verified Oct 19, 2026. Cache-hit input shown at the documented 10% implicit-cache rate; explicit cache creation bills at 125% of standard input. US (Virginia) matches these prices; China (Beijing) and HK/Frankfurt/Tokyo regions run ~18% lower ($1.65/$4.951 on Max).</p>
+
+  <h3>Positioning: flagship output at Sonnet-money input</h3>
+  <p>Qwen3.8-Max was released Aug 2, 2026 as the family's most capable model, pitched at coding and agentic "cowork" work. The price cuts an unusual path: it <b>matches Claude Sonnet 5.5's $2 input</b> but charges <b>$6 output vs Sonnet's $10</b>, and lands between <a href="/gpt-5-6-pricing">GPT-5.6 Terra ($2/$12)</a> and <a href="/kimi-k3-pricing">Kimi K3 ($3/$15)</a>. Against Opus 5.5 ($4/$20) it's 2x cheaper in, 3.3x cheaper out. The budget floor still belongs to <a href="/deepseek-v4-pricing">DeepSeek V4.1-Flash ($0.15–0.30/$0.60–1.20)</a>, with Qwen3.8-Flash ($0.15/$0.47) the closest challenger.</p>
+
+  <h3>Cache economics: the 10% rate does the heavy lifting</h3>
+  <p>Alibaba bills implicit cache hits at <b>10% of input price</b> — $0.20/M on Max. Worked example at 30M input + 5M output/day on Max: full-fresh runs <b>$90/day (~$2,700/mo)</b>; at 75% cache hits the input side drops to $19.50 and the same volume costs <b>$49.50/day (~$1,485/mo)</b> — a 45% cut from caching alone. The same workload on Sonnet 5.5 is $110/day fresh, so Max wins both with and without cache. For per-request math, the <a href="/claude-token-calculator">token calculator</a> covers the Claude side.</p>
+
+  <h3>The reasoning_effort bill you didn't see</h3>
+  <p>Qwen3.8 exposes a <code>reasoning_effort</code> parameter — and reviewers have noted it <b>defaults to overthinking</b>, burning thinking tokens that bill as output at $6/M on Max. For cost control: set reasoning to low or medium on routine calls, reserve high-effort mode for the slices that need it, and route everything else to Flash, where the same overthinking costs $0.47/M instead.</p>
+
+  <h3>Lineup gotchas worth knowing</h3>
+  <p>Three things the pricing page won't flag: <b>qwen3.8-plus doesn't exist</b> (the Plus line tops out at Qwen3.7-Plus), there's no qwen3.8-max-preview either (that slot is qwen3.7-max-preview at $2.5/$7.5, thinking-only), and unlike the 3.5/3.6/3.7 lines, the 3.8 listings carry <b>no long-context surcharge</b> — flat rates to 1M-token prompts where older Flash tiers rise up to 4x past 128K.</p>
+
+  <h3>Hosting alternatives: the Cerebras route for 27B</h3>
+  <p>The open-weight models aren't locked to Alibaba. Cerebras hosts <b>Qwen3.8-27B at $0.99/$1.49</b> per million — pricier input than Alibaba's $0.50, but less than half the output price and pitched on inference speed. Self-hosting the 27B is realistic on a single high-memory GPU; the 2.4T-A95B MoE is a datacenter-scale job. Community quantized builds for local runs are active.</p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Alibaba Cloud Model Studio's official pricing page on Oct 19, 2026. Not affiliated with Alibaba Cloud, the Qwen team, or Anthropic.</p><nav><a href="/">Claude API Pricing</a> · <a href="/gpt-5-6-pricing">GPT-5.6</a> · <a href="/kimi-k3-pricing">Kimi K3</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
