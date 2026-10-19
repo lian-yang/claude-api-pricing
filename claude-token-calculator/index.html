@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Claude Token Calculator — API Cost per Token, Every Model (2026)</title>
+<meta name="description" content="Free Claude token cost calculator: price any request across Opus, Sonnet and Haiku by the token. Per-request, daily and monthly costs, plus what $1 buys on each model.">
+<meta property="og:title" content="Claude Token Calculator — API Cost per Token, Every Model">
+<meta property="og:description" content="Price any Claude API request by the token: per-request, daily and monthly cost across all models, with a what-$1-buys reference table.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/claude-token-calculator">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/claude-token-calculator">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does one Claude API token cost?", "acceptedAnswer": {"@type": "Answer", "text": "Per-token prices are quoted per million tokens. As of October 2026: Opus 5.5 costs $4 per million input and $20 per million output tokens — $0.000004 per input token and $0.00002 per output token. Sonnet 5.5 is $2/$10 per million, Haiku 4.5 is $1/$5, and Haiku 5.5 is $0.10/$0.50 per million tokens."}}, {"@type": "Question", "name": "How many tokens are in a word of English text?", "acceptedAnswer": {"@type": "Answer", "text": "Roughly 1.33 tokens per word — or about 0.75 words per token — for typical English prose, and about 4 characters per token. Code, non-English scripts and heavy punctuation tokenize less efficiently and can double the count. A 500-word blog paragraph is roughly 670 tokens."}}, {"@type": "Question", "name": "How do I calculate the cost of a Claude API request?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply input tokens by the model's input price, output tokens by its output price (both per million), and add the two. Example: a 10,000-token prompt with a 2,000-token answer on Sonnet 5.5 costs 0.01M × $2 + 0.002M × $10 = $0.04 per request."}}, {"@type": "Question", "name": "Does prompt caching change the per-token cost?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — cached input is dramatically cheaper: $0.20 per million tokens on Opus 5.5, $0.10 on Sonnet 5.5, and $0.01 on Haiku 5.5. Repeated system prompts and document context can drop effective input costs by 90%+ when cache hits apply."}}]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Claude Token Calculator","url":"https://claude-api-pricing.vercel.app/claude-token-calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free calculator that prices any Claude API request by the token across Opus, Sonnet and Haiku models, with per-request, daily and monthly totals."}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Free · No signup · Rates verified Oct 14, 2026</div>
+  <h1>Claude token calculator — price any request by the token</h1>
+  <p class="sub">Set a request size, see what it costs on every Claude model — per request, per day, per month. Plus the reference table everyone copies: <b>what $1 buys</b> on each model.</p>
+</div></div>
+
+<section id="tokcalc" style="padding-top:8px"><div class="wrap">
+<div class="calc">
+  <div class="calc-inputs">
+    <h2>Request size</h2>
+    <label>Model
+      <select id="model">
+        <option value="opus55" selected>Claude Opus 5.5 — $4 / $20 per MTok</option>
+        <option value="opus5">Claude Opus 5 — $5 / $25 per MTok</option>
+        <option value="sonnet55">Claude Sonnet 5.5 — $2 / $10 per MTok</option>
+        <option value="sonnet4">Claude Sonnet 4.x — $3 / $15 per MTok</option>
+        <option value="haiku45">Claude Haiku 4.5 — $1 / $5 per MTok</option>
+        <option value="haiku55">Claude Haiku 5.5 — $0.10 / $0.50 per MTok</option>
+      </select>
+    </label>
+    <label>Input tokens per request <output id="inReqVal">10K</output>
+      <input type="range" id="inReq" min="500" max="1000000" step="500" value="10000">
+    </label>
+    <label>Output tokens per request <output id="outReqVal">2K</output>
+      <input type="range" id="outReq" min="100" max="200000" step="100" value="2000">
+    </label>
+    <label>Requests per day <output id="rpsVal">50</output>
+      <input type="range" id="rps" min="1" max="5000" step="1" value="50">
+    </label>
+    <p class="hint">Rule of thumb: 1 token ≈ 4 characters ≈ 0.75 English words. A 500-word paragraph ≈ 670 tokens. Code and non-English text run heavier.</p>
+  </div>
+  <div class="calc-out">
+    <div class="verdict" id="verdict">…</div>
+    <div class="bars" id="bars"></div>
+    <div class="breakeven" id="breakeven"></div>
+  </div>
+</div>
+</div></section>
+
+<section><div class="wrap prose">
+<h2>What $1 buys on each Claude model</h2>
+<p>The fastest way to feel token prices — how much output (and input) a single dollar gets you at list rates:</p>
+<div class="tbl"><table>
+<thead><tr><th>Model</th><th>$1 buys (output tokens)</th><th>$1 buys (input tokens)</th><th>Cached input per $1</th></tr></thead>
+<tbody>
+<tr><td>Claude Opus 5.5</td><td>50K tokens</td><td>250K tokens</td><td>5M tokens</td></tr>
+<tr><td>Claude Opus 5</td><td>40K tokens</td><td>200K tokens</td><td>2M tokens</td></tr>
+<tr><td>Claude Sonnet 5.5</td><td>100K tokens</td><td>500K tokens</td><td>10M tokens</td></tr>
+<tr><td>Claude Sonnet 4.x</td><td>66.7K tokens</td><td>333K tokens</td><td>—</td></tr>
+<tr><td>Claude Haiku 4.5</td><td>200K tokens</td><td>1M tokens</td><td>10M tokens</td></tr>
+<tr><td>Claude Haiku 5.5</td><td>2M tokens</td><td>10M tokens</td><td>100M tokens</td></tr>
+</tbody>
+</table></div>
+<p>Perspective: a typical novel is ~100K tokens. One dollar of Haiku 5.5 output could write twenty novels; one dollar of Opus 5.5 output writes half of one. That gap is the entire model-tier decision in one row.</p>
+
+<h2>Claude API price per million tokens (October 2026)</h2>
+<div class="tbl"><table>
+<thead><tr><th>Model</th><th>Input / MTok</th><th>Cached input / MTok</th><th>Output / MTok</th><th>Context</th></tr></thead>
+<tbody>
+<tr><td>Claude Opus 5.5</td><td>$4.00</td><td>$0.20</td><td>$20.00</td><td>1M</td></tr>
+<tr><td>Claude Opus 5</td><td>$5.00</td><td>$0.50</td><td>$25.00</td><td>1M</td></tr>
+<tr><td>Claude Sonnet 5.5</td><td>$2.00</td><td>$0.10</td><td>$10.00</td><td>1M</td></tr>
+<tr><td>Claude Sonnet 4.x</td><td>$3.00</td><td>—</td><td>$15.00</td><td>200K</td></tr>
+<tr><td>Claude Haiku 4.5</td><td>$1.00</td><td>$0.10</td><td>$5.00</td><td>200K</td></tr>
+<tr><td>Claude Haiku 5.5</td><td>$0.10</td><td>$0.01</td><td>$0.50</td><td>1M</td></tr>
+</tbody>
+</table></div>
+<p>To turn any row into a per-token price, divide by one million: Sonnet 5.5 output is $10/MTok = <b>$0.00001 per output token</b>. The full decision math — API vs Pro vs Max subscription — lives on the <a href="/">Claude API pricing homepage</a>; per-token mechanics for Gemini's flagship are on the <a href="/gemini-4-argon-pricing">Argon rate card</a>.</p>
+</div></section>
+
+<section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
+<details open><summary>How much does one Claude API token cost?</summary><div class="a">Prices are per million tokens: Opus 5.5 $4 in / $20 out (that's $0.000004 per input token, $0.00002 per output token); Sonnet 5.5 $2/$10; Haiku 4.5 $1/$5; Haiku 5.5 $0.10/$0.50.</div></details>
+<details><summary>How many tokens are in a word?</summary><div class="a">About 1.33 tokens per English word (~0.75 words per token, ~4 characters per token). Code, non-Latin scripts and dense punctuation can double that. 500 words ≈ 670 tokens; 100-page PDF ≈ 50K–80K tokens.</div></details>
+<details><summary>How do I calculate a request's cost?</summary><div class="a">input_tokens × input_price + output_tokens × output_price, both priced per million. 10K-token prompt + 2K-token answer on Sonnet 5.5 = 0.01×$2 + 0.002×$10 = $0.04. The calculator above does this for every model at once.</div></details>
+<details><summary>Does caching change per-token pricing?</summary><div class="a">Cached input runs $0.20/MTok on Opus 5.5, $0.10 on Sonnet 5.5, $0.01 on Haiku 5.5 — 90%+ cheaper than uncached input when cache hits land. Repeated system prompts are the classic win.</div></details>
+<details><summary>How many tokens fit in Claude's context window?</summary><div class="a">Current-gen models expose 1M-token windows (Opus 5.5, Sonnet 5.5, Haiku 5.5); Sonnet 4.x and Haiku 4.5 are 200K. On Argon-style shared windows, thinking tokens count against the same budget — see the Argon rate card for that model's split.</div></details>
+</div></div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with or endorsed by Anthropic. “Claude” is a trademark of Anthropic, PBC. Token estimates use standard English rule-of-thumb; actual tokenizer counts vary. Verify rates at <a rel="nofollow" href="https://claude.com/pricing">claude.com/pricing</a>. Related: <a href="/">API vs subscription calculator</a> · <a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var MODELS={
+    opus55:{name:"Opus 5.5",pin:4,pout:20,pc:0.20},
+    opus5:{name:"Opus 5",pin:5,pout:25,pc:0.50},
+    sonnet55:{name:"Sonnet 5.5",pin:2,pout:10,pc:0.10},
+    sonnet4:{name:"Sonnet 4.x",pin:3,pout:15,pc:null},
+    haiku45:{name:"Haiku 4.5",pin:1,pout:5,pc:0.10},
+    haiku55:{name:"Haiku 5.5",pin:0.10,pout:0.50,pc:0.01}
+  };
+  var $=function(id){return document.getElementById(id)};
+  function fmtTok(n){ if(n>=1e6) return (n/1e6).toFixed(n%1e6?1:0)+"M"; if(n>=1e3) return Math.round(n/1e3)+"K"; return String(n); }
+  function fmtUSD(n){ if(n>=100) return "$"+Math.round(n).toLocaleString(); if(n>=10) return "$"+n.toFixed(0); if(n>=1) return "$"+n.toFixed(2); return "$"+n.toFixed(4); }
+  function render(){
+    var m=MODELS[$("model").value], ir=+$("inReq").value, or_=+$("outReq").value, n=+$("rps").value;
+    $("inReqVal").textContent=fmtTok(ir); $("outReqVal").textContent=fmtTok(or_); $("rpsVal").textContent=n;
+    var perReq=(ir/1e6)*m.pin+(or_/1e6)*m.pout;
+    var day=perReq*n, mo=day*30;
+    var v=$("verdict");
+    v.innerHTML="On <b>"+m.name+"</b>: <b>"+fmtUSD(perReq)+"</b> per request → <b>"+fmtUSD(day)+"/day</b> → <b>"+fmtUSD(mo)+"/month</b> at "+n+" req/day.";
+    v.className="verdict api";
+    var rows=[
+      {l:"per request",v:perReq},
+      {l:"per day",v:day},
+      {l:"per month (×30)",v:mo}
+    ];
+    var max=Math.max.apply(null,rows.map(function(r){return r.v}));
+    $("bars").innerHTML=rows.map(function(r){
+      var pct=Math.max(4,Math.round(r.v/max*100));
+      return '<div class="bar"><span class="bl">'+r.l+'</span><span class="bf api" style="width:'+pct+'%"></span><span class="bp">'+fmtUSD(r.v)+'</span></div>';
+    }).join("");
+    $("breakeven").innerHTML=(m.pc?("Cached input at $"+m.pc.toFixed(2)+"/MTok would cut the input line by ~"+Math.round((1-m.pc/m.pin)*100)+"%. "):"")+"Same request on Pro ($20/mo): break even at ~"+Math.round(20/(day||1e-9))+" days of this volume — vs the plan's 5-hour/weekly caps.";
+  }
+  ["model","inReq","outReq","rps"].forEach(function(id){$(id).addEventListener("input",render)});
+  render();
+})();
+</script>
+</body>
+</html>
