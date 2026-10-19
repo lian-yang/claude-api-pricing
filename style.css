@@ -13,7 +13,8 @@ header.site{border-bottom:1px solid var(--line);background:rgba(13,17,23,.9);pos
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
 .logo{font-weight:800;font-size:18px;color:var(--tx);text-decoration:none;letter-spacing:-.3px}
 .logo span{color:var(--acc)}
-nav.top{display:flex;gap:18px;overflow-x:auto}
+nav.top{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+nav.top::-webkit-scrollbar{display:none}
 nav.top a{color:var(--tx2);text-decoration:none;font-size:14px;white-space:nowrap}
 nav.top a:hover{color:var(--tx)}
 @media(max-width:640px){nav.top{display:none}}
