@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>DeepSeek Search API Pricing (2026): $0.75/1k, Free Tool Calls End Nov 1</title>
+<meta name="description" content="DeepSeek Search & Fetch API pricing: $0.75 per 1,000 successful requests, billed only on success, 100 QPS search / 25 QPS fetch; server-side tool calls in Claude Code are free until Nov 1, 2026. vs Serper, Tavily, Exa and Brave rates verified Oct 20, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/deepseek-search-api-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek Search & Fetch API Pricing — $0.75/1k, Free Calls End Nov 1">
+<meta property="og:description" content="Official DeepSeek Search & Fetch API rates: $0.75 per 1,000 successful requests, billed only on success; free server-side tool calls end Nov 1, 2026. Compared against Serper, Tavily, Exa and Brave.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/deepseek-search-api-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the DeepSeek Search API cost?","acceptedAnswer":{"@type":"Answer","text":"DeepSeek bills both its Search and Fetch APIs at $0.75 per 1,000 successful requests (verified Oct 20, 2026). Billing is per request, not per token or per result — the count parameter (how many results you get, up to 50) does not change the price. Failed requests, empty searches and timeouts are not billed: a Search request only bills when it returns HTTP 200 with a non-empty results array, and Fetch only bills when it returns page content."}},
+{"@type":"Question","name":"When does DeepSeek start charging for search in Claude Code?","acceptedAnswer":{"@type":"Answer","text":"Server-side search and fetch tool calls made through DeepSeek Harness, Claude Code, or Codex are currently free of charge, and start billing at the same $0.75 per 1,000 rate at 00:00 Beijing time on November 1, 2026. Standalone calls to the /v1/tools/search and /v1/tools/fetch endpoints are billed per request from launch. Charges are deducted from your DeepSeek balance, with granted balance used before topped-up balance."}},
+{"@type":"Question","name":"Is the DeepSeek Search API cheaper than Serper, Tavily, Exa, or Brave?","acceptedAnswer":{"@type":"Answer","text":"At list price, yes, against most of them. DeepSeek's $0.75 per 1,000 undercuts Serper's starter tier ($1.00/1k) by 25%, Exa lite ($4/1k) by 81%, Brave Search ($5/1k) by 85%, and Tavily pay-as-you-go ($8/1k credits) by about 91%. Only Serper's bulk tiers reach parity or beat it ($0.75/1k at 500k credits, $0.30/1k at 12.5M). One caveat: Serper sells Google SERP data (organic positions and ad fields), while DeepSeek, Tavily, Exa and Brave sell web search for AI agents — the closest apples-to-apples comparison."}},
+{"@type":"Question","name":"What counts as a billed 'successful request' on DeepSeek Search?","acceptedAnswer":{"@type":"Answer","text":"A Search request bills only if it returns HTTP 200 with a non-empty results array; a Fetch request bills only if it returns page content. Failures, empty searches and timeouts cost nothing. Error codes worth knowing: retry 408, 429 and 5xx; top up your balance on 402; on Fetch, 403 means a security-policy rejection and 404 means no usable content (blocked, unsupported, or empty page)."}},
+{"@type":"Question","name":"What are the DeepSeek Search and Fetch rate limits?","acceptedAnswer":{"@type":"Answer","text":"Per account (not per key, and separate from model concurrency limits): Search allows 100 QPS and Fetch allows 25 QPS; Fetch additionally applies a per-domain QPS limit. Exceeding either returns HTTP 429. A Search query is 1–128 characters and returns up to 50 results with rerank scores (0–3), authority scores (0–4), optional ~600–800 character summaries and RFC 3339 dates; Fetch accepts URLs up to 8,192 characters and returns the title plus Markdown content."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official DeepSeek rates · verified Oct 20, 2026</div>
+  <h1>DeepSeek Search &amp; Fetch API pricing — $0.75 per 1,000 requests</h1>
+  <p class="sub">DeepSeek's new Search and Fetch APIs bill <b>$0.75 per 1,000 successful requests</b> each — failed requests cost nothing. Tool calls inside <b>Claude Code are free until Nov 1, 2026</b>, then billed at the same rate. That list price undercuts Tavily by ~10x and Serper's starter tier by 25%.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official DeepSeek Search &amp; Fetch prices</h2>
+  <div class="tbl"><table>
+    <tr><th>API</th><th>Price</th><th>Billed when</th><th>Rate limit</th></tr>
+    <tr><td>Search (<code>POST /v1/tools/search</code>)</td><td>$0.75 / 1,000 successful requests</td><td>HTTP 200 with a non-empty results array</td><td>100 QPS / account</td></tr>
+    <tr><td>Fetch (<code>POST /v1/tools/fetch</code>)</td><td>$0.75 / 1,000 successful requests</td><td>HTTP 200 with page content returned</td><td>25 QPS / account</td></tr>
+  </table></div>
+  <p class="hint">Source: api-docs.deepseek.com pricing page and Search &amp; Fetch guide, verified Oct 20, 2026. Billing is per request — not per token and not per result: raising <code>count</code> (results per search, up to 50) doesn't change the price. Failed requests, empty searches and timeouts are never billed. Charges come off your DeepSeek balance; granted balance is spent before topped-up balance.</p>
+
+  <h3>The Nov 1 deadline: free tool calls are ending</h3>
+  <p>Right now, search and fetch made as <b>server-side tool calls</b> — through DeepSeek Harness, <b>Claude Code</b>, or Codex — cost <b>nothing</b>. That window closes at <b>00:00 Beijing time on November 1, 2026</b>, when the same $0.75/1,000 rate kicks in. Two practical notes: first, if your agents lean on Claude Code's built-in web tools against a DeepSeek backend, budget for search volume from Nov 1; second, calling the standalone endpoints directly (<code>/v1/tools/search</code>, <code>/v1/tools/fetch</code>) has been billed per request since launch, so the deadline only matters for the server-side path.</p>
+
+  <h2>vs Serper, Tavily, Exa and Brave</h2>
+  <div class="tbl"><table>
+    <tr><th>Provider</th><th>Effective price / 1k</th><th>Free tier</th><th>What it sells</th></tr>
+    <tr><td><b>DeepSeek Search</b></td><td><b>$0.75</b></td><td>— (free tool calls end Nov 1, 2026)</td><td>Web search + page fetch for agents</td></tr>
+    <tr><td>Serper</td><td>$1.00 (starter) → $0.30 at 12.5M bulk</td><td>2,500 queries</td><td>Google SERP data (positions, ads fields)</td></tr>
+    <tr><td>Exa</td><td>$4 (lite) / $7 (auto, fast)</td><td>$10 credits/mo (~2,500 lite searches)</td><td>Neural/web search for agents</td></tr>
+    <tr><td>Brave Search API</td><td>$5 (Search) / $4 + tokens (Answers)</td><td>$5 credits/mo</td><td>Independent web index</td></tr>
+    <tr><td>Tavily</td><td>$8 pay-as-you-go / credit</td><td>1,000 credits/mo</td><td>Research search for agents</td></tr>
+  </table></div>
+  <p class="hint">All competitor rates pulled from provider pricing pages Oct 20, 2026: serper.dev ($50/50k starter, tiers to $3,750/12.5M, credits valid 6 months), exa.ai (pay-as-you-go, +$1/1k per extra 10 results), brave.com (prepaid credits, no subscription), tavily.com ($0.008/credit, $30/mo Project plan ≈ $7.50/1k at 4,000 credits). Category caveat: Serper resells Google SERP data — different product; the other four compete with DeepSeek directly as agent web-search.</p>
+
+  <h3>What the gap is worth at 10k searches/day</h3>
+  <p>At a busy agent workload of 10,000 searches a day (~300k/month): DeepSeek runs <b>$7.50/day ≈ $225/mo</b>. Serper's starter tier costs $300/mo — and hits exact parity ($225) only once you're on the 500k-credit Standard tier. Exa lite is $1,200/mo, Brave Search $1,500/mo, Tavily pay-as-you-go $2,400/mo. Tavily's generous free tier (1,000 credits/month) and Serper's 2,500 free queries are rounding errors at this volume.</p>
+
+  <h2>Billing mechanics worth knowing</h2>
+  <p>The "successful request" bar is the notable part of the pricing: a Search call bills only when it returns <b>HTTP 200 with a non-empty results array</b>, and Fetch only when it returns actual page content. Rate limits are <b>per account, not per key</b> — separate from model concurrency — and Fetch adds a per-domain QPS limit on top of its 25 QPS. Exceeding either returns 429. Retry on 408/429/5xx, top up on 402, and don't retry other 4xx unchanged; on Fetch, 403 means a security-policy rejection and 404 means no usable content (blocked or empty page).</p>
+
+  <h3>What $0.75/1k actually buys</h3>
+  <p>Search queries are 1–128 characters, return up to 50 results, and support real query operators: <code>site:</code>, <code>-site:</code>, <code>-term</code>, <code>"exact phrase"</code>, <code>lang:</code>, <code>after:</code>/<code>before:</code> date filters. Each result ships with a rerank score (0–3; ≥1.5 = high quality), an authority score (0–4; ≥3 = highly authoritative), snippets, optional ~600–800 character summaries, and RFC 3339 dates — enough metadata to filter results in-agent without a second ranking pass. Fetch takes URLs up to 8,192 characters and returns the title plus clean Markdown, which is what makes it a one-call substitute for "search then scrape". For what the DeepSeek models themselves cost per token, see <a href="/deepseek-v4-pricing">DeepSeek V4 pricing</a>; for Claude-side per-request math, the <a href="/claude-token-calculator">token calculator</a>.</p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against DeepSeek's official pricing page and Search &amp; Fetch guide (plus Serper, Exa, Brave, Tavily pricing pages) on Oct 20, 2026. Not affiliated with DeepSeek, Anthropic, or any search API provider.</p><nav><a href="/">Claude API Pricing</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a> · <a href="/gpt-5-6-pricing">GPT-5.6</a> · <a href="/kimi-k3-pricing">Kimi K3</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

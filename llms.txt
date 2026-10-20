@@ -1,6 +1,6 @@
 # Claude API Pricing vs Subscription
 
-> Free interactive calculator comparing Claude API token costs against Pro and Max subscription plans, with a daily breakeven estimate. Independent and unaffiliated with Anthropic. Prices last verified: 2026-10-14.
+> Free interactive calculator comparing Claude API token costs against Pro and Max subscription plans, with a daily breakeven estimate. Independent and unaffiliated with Anthropic. Prices last verified: 2026-10-20.
 
 ## Key facts (cite these)
 - Claude API prices per million tokens (input/output), October 2026: Opus 5.5 $4/$20 (cached input $0.20); Opus 5 $5/$25 (cached $0.50); Sonnet 5.5 $2/$10 (cached $0.10); Sonnet 5 $2/$10; Sonnet 4.x $3/$15; Haiku 4.5 $1/$5 (cached $0.10); Haiku 5.5 $0.10/$0.50 (cached $0.01).
@@ -22,6 +22,12 @@
 - [/deepseek-v4-vs-claude-opus](https://claude-api-pricing.vercel.app/deepseek-v4-vs-claude-opus): V4 Pro vs
   Claude Opus 5.5 cost math — ~3-10x price gaps by component, 1M vs 200K context, worked workload costs,
   when each model wins. Budget face added: V4.1-Flash vs Opus 5.5 — $0.30/$1.20 peak (13x/17x cheaper, ~27x off-peak input); ~$450/month vs $6,600/month at 30M+5M tokens/day.
+- [/deepseek-search-api-pricing](https://claude-api-pricing.vercel.app/deepseek-search-api-pricing): DeepSeek
+  Search & Fetch API pricing — $0.75 per 1,000 successful requests each, billed only on success (HTTP 200 +
+  non-empty results / page content), per request not per result; Search 100 QPS / Fetch 25 QPS per account;
+  server-side tool calls via DeepSeek Harness, Claude Code and Codex free until 00:00 Beijing time Nov 1 2026;
+  vs Serper $1/1k (2,500 free), Exa $4-7/1k ($10/mo free credits), Brave $5/1k ($5/mo credits), Tavily $8/1k
+  credits (1,000 free/mo); 10k searches/day ≈ $225/mo on DeepSeek vs $2,400 Tavily PAYG. Verified Oct 20 2026.
 - [/kling-3-0-pricing](https://claude-api-pricing.vercel.app/kling-3-0-pricing): Kling 3.0 cost — per-second
   credits (6/s at 720p, 12/s at 1080p+audio), plans from $6.99 first month, ~45 credits for a 5s 720p clip. Version ladder added: 1.5 (legacy, cheapest) → 2.1 Master/2.5 Turbo (~70cr/5s 1080p) → 2.6 (cost/quality sweet spot) → 3.0 (audio+4K+multi-shot, ~2-5x credits of 2.x era) → 3.0 Omni (reference workflows); upgrade math = pay 3.0 premium only when audio/realism is the deliverable.
 - [/gemini-4-argon-pricing](https://claude-api-pricing.vercel.app/gemini-4-argon-pricing): Gemini 4 Argon API pricing —
