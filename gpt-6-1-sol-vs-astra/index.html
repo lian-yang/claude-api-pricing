@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>GPT-6.1 Sol vs GPT-6 Astra: Same Class at 1/5 the Price — Cost Math (2026)</title>
+<meta name="description" content="Interactive cost comparison: GPT-6.1 Sol vs GPT-6 Astra. Sol runs $2/$10 per million tokens vs Astra's $10/$50 — exactly 1/5 at every tier, batch included. Sliders, long-context surcharge math, when 5x is worth it.">
+<meta property="og:title" content="GPT-6.1 Sol vs GPT-6 Astra: Same Class at 1/5 the Price">
+<meta property="og:description" content="GPT-6.1 Sol nearly matches Astra on agentic coding and computer use — at exactly one-fifth of Astra's rate card, batch tiers included. Interactive calculator inside.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-astra">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-astra">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is GPT-6.1 Sol as capable as GPT-6 Astra?","acceptedAnswer":{"@type":"Answer","text":"Per OpenAI's announcement, GPT-6.1 Sol nearly matches GPT-6 Astra on agentic coding, computer use and professional work, while running about three times faster on Codex benchmarks. Independent testing (The New Stack, Oct 2026) measured the same accuracy at roughly 18-20% of Astra's cost. Astra remains the flagship for the hardest agentic tasks, but the capability-per-dollar leader is Sol for most workloads."}},
+{"@type":"Question","name":"Why is GPT-6.1 Sol so much cheaper than Astra?","acceptedAnswer":{"@type":"Answer","text":"It is deliberate tier positioning, not a promotion: Sol is the workhorse tier at $2/$10 per million tokens (short context) vs Astra's flagship $10/$50. The gap is structural — exactly 5x holds across standard, batch/flex, fast and ultrafast rates, so it will not close with volume discounts."}},
+{"@type":"Question","name":"Does the 1/5 gap change for long context or batch?","acceptedAnswer":{"@type":"Answer","text":"No. Above 272K input tokens both models step up (Sol to $4/$15, Astra to $20/$75) and the 5x ratio holds. Batch and Flex pricing halves both models equally (Sol $1/$5, Astra $5/$25 short context), so the ratio survives every lever. The only levers that change the gap are caching-heavy workloads, where Astra's $1.00 cached input is 10x Sol's $0.10."}},
+{"@type":"Question","name":"When is GPT-6 Astra still worth 5x the price?","acceptedAnswer":{"@type":"Answer","text":"Three cases: (1) the hardest agentic computer-use runs where a single failed session costs more than the token bill; (2) workloads where Astra clears an eval that Sol fails — run your own 20-task eval before assuming parity; (3) priority rate limits during peak windows. Everything else — code review, document work, routine agents — belongs on Sol, with batch/flex halving it again."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"GPT-6.1 Sol vs GPT-6 Astra Cost Calculator","url":"https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-astra","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Interactive side-by-side monthly cost comparison of GPT-6.1 Sol and GPT-6 Astra, including the 272K long-context surcharge and batch/flex pricing."}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates verified Oct 22, 2026 · developers.openai.com rate card</div>
+  <h1>GPT-6.1 Sol vs GPT-6 Astra — the 1/5 model</h1>
+  <p class="sub">OpenAI's own positioning: Sol <b>nearly matches Astra on agentic coding, computer use and professional work</b>. The bill says the rest — <b>$2/$10 vs $10/$50 per million tokens, exactly one-fifth at every tier</b>, batch included. Where the money goes, with sliders.</p>
+</div></div>
+
+<section style="padding-top:8px"><div class="wrap prose">
+<div class="tbl"><table>
+<thead><tr><th>Rate card (per 1M tokens)</th><th>Input</th><th>Cached input</th><th>Output</th></tr></thead>
+<tbody>
+<tr><td>Sol — standard (≤272K context)</td><td>$2.00</td><td>$0.10</td><td>$10.00</td></tr>
+<tr><td>Sol — long context (&gt;272K)</td><td>$4.00</td><td>$0.20</td><td>$15.00</td></tr>
+<tr><td>Sol — batch / flex</td><td>$1.00 → $2.00</td><td>$0.05 → $0.10</td><td>$5.00 → $7.50</td></tr>
+<tr><td>Astra — standard (≤272K)</td><td>$10.00</td><td>$1.00</td><td>$50.00</td></tr>
+<tr><td>Astra — long context (&gt;272K)</td><td>$20.00</td><td>$2.00</td><td>$75.00</td></tr>
+<tr><td>Astra — batch / flex</td><td>$5.00 → $10.00</td><td>$0.50 → $1.00</td><td>$25.00 → $37.50</td></tr>
+</tbody>
+</table></div>
+<p>Read the table as one number: <b>5</b>. Every Sol price is exactly one-fifth of the matching Astra price — standard, long-context, batch and even the Fast/Ultrafast latency tiers (Sol $4/$20 fast, Astra $20/$100). The 272K long-context surcharge adds 50% to output on both sides, so it doesn't move the ratio either. The two ratios that <i>do</i> differ: caching (Astra's cached input is 10x Sol's) and the GPT-6 Luna small tier ($0.10/$0.50) if your task fits a 20x-cheaper model.</p>
+</div></section>
+
+<section id="vs-calc"><div class="wrap">
+<div class="calc">
+  <div class="calc-inputs">
+    <h2>Side-by-side cost</h2>
+    <label>Context band
+      <select id="band">
+        <option value="short" selected>Standard — requests ≤272K input</option>
+        <option value="long">Long — requests &gt;272K input</option>
+      </select>
+    </label>
+    <label>Input tokens per day <output id="inVal">1M</output>
+      <input type="range" id="inTok" min="50000" max="20000000" step="50000" value="1000000">
+    </label>
+    <label>Output tokens per day <output id="outVal">100K</output>
+      <input type="range" id="outTok" min="5000" max="4000000" step="5000" value="100000">
+    </label>
+    <label><input type="checkbox" id="useBatch" style="width:auto;accent-color:var(--acc)"> Use batch / flex pricing (−50%, async)</label>
+    <p class="hint">Agentic and coding workloads are input-heavy — repo context re-reads push input past output. Cached input (Sol $0.10, Astra $1.00 short band) can cut the input line by 90%+ on repetitive prompts and isn't modeled here.</p>
+  </div>
+  <div class="calc-out">
+    <div class="verdict" id="verdict">…</div>
+    <div class="bars" id="bars"></div>
+    <div class="breakeven" id="breakeven"></div>
+  </div>
+</div>
+</div></section>
+
+<section><div class="wrap prose">
+<h2>What a real workload costs</h2>
+<p>Monthly bills at a 10:1 input/output mix, 30 days, standard rates (no batch, no caching):</p>
+<div class="tbl"><table>
+<thead><tr><th>Daily volume (in / out)</th><th>GPT-6.1 Sol</th><th>GPT-6 Astra</th><th>Sol saves</th></tr></thead>
+<tbody>
+<tr><td>200K / 20K tokens</td><td>$36/mo</td><td>$180/mo</td><td>$144/mo (80%)</td></tr>
+<tr><td>1M / 100K tokens</td><td>$180/mo</td><td>$900/mo</td><td>$720/mo (80%)</td></tr>
+<tr><td>5M / 500K tokens</td><td>$900/mo</td><td>$4,500/mo</td><td>$3,600/mo (80%)</td></tr>
+</tbody>
+</table></div>
+<p>Three readings: (1) <b>The default is Sol</b> — OpenAI's own benchmark framing puts Sol near Astra on the agentic tasks that define the flagship tier; paying 5x on faith is a budget decision, not a quality one. (2) <b>Batch compounds the gap in absolute dollars</b> — at 5M/500K daily, batch Sol is $450/mo vs batch Astra $2,250/mo. (3) <b>The honest case for Astra</b> is narrow and real: the hardest computer-use sessions where one failed run costs more than a month of tokens, and evals where Astra clears a bar Sol misses — verify on your own tasks before committing either way.</p>
+
+<h2>Where each model earns its keep</h2>
+<ul>
+<li><b>Sol's case</b>: near-Astra agentic coding and computer use at 1/5 the rate card, faster Codex completion (~3x per The New Stack testing), batch/flex halving it again, and the cheapest route to GPT-6-class reasoning short of Luna ($0.10/$0.50) for tasks that fit a small model.</li>
+<li><b>Astra's case</b>: the flagship tier for a reason — peak-velocity computer-use sessions, the last few points of SWE-bench-style evals, priority rate limits. If your monthly token bill is small, 5x on a $50 base is noise; at $4,500/mo it's a headcount.</li>
+<li><b>The honest tiebreak</b>: run your own 20-task eval on both. The price math is settled (80% saved); only your workload decides whether Astra's residual edge is worth it. For the cross-vendor version of this comparison, see GPT-6.1 Sol vs Opus 5.5.</li>
+</ul>
+</div></section>
+
+<section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
+<details open><summary>Is GPT-6.1 Sol as capable as GPT-6 Astra?</summary><div class="a">Per OpenAI, Sol nearly matches Astra on agentic coding, computer use and professional work, and runs about 3x faster on Codex. Independent testing measured the same accuracy at roughly 18-20% of Astra's cost. Astra keeps the edge on the hardest agentic runs — but capability-per-dollar belongs to Sol for most workloads.</div></details>
+<details><summary>Why is GPT-6.1 Sol so much cheaper than Astra?</summary><div class="a">Deliberate tier positioning, not a promo: Sol is the workhorse tier ($2/$10 short-context) under Astra's flagship ($10/$50). The 5x gap is structural — it holds across standard, batch, fast and ultrafast rates, so no volume discount closes it.</div></details>
+<details><summary>Does the 1/5 gap change for long context or batch?</summary><div class="a">No. Past 272K input both step up (Sol $4/$15, Astra $20/$75) and the ratio holds. Batch/Flex halves both equally (Sol $1/$5, Astra $5/$25). Only caching breaks symmetry: Astra's $1.00 cached input is 10x Sol's $0.10, so cache-heavy pipelines narrow the effective gap on the input side.</div></details>
+<details><summary>When is Astra still worth 5x?</summary><div class="a">Hardest computer-use sessions where a failed run costs more than tokens; evals where Astra clears a bar Sol misses; priority rate limits at peak. Everything else belongs on Sol. Note this page compares OpenAI's own tiers — not to be confused with the retired GPT-5.6 Sol SKU at $4/$20.</div></details>
+</div></div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with OpenAI. GPT is a trademark of OpenAI. Rates from OpenAI's public rate card, verified Oct 2026 — confirm current pricing with the vendor. Related: <a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus 5.5</a> · <a href="/gpt-5-6-pricing">GPT-5.6 rate card</a> · <a href="/">Claude API pricing</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var RATES={
+    short:{sol:{pin:2,pout:10,label:"GPT-6.1 Sol"},astra:{pin:10,pout:50,label:"GPT-6 Astra"}},
+    long:{sol:{pin:4,pout:15,label:"GPT-6.1 Sol (long)"},astra:{pin:20,pout:75,label:"GPT-6 Astra (long)"}}
+  };
+  var $=function(id){return document.getElementById(id)};
+  function fmtTok(n){ if(n>=1e6) return (n/1e6).toFixed(n%1e6?1:0)+"M"; if(n>=1e3) return Math.round(n/1e3)+"K"; return String(n); }
+  function fmtUSD(n){ if(n>=100) return "$"+Math.round(n).toLocaleString(); if(n>=10) return "$"+n.toFixed(0); return "$"+n.toFixed(2); }
+  function render(){
+    var band=RATES[$("band").value], inp=+$("inTok").value, out=+$("outTok").value, batch=$("useBatch").checked;
+    $("inVal").textContent=fmtTok(inp); $("outVal").textContent=fmtTok(out);
+    var sPin=batch?band.sol.pin/2:band.sol.pin, sPout=batch?band.sol.pout/2:band.sol.pout;
+    var aPin=batch?band.astra.pin/2:band.astra.pin, aPout=batch?band.astra.pout/2:band.astra.pout;
+    var sLabel=band.sol.label+(batch?" batch":""), aLabel=band.astra.label+(batch?" batch":"");
+    var sCost=((inp/1e6)*sPin+(out/1e6)*sPout)*30, aCost=((inp/1e6)*aPin+(out/1e6)*aPout)*30;
+    var v=$("verdict");
+    v.innerHTML="🏆 <b>"+sLabel+" wins</b> at "+fmtUSD(sCost)+"/mo vs "+aLabel+" "+fmtUSD(aCost)+"/mo — saves "+fmtUSD(aCost-sCost)+"/mo ("+Math.round((1-sCost/aCost)*100)+"%).";
+    v.className="verdict api";
+    var max=Math.max(sCost,aCost,1);
+    var row=function(name,cost,api,win){ var pct=Math.max(4,Math.round(cost/max*100)); return '<div class="bar"><span class="bl">'+name+'</span><span class="bf'+(api?' api':'')+(win?' win':'')+'" style="width:'+pct+'%"></span><span class="bp">'+fmtUSD(cost)+'/mo</span></div>'; };
+    $("bars").innerHTML=row(sLabel,sCost,true,true)+row(aLabel,aCost,false,false);
+    $("breakeven").innerHTML="No breakeven exists — Sol is exactly <b>1/5 of Astra</b> at every volume and every tier"+(batch?", batch included":"")+".<br>At this volume: "+fmtTok(inp)+" in / "+fmtTok(out)+" out per day.";
+  }
+  ["band","inTok","outTok","useBatch"].forEach(function(id){$(id).addEventListener("input",render)});
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>GPT-6.1 Sol vs Claude Opus 5.5: Astra-Class at Half Opus Price — Cost Math (2026)</title>
+<meta name="description" content="Interactive cost comparison: GPT-6.1 Sol vs Claude Opus 5.5. Sol costs $2/$10 per million tokens — half of Opus's $4/$20 at list, a quarter at batch. Sliders, long-context math, the honest capability question.">
+<meta property="og:title" content="GPT-6.1 Sol vs Claude Opus 5.5: Astra-Class at Half Opus Price">
+<meta property="og:description" content="OpenAI positions GPT-6.1 Sol at near-Astra level on agentic coding and computer use — at half of Opus 5.5's list price, a quarter on batch. Interactive calculator inside.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-opus-5-5">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-opus-5-5">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is GPT-6.1 Sol cheaper than Claude Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"Yes, at every lever. List price: Sol $2/$10 per million tokens vs Opus 5.5 $4/$20 — exactly half. Batch: Sol $1/$5 vs Opus batch $2/$10 — a quarter. Cached input: $0.10 vs $0.20 — half. At a 1M-in/100K-out daily workload that is $180/month on Sol versus $360/month on Opus."}},
+{"@type":"Question","name":"Which is smarter — GPT-6.1 Sol or Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"They are different labs' different tiers, so there is no official head-to-head: OpenAI positions Sol against its own flagship GPT-6 Astra ('nearly matches on agentic coding, computer use and professional work'), not against Opus. Opus 5.5 remains Anthropic's flagship reasoning tier. The pricing question — half or quarter the cost — is settled; the capability question needs your own 20-task eval on your workload."}},
+{"@type":"Question","name":"Why is GPT-6.1 Sol cheaper than the old GPT-5.6 Sol?","acceptedAnswer":{"@type":"Answer","text":"Different SKU, one generation apart. The GPT-5.6-era Sol ran $4/$20 on promotion (originally $5/$30); GPT-6.1 Sol launches at $2/$10 standard with batch at $1/$5. If you were paying $4/$20 for the old Sol, the successor is literally half the price — check your model string before comparing quotes."}},
+{"@type":"Question","name":"Does GPT-6.1 Sol cost more above 272K context?","acceptedAnswer":{"@type":"Answer","text":"Yes: above 272K input tokens Sol steps up to $4 input / $15 output per million (output +50%), and the 272K boundary is per-request. Opus 5.5 has no long-context surcharge — its $4/$20 holds across the full 1M window. That is Opus's one structural price win: for sustained >272K workloads the gap narrows from 2x to roughly 1.3-2.7x depending on the input/output mix."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"GPT-6.1 Sol vs Claude Opus 5.5 Cost Calculator","url":"https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-opus-5-5","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Interactive side-by-side monthly cost comparison of GPT-6.1 Sol and Claude Opus 5.5, including Sol's 272K long-context step-up and batch pricing."}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates verified Oct 22, 2026 · developers.openai.com + docs.anthropic.com rate cards</div>
+  <h1>GPT-6.1 Sol vs Claude Opus 5.5 — half the list, a quarter on batch</h1>
+  <p class="sub">OpenAI bills Sol as <b>near-Astra on agentic coding, computer use and professional work</b>. Anthropic bills Opus 5.5 as its flagship. The bill you get: <b>$2/$10 vs $4/$20 per million tokens — Sol at half of Opus at list, a quarter on batch</b>. Where that holds, and where it doesn't, with sliders.</p>
+</div></div>
+
+<section style="padding-top:8px"><div class="wrap prose">
+<div class="tbl"><table>
+<thead><tr><th>Rate card (per 1M tokens)</th><th>Input</th><th>Cached input</th><th>Output</th><th>Context</th></tr></thead>
+<tbody>
+<tr><td>GPT-6.1 Sol — standard (≤272K)</td><td>$2.00</td><td>$0.10</td><td>$10.00</td><td rowspan="2">272K band, then surcharge</td></tr>
+<tr><td>GPT-6.1 Sol — long (&gt;272K)</td><td>$4.00</td><td>$0.20</td><td>$15.00</td></tr>
+<tr><td>GPT-6.1 Sol — batch / flex</td><td>$1.00 → $2.00</td><td>$0.05 → $0.10</td><td>$5.00 → $7.50</td><td>same bands</td></tr>
+<tr><td>Claude Opus 5.5 (list)</td><td>$4.00</td><td>$0.20</td><td>$20.00</td><td rowspan="2">1M, no surcharge bands</td></tr>
+<tr><td>Claude Opus 5.5 — batch (−50%)</td><td>$2.00</td><td>$0.10</td><td>$10.00</td></tr>
+</tbody>
+</table></div>
+<p>Two honest readings. <b>Short-context workloads (most agentic runs): Sol is half of Opus everywhere</b> — list, batch and cached input all line up at exactly 2x. <b>Long-context workloads are Opus's one structural win</b>: past 272K input, Sol's surcharge takes it to $4/$15 while Opus's single price holds to 1M — the gap narrows to roughly 1.3x on output-heavy mixes, though Opus never gets cheaper than 2x Sol on input.</p>
+</div></section>
+
+<section id="vs-calc"><div class="wrap">
+<div class="calc">
+  <div class="calc-inputs">
+    <h2>Side-by-side cost</h2>
+    <label>Sol context band
+      <select id="band">
+        <option value="short" selected>Standard — requests ≤272K input</option>
+        <option value="long">Long — requests &gt;272K input</option>
+      </select>
+    </label>
+    <label>Input tokens per day <output id="inVal">1M</output>
+      <input type="range" id="inTok" min="50000" max="20000000" step="50000" value="1000000">
+    </label>
+    <label>Output tokens per day <output id="outVal">100K</output>
+      <input type="range" id="outTok" min="5000" max="4000000" step="5000" value="100000">
+    </label>
+    <label><input type="checkbox" id="useBatch" style="width:auto;accent-color:var(--acc)"> Use batch pricing (both −50%, async)</label>
+    <p class="hint">The 272K band is per-request: a pipeline mixing 300K-context reruns with short calls pays Sol's long rate only on the long ones. Caching (Sol $0.10, Opus $0.20) can cut the input line 90%+ and isn't modeled here.</p>
+  </div>
+  <div class="calc-out">
+    <div class="verdict" id="verdict">…</div>
+    <div class="bars" id="bars"></div>
+    <div class="breakeven" id="breakeven"></div>
+  </div>
+</div>
+</div></section>
+
+<section><div class="wrap prose">
+<h2>What a real workload costs</h2>
+<p>Monthly bills at a 10:1 input/output mix, 30 days, list rates (no batch, no caching):</p>
+<div class="tbl"><table>
+<thead><tr><th>Daily volume (in / out)</th><th>GPT-6.1 Sol</th><th>Opus 5.5</th><th>Sol saves</th></tr></thead>
+<tbody>
+<tr><td>200K / 20K tokens</td><td>$18/mo</td><td>$36/mo</td><td>$18/mo (50%)</td></tr>
+<tr><td>1M / 100K tokens</td><td>$180/mo</td><td>$360/mo</td><td>$180/mo (50%)</td></tr>
+<tr><td>5M / 500K tokens</td><td>$900/mo</td><td>$1,800/mo</td><td>$900/mo (50%)</td></tr>
+</tbody>
+</table></div>
+<p>Three readings: (1) <b>On price alone this is not a contest</b> — half at list, quarter at batch, half on cached input, at every volume. (2) <b>The capability question is genuinely open</b>: Sol's official benchmark peer is Astra, not Opus — so if your evals show Opus 5.5 saving one wasted retry in ten agentic runs, identical-class quality at 2x price can still be the rational pick for the frontier slice, with Sol carrying the bulk. (3) <b>A hybrid exists</b>: route short-context routine work to Sol batch at $1/$5 and keep >272K or eval-winning tasks on Opus — the calculator above prices each band separately for exactly this reason.</p>
+
+<h2>Where each model earns its keep</h2>
+<ul>
+<li><b>Sol's case</b>: near-Astra agentic capability at half of Opus list and a quarter of Opus batch; the default for code review, document work and high-volume agents; ~3x faster Codex completion than Astra in independent testing.</li>
+<li><b>Opus 5.5's case</b>: Anthropic's flagship reasoning tier with a full-price-free 1M window — the structural pick for sustained >272K workloads, plus whatever edge your own evals measure on long-run agent coherence.</li>
+<li><b>The honest tiebreak</b>: price is settled (50% saved at list); capability is workload-specific. Run both on your 20 hardest tasks, then split traffic. Cross-vendor alternatives in the same price band: DeepSeek V4 vs Opus, Argon vs Opus.</li>
+</ul>
+</div></section>
+
+<section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
+<details open><summary>Is GPT-6.1 Sol cheaper than Claude Opus 5.5?</summary><div class="a">Yes, at every lever: half at list ($2/$10 vs $4/$20), a quarter at batch ($1/$5 vs $2/$10), half on cached input ($0.10 vs $0.20). A 1M-in/100K-out daily workload runs $180/mo on Sol vs $360/mo on Opus.</div></details>
+<details><summary>Which is smarter — Sol or Opus 5.5?</summary><div class="a">No official head-to-head exists: OpenAI benchmarks Sol against its own Astra flagship, not Opus. Opus 5.5 is Anthropic's flagship reasoning tier. Settle it with your own eval — the price half of the decision is already settled in Sol's favor.</div></details>
+<details><summary>Why is GPT-6.1 Sol cheaper than the old GPT-5.6 Sol?</summary><div class="a">One generation apart: GPT-5.6-era Sol ran $4/$20 promotional (from $5/$30); GPT-6.1 Sol launches at $2/$10 with $1/$5 batch. Check your model string before comparing quotes — "Sol" now means two different price points.</div></details>
+<details><summary>Does Sol cost more above 272K context?</summary><div class="a">Yes — $4/$15 per million (output +50%), charged per-request past the 272K input boundary. Opus 5.5 has no surcharge to 1M, which narrows the gap on long-context workloads to roughly 1.3-2.7x depending on mix — Opus's single structural price win.</div></details>
+</div></div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with OpenAI or Anthropic. GPT and Claude are trademarks of their respective owners. Rates from public rate cards, verified Oct 2026 — confirm current pricing with each vendor. Related: <a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a> · <a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 vs Opus</a> · <a href="/">Claude API pricing</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var SOL={
+    short:{pin:2,pout:10,label:"GPT-6.1 Sol"},
+    long:{pin:4,pout:15,label:"GPT-6.1 Sol (long)"}
+  };
+  var OPUS={pin:4,pout:20,label:"Opus 5.5"};
+  var $=function(id){return document.getElementById(id)};
+  function fmtTok(n){ if(n>=1e6) return (n/1e6).toFixed(n%1e6?1:0)+"M"; if(n>=1e3) return Math.round(n/1e3)+"K"; return String(n); }
+  function fmtUSD(n){ if(n>=100) return "$"+Math.round(n).toLocaleString(); if(n>=10) return "$"+n.toFixed(0); return "$"+n.toFixed(2); }
+  function render(){
+    var sol=SOL[$("band").value], inp=+$("inTok").value, out=+$("outTok").value, batch=$("useBatch").checked;
+    $("inVal").textContent=fmtTok(inp); $("outVal").textContent=fmtTok(out);
+    var sPin=batch?sol.pin/2:sol.pin, sPout=batch?sol.pout/2:sol.pout;
+    var oPin=batch?OPUS.pin/2:OPUS.pin, oPout=batch?OPUS.pout/2:OPUS.pout;
+    var sLabel=sol.label+(batch?" batch":""), oLabel=OPUS.label+(batch?" batch":"");
+    var sCost=((inp/1e6)*sPin+(out/1e6)*sPout)*30, oCost=((inp/1e6)*oPin+(out/1e6)*oPout)*30;
+    var v=$("verdict");
+    v.innerHTML="🏆 <b>"+sLabel+" wins</b> at "+fmtUSD(sCost)+"/mo vs "+oLabel+" "+fmtUSD(oCost)+"/mo — saves "+fmtUSD(oCost-sCost)+"/mo ("+Math.round((1-sCost/oCost)*100)+"%).";
+    v.className="verdict api";
+    var max=Math.max(sCost,oCost,1);
+    var row=function(name,cost,api,win){ var pct=Math.max(4,Math.round(cost/max*100)); return '<div class="bar"><span class="bl">'+name+'</span><span class="bf'+(api?' api':'')+(win?' win':'')+'" style="width:'+pct+'%"></span><span class="bp">'+fmtUSD(cost)+'/mo</span></div>'; };
+    $("bars").innerHTML=row(sLabel,sCost,true,true)+row(oLabel,oCost,false,false);
+    var be=$("breakeven"), lines=[];
+    if($("band").value==="short"){
+      lines.push("Short band: Sol is exactly <b>half of Opus</b> at every volume"+(batch?" — and a quarter at batch":"")+" — no breakeven exists, only the capability eval.");
+    } else {
+      lines.push("Long band: Sol pays a surcharge ($4/$15) while Opus holds $4/$20 to 1M — the gap narrows but <b>never closes on input</b> (still 2x).");
+    }
+    lines.push("At this volume: "+fmtTok(inp)+" in / "+fmtTok(out)+" out per day.");
+    be.innerHTML=lines.join("<br>");
+  }
+  ["band","inTok","outTok","useBatch"].forEach(function(id){$(id).addEventListener("input",render)});
+  render();
+})();
+</script>
+</body>
+</html>

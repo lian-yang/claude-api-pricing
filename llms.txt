@@ -57,3 +57,12 @@
   verdict: bulk long-context work to Muse Spark, frontier agentic slice to Opus. Verified Oct 18 2026.
 - [/gemini-4-argon-vs-opus-5-5](https://claude-api-pricing.vercel.app/gemini-4-argon-vs-opus-5-5): Argon vs Opus 5.5 interactive cost comparison. Both $4/$20 per MTok after Dec 1, 2026; Argon intro $2/$10 (half price) until Nov 30; batch permanently half of Opus list.
 - [/claude-token-calculator](https://claude-api-pricing.vercel.app/claude-token-calculator): per-request Claude token cost calculator across all models, with a what-$1-buys reference table (Opus 5.5: $1 = 50K output tokens).
+- [/gpt-6-1-sol-vs-astra](https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-astra): GPT-6.1 Sol vs
+  GPT-6 Astra cost math — Sol $2/$10 vs Astra $10/$50 per 1M (short ≤272K), exactly 1/5 at every tier incl.
+  batch ($1/$5 vs $5/$25) and fast; long context (>272K) Sol $4/$15 vs Astra $20/$75, ratio holds;
+  cached input Sol $0.10 vs Astra $1.00 (10x); Luna small tier $0.10/$0.50. Verified Oct 22 2026.
+- [/gpt-6-1-sol-vs-opus-5-5](https://claude-api-pricing.vercel.app/gpt-6-1-sol-vs-opus-5-5): GPT-6.1 Sol vs
+  Claude Opus 5.5 cost math — Sol half of Opus at list ($2/$10 vs $4/$20), quarter at batch ($1/$5 vs $2/$10),
+  cached half ($0.10 vs $0.20); Sol surcharge past 272K ($4/$15) vs Opus flat 1M = Opus's one structural win
+  (gap narrows to ~1.3-2.7x); SKU warning: new GPT-6.1 Sol $2/$10 ≠ retired GPT-5.6 Sol $4/$20 promo.
+  Verified Oct 22 2026.
