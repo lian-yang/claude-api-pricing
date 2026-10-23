@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Voxtral API Pricing (2026): Per-Minute Transcription, TTS &amp; Voice Agent Rates</title>
+<meta name="description" content="Mistral Voxtral API pricing: Mini Transcribe 3 at $0.0035/min batch, Small Transcribe 3 $0.0040/min, Realtime $0.008/min, TTS $13 per 1M characters, voice-agent stack $0.04–0.08/min. Rates verified Oct 23, 2026 against Mistral's announcement.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/voxtral-api-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Voxtral API Pricing — $0.0035/min Transcription, TTS $13/1M chars">
+<meta property="og:description" content="Every published Voxtral API rate: batch and realtime transcription per minute, TTS per million characters, and the full voice-agent stack per minute. Verified Oct 23, 2026.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/voxtral-api-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the Voxtral API cost?","acceptedAnswer":{"@type":"Answer","text":"Per-minute and per-character billing, verified against Mistral's Voxtral 3 announcement on Oct 23, 2026: Voxtral Mini Transcribe 3 (batch) $0.0035/min, Voxtral Small Transcribe 3 $0.0040/min, Voxtral Mini Transcribe Realtime 3 $0.008/min, Voxtral Mini TTS 3 $13 per 1M characters, voice-agent API with Mistral Small 4 reasoning $0.04/min, and with a larger reasoning model $0.08/min."}},
+{"@type":"Question","name":"Is there a free tier for the Voxtral API?","acceptedAnswer":{"@type":"Answer","text":"No free API tier is documented as of Oct 23, 2026 — the API is pay-as-you-go. You can test the models interactively in Mistral's Studio playground, and Mistral's consumer Vibe/Pro plans cover chat products, not API audio usage. Budget from the first minute."}},
+{"@type":"Question","name":"What is the difference between Voxtral Mini Transcribe 3 and Small Transcribe 3?","acceptedAnswer":{"@type":"Answer","text":"Mini Transcribe 3 is a 4B-parameter model built for speed at $0.0035/min in batch. Small Transcribe 3 ($0.0040/min) is Mistral's accuracy flagship: state-of-the-art multilingual transcription with speaker diarization, context biasing and end-of-turn detection — per Mistral's published FLEURS benchmarks it scores lower word error rate than Whisper large-v3, ElevenLabs Scribe v2 and Gemini 3.5 Transcribe. The two cost within 15% of each other, so accuracy-sensitive workloads can default to Small."}},
+{"@type":"Question","name":"Is Voxtral priced per minute or per token?","acceptedAnswer":{"@type":"Answer","text":"The current Transcribe 3 generation is priced per minute of audio, which makes costs predictable before you process a file. The older open-weights models (Voxtral Small 24B 2507 and earlier) are priced per audio token — e.g. $0.10 input / $0.30 output per million tokens on OpenRouter — and that per-token SKU is a different product line, not the current API's pricing."}},
+{"@type":"Question","name":"Can I use Voxtral with Claude?","acceptedAnswer":{"@type":"Answer","text":"Yes, as a pipeline: Anthropic's Claude API has no speech input or output, so the common pattern is Voxtral for the ears (transcription) and Claude for the brain (reasoning on the transcript). Example: a 10-minute meeting is $0.035 with batch Mini Transcribe 3, and summarizing the roughly 1,500-word transcript with Claude Haiku 5.5 at $0.10/$0.50 per million tokens costs a fraction of a cent — speech-to-insight for under $0.04."}},
+{"@type":"Question","name":"What languages does Voxtral support, and can you self-host it?","acceptedAnswer":{"@type":"Answer","text":"Batch transcription covers 50+ languages including all 24 official EU languages plus low-resource Asian and Indic languages; realtime transcription covers 35+; TTS covers 35+ languages with 50+ dialects. The API runs on Mistral's EU, US and global endpoints, and Mistral offers on-premises or private-cloud deployment of the full stack for enterprise customers — talk to their team for pricing."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official Mistral rates · verified Oct 23, 2026</div>
+  <h1>Voxtral API pricing — per-minute transcription, TTS and voice-agent rates</h1>
+  <p class="sub">Mistral's Voxtral 3 wave bills speech by the minute: <b>$0.0035/min</b> for batch transcription on Mini Transcribe 3, <b>$0.0040/min</b> for the accuracy-flagship Small model, <b>$0.008/min</b> realtime, <b>$13 per 1M characters</b> for TTS, and <b>$0.04–0.08/min</b> for the full voice-agent stack. Every rate below is from Mistral's own announcement page.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Voxtral API prices</h2>
+  <div class="tbl"><table>
+    <tr><th>Endpoint / model</th><th>Price</th><th>What it's for</th></tr>
+    <tr><td>Voxtral Mini Transcribe 3 (batch)</td><td><b>$0.0035 / min</b></td><td>Fast, cheap file transcription — 4B parameters</td></tr>
+    <tr><td>Voxtral Small Transcribe 3</td><td><b>$0.0040 / min</b></td><td>Accuracy flagship: diarization, context biasing, end-of-turn detection</td></tr>
+    <tr><td>Voxtral Mini Transcribe Realtime 3</td><td><b>$0.008 / min</b></td><td>Live transcription, sub-500ms latency, built for agents</td></tr>
+    <tr><td>Voxtral Mini TTS 3</td><td><b>$13 / 1M chars</b></td><td>Speech synthesis, batch and realtime, 35+ languages / 50+ dialects</td></tr>
+    <tr><td>Voice-agent API + Mistral Small 4 reasoning</td><td><b>$0.04 / min</b></td><td>Full stack: listen, think, reply on a call</td></tr>
+    <tr><td>Voice-agent API + larger reasoning model</td><td><b>$0.08 / min</b></td><td>Same stack with a bigger brain on the turn</td></tr>
+  </table></div>
+  <p class="hint">Source: Mistral's Voxtral 3 announcement (mistral.ai/news/voxtral-3), rate table verified Oct 23, 2026. Models are served through Mistral's EU, US and global endpoints; the API is pay-as-you-go with no free tier documented as of that date (the Studio playground is the no-cost way to try the models). On-premises / private-cloud deployment of the full stack is an enterprise option.</p>
+
+  <h3>What a minute of audio actually costs</h3>
+  <p>Per-minute pricing makes budgets arithmetic. One hour of recorded audio is <b>$0.21</b> with batch Mini Transcribe 3, <b>$0.24</b> on Small Transcribe 3, and <b>$0.48</b> if you need realtime. A podcast archive of 100 hours runs about <b>$21</b> to transcribe in full. The voice-agent figures stack differently — $0.04/min is $2.40 per hour of live conversation including the reasoning model, which is the number to compare against human agent costs, not against other transcription APIs.</p>
+
+  <h3>Per-minute now, per-token last generation</h3>
+  <p>Naming trap worth dodging: the <b>Transcribe 3</b> models above are billed per minute and are the current API. The earlier open-weights line — Voxtral Small 24B 2507 and its siblings — is billed per audio token and still shows up on aggregators like OpenRouter at <b>$0.10 input / $0.30 output per million tokens</b>. Same family name, different product and different billing model. If a pricing page quotes per-token Voxtral rates, it's describing the 2507 generation, not the current API.</p>
+
+  <h2>Where Voxtral fits next to Claude</h2>
+  <p>Claude has no speech input or output — the common production pattern is <b>Voxtral for the ears, Claude for the brain</b>. A 10-minute meeting costs $0.035 to transcribe with batch Mini; handing the ~1,500-word transcript to Claude Haiku 5.5 ($0.10/$0.50 per MTok) for a summary costs a fraction of a cent. Even the voice-agent route stays cheap: at $0.04/min with Mistral Small 4 doing the reasoning, an hour of automated phone support runs $2.40 before you add a Claude or Opus-class escalation path. For the token math on the Claude side, use the <a href="/claude-token-calculator">token calculator</a>; for how another 2026 launch prices its add-on APIs, see <a href="/deepseek-search-api-pricing">DeepSeek Search API pricing</a>.</p>
+
+  <h2>Model choice in one table</h2>
+  <div class="tbl"><table>
+    <tr><th>If you need…</th><th>Pick</th><th>Why</th></tr>
+    <tr><td>Cheapest possible transcripts</td><td>Mini Transcribe 3 batch</td><td>$0.0035/min, 4B model, built for throughput</td></tr>
+    <tr><td>Who-said-what and tricky vocabularies</td><td>Small Transcribe 3</td><td>Diarization + context biasing; Mistral-published SOTA on multilingual WER vs Whisper large-v3, Scribe v2 and Gemini 3.5 Transcribe</td></tr>
+    <tr><td>Live captions / voice agents</td><td>Mini Transcribe Realtime 3</td><td>Sub-500ms latency, end-of-turn detection, 35+ languages</td></tr>
+    <tr><td>A voice that answers back</td><td>Mini TTS 3</td><td>$13/1M chars, instruction-following, 50+ dialects; Mistral positions it under OpenAI TTS-1, Deepgram, ElevenLabs Flash and Gemini Flash on cost</td></tr>
+    <tr><td>The whole phone call handled</td><td>Voice-agent API</td><td>$0.04–0.08/min all-in with reasoning included</td></tr>
+  </table></div>
+  <p class="hint">Accuracy claims in this section are Mistral's own published benchmarks (FLEURS 45-language WER and Artificial Analysis index charts in the Voxtral 3 announcement, dated Oct 20, 2026) — treat vendor benchmarks as a starting point and test on your own audio. Languages: 50+ batch (all 24 official EU languages plus low-resource Asian and Indic languages), 35+ realtime.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does the Voxtral API cost?</h3>
+  <p>Verified Oct 23, 2026: Mini Transcribe 3 batch $0.0035/min; Small Transcribe 3 $0.0040/min; Mini Transcribe Realtime 3 $0.008/min; Mini TTS 3 $13 per 1M characters; voice-agent API $0.04/min with Mistral Small 4 reasoning or $0.08/min with a larger model.</p>
+  <h3>Is there a free tier for Voxtral?</h3>
+  <p>No free API tier is documented as of Oct 23, 2026 — it's pay-as-you-go from the first minute. Mistral's Studio playground lets you test the models without writing code, and the consumer Vibe/Pro plans cover Mistral's chat products, not API audio usage.</p>
+  <h3>Can I use Voxtral with Claude?</h3>
+  <p>Yes — Voxtral transcribes, Claude reasons. A 10-minute meeting is $0.035 on batch Mini; a Claude Haiku 5.5 summary of the transcript costs well under a cent. The two APIs never talk directly; your code passes the transcript as a prompt.</p>
+  <h3>Why do some Voxtral prices show up per token?</h3>
+  <p>Those are the older open-weights models (Voxtral Small 24B 2507 at $0.10/$0.30 per million audio tokens on OpenRouter, for example). The current Transcribe 3 generation is per-minute. Check which generation a price refers to before comparing.</p>
+  <h3>What about self-hosting Voxtral?</h3>
+  <p>The older Voxtral releases shipped open weights you can run yourself; the current full stack (Transcribe 3, TTS 3, voice-agent SDK) is available on Mistral's hosted endpoints, with on-premises and private-cloud deployment offered as an enterprise arrangement.</p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Mistral's Voxtral 3 announcement and rate table on Oct 23, 2026, plus OpenRouter's public model listing for legacy per-token pricing. Not affiliated with Mistral, Anthropic, or OpenRouter.</p><nav><a href="/">Claude API Pricing</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a> · <a href="/gpt-5-6-pricing">GPT-5.6</a> · <a href="/kimi-k3-pricing">Kimi K3</a> · <a href="/voxtral-api-pricing">Voxtral API</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

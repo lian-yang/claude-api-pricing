@@ -66,3 +66,10 @@
   cached half ($0.10 vs $0.20); Sol surcharge past 272K ($4/$15) vs Opus flat 1M = Opus's one structural win
   (gap narrows to ~1.3-2.7x); SKU warning: new GPT-6.1 Sol $2/$10 ≠ retired GPT-5.6 Sol $4/$20 promo.
   Verified Oct 22 2026.
+- [/voxtral-api-pricing](https://claude-api-pricing.vercel.app/voxtral-api-pricing): Voxtral API pricing —
+  Mistral's per-minute speech rates: Mini Transcribe 3 batch $0.0035/min (4B), Small Transcribe 3 $0.0040/min
+  (diarization + context biasing, Mistral-published SOTA vs Whisper large-v3/Scribe v2/Gemini 3.5 Transcribe),
+  Mini Transcribe Realtime 3 $0.008/min (sub-500ms), Mini TTS 3 $13/1M chars, voice-agent API $0.04-0.08/min
+  with reasoning included; naming trap vs legacy per-token open-weights (Voxtral Small 24B 2507 $0.10/$0.30 per
+  M audio tokens on OpenRouter); Claude-pipeline math: 10-min meeting $0.035 to transcribe + sub-cent Haiku 5.5
+  summary. Verified Oct 23 2026.
