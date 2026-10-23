@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Muse Spark 1.3 API Pricing (2026): $1.25/$4.25 — or $0.10/$0.20 Contributor</title>
+<meta name="description" content="Muse Spark 1.3 API pricing per million tokens: $1.25 input / $4.25 output Standard (cached input $0.15), or $0.10/$0.20 in Contributor mode — the cheapest frontier-class rates on any major API, if Meta may train on your traffic. Official Meta Model API rates verified Oct 23 2026, with vs Claude cost math.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/muse-spark-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Muse Spark 1.3 API Pricing (2026) — $1.25/$4.25 Standard, $0.10/$0.20 Contributor">
+<meta property="og:description" content="Official Meta Model API rates for Muse Spark 1.3/1.2/1.1: $1.25/$4.25 per million tokens Standard, cached input $0.15 — and a Contributor tier at $0.10/$0.20 that trades your data for a 12.5x/21x discount. Vs Claude cost math inside.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/muse-spark-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the Muse Spark 1.3 API cost?","acceptedAnswer":{"@type":"Answer","text":"Per 1M tokens on Meta's Model API (verified Oct 23 2026): Muse Spark 1.3, 1.2 and 1.1 all cost $1.25 input and $4.25 output in Standard mode, with cached input at $0.15. The Contributor-mode variants (muse-spark-1.3-contributor, muse-spark-1.2-contributor) run $0.10 input and $0.20 output, with cached input at $0.002 — a 12.5x input and 21x output discount in exchange for letting Meta train on your prompts and responses."}},
+{"@type":"Question","name":"What is Muse Spark Contributor mode?","acceptedAnswer":{"@type":"Answer","text":"Contributor mode runs the same models at heavily discounted token prices in exchange for permission to use your content — the prompts, code, files and context you send, plus the responses you get back — to train future Meta models. You opt in by calling the -contributor variant (e.g. muse-spark-1.3-contributor). Trade-offs: lower rate limits (150 RPM / 3M TPM vs 3,000 RPM / 4M TPM on Standard) and your traffic trains Meta's next models, which can be a dealbreaker for proprietary code or client data."}},
+{"@type":"Question","name":"Is Muse Spark cheaper than Claude?","acceptedAnswer":{"@type":"Answer","text":"Yes, at every tier. Standard mode's $1.25/$4.25 is 3.2x cheaper on input and 4.7x on output than Claude Opus 5.5 ($4/$20), and 1.6x/2.4x cheaper than Sonnet 5.5 ($2/$10). Contributor mode's $0.10/$0.20 is 40x/100x cheaper than Opus at list. For a 30M-input + 5M-output daily workload, Muse Spark Standard runs $58.75/day vs Opus 5.5's $220 — and Contributor mode runs $4/day."}},
+{"@type":"Question","name":"How do Muse Spark's rate limits work?","acceptedAnswer":{"@type":"Answer","text":"Limits apply per team, not per API key — every key in a team draws from the same pool, and each model has its own separate limits. Muse Spark 1.3/1.2/1.1 Standard: 3,000 requests/min and 4M tokens/min. Contributor variants: 150 RPM / 3M TPM. Background responses are capped at an additional 600 submissions per minute per team, returning HTTP 429 above that."}},
+{"@type":"Question","name":"Is there a long-context surcharge on Muse Spark?","acceptedAnswer":{"@type":"Answer","text":"No. Meta charges the same per-token rate whether your context window is nearly empty or almost full, so a 900K-token prompt bills at the same rate as a 900-token one — like Qwen 3.8's flat pricing and unlike older Qwen tiers that rise up to 4x past 128K. Note that Meta injects a small amount of steering context into every prompt; those tokens are not billed or counted."}},
+{"@type":"Question","name":"Can I get Muse Spark 1.3 cheaper than list price?","acceptedAnswer":{"@type":"Answer","text":"Three routes, cheapest first: Contributor mode at $0.10/$0.20 (accept Meta training on your content, accept 150 RPM caps); the open-weight Muse Spark Open release (816B MoE, free weights — but self-hosting needs 512GB-class memory or multi-GPU servers at $15–25/hour, so it only wins at sustained high volume); or aggregators like OpenRouter, which list the contributor variant at pass-through rates. Standard mode has no published volume discounts beyond cached input at $0.15."}}
+]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates from Meta Model API · verified Oct 23, 2026</div>
+  <h1>Muse Spark 1.3 API pricing — $1.25/$4.25, or $0.10/$0.20 if Meta may train on it</h1>
+  <p class="sub">Meta's Model API prices the whole Muse Spark line at <b>$1.25 input / $4.25 output</b> per million tokens — already 3.2–4.7x under Claude Opus 5.5 — and then cuts the floor out: a <b>Contributor tier at $0.10/$0.20</b> in exchange for training rights. Here's the full rate card, the catch, and the vs-Claude math.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Muse Spark prices (per 1M tokens, Meta Model API)</h2>
+  <div class="tbl"><table>
+    <tr><th>Usage</th><th>Standard mode</th><th>Contributor mode</th></tr>
+    <tr><td>Cached input</td><td>$0.15</td><td class="win">$0.002</td></tr>
+    <tr><td>Input</td><td>$1.25</td><td class="win">$0.10</td></tr>
+    <tr><td>Output</td><td>$4.25</td><td class="win">$0.20</td></tr>
+    <tr><td>Variant to call</td><td>muse-spark-1.3 / 1.2 / 1.1</td><td>muse-spark-1.3-contributor / 1.2-contributor</td></tr>
+    <tr><td>Rate limits (per team)</td><td>3,000 RPM · 4M TPM</td><td>150 RPM · 3M TPM</td></tr>
+  </table></div>
+  <p class="hint">Source: Meta's official Model API pricing and rate limits page, verified Oct 23, 2026. One rate card covers Muse Spark 1.3, 1.2 and 1.1; 1.1 is Standard-only (no contributor variant). Contributor mode gives Meta permission to train on what you send and receive.</p>
+
+  <h3 id="contributor">Contributor mode: the 12.5x/21x discount and its catch</h3>
+  <p>Contributor mode runs the same models at <b>$0.10 input / $0.20 output</b> — a 12.5x input and 21x output cut versus Standard — in exchange for permission to use your content to train future Meta models: the prompts, code, files and context you send, plus everything the model sends back. You opt in per-call by invoking the <code>-contributor</code> variant, so a team can prototype on Contributor and promote production traffic to Standard without changing anything else. Two hard trade-offs beyond the training rights: rate limits drop to <b>150 RPM / 3M TPM</b> (vs 3,000 RPM / 4M TPM), and anything sensitive — proprietary code, client data, regulated records — should never ride a tier whose payment is your data.</p>
+
+  <h3>Muse Spark 1.3 vs Claude: what a real workload costs</h3>
+  <p>Same heavy daily agent we use across our comparisons: <b>30M input + 5M output tokens per day</b>.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Daily cost</th><th>30-day month</th></tr>
+    <tr><td>Muse Spark 1.3 — Contributor</td><td>30×$0.10 + 5×$0.20 = $4.00</td><td><b>$120</b></td></tr>
+    <tr><td>Muse Spark 1.3 — Standard</td><td>30×$1.25 + 5×$4.25 = $58.75</td><td><b>$1,763</b></td></tr>
+    <tr><td>Claude Sonnet 5.5</td><td>30×$2 + 5×$10 = $110</td><td><b>$3,300</b></td></tr>
+    <tr><td>Claude Opus 5.5</td><td>30×$4 + 5×$20 = $220</td><td><b>$6,600</b></td></tr>
+  </table></div>
+  <p>At Contributor rates, a full month of that agent costs about <b>one day</b> on Opus 5.5. Even Standard mode undercuts Sonnet by ~47% on the month. For per-request math on the Claude side, use the <a href="/claude-token-calculator">token calculator</a>; for the quality side of the trade (where Opus still earns its premium per attempt), see <a href="/muse-spark-vs-claude-app">Muse Spark vs Claude</a>.</p>
+
+  <h3>Where that lands against the other budget models</h3>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input</th><th>Output</th><th>Context</th></tr>
+    <tr><td>Muse Spark 1.3 — Contributor</td><td class="win">$0.10</td><td class="win">$0.20</td><td>1M</td></tr>
+    <tr><td><a href="/deepseek-v4-pricing">DeepSeek V4.1-Flash</a></td><td>$0.15–0.30</td><td>$0.60–1.20</td><td>1M</td></tr>
+    <tr><td><a href="/qwen-3-8-pricing">Qwen3.8-Flash</a></td><td>$0.15</td><td>$0.47</td><td>1M</td></tr>
+    <tr><td>Muse Spark 1.3 — Standard</td><td>$1.25</td><td>$4.25</td><td>1M</td></tr>
+    <tr><td><a href="/qwen-3-8-pricing">Qwen3.8-Max</a></td><td>$2.00</td><td>$6.00</td><td>1M</td></tr>
+    <tr><td><a href="/gpt-5-6-pricing">GPT-5.6 Terra</a></td><td>$2.00</td><td>$12.00</td><td>—</td></tr>
+    <tr><td><a href="/kimi-k3-pricing">Kimi K3</a></td><td>$3.00</td><td>$15.00</td><td>1M</td></tr>
+  </table></div>
+  <p>The Contributor tier is the cheapest frontier-class output price on any major API right now — below even DeepSeek's budget Flash line, with a 1M-token window attached. The open-weight <b>Muse Spark Open</b> release (816B MoE, ~42B active) technically undercuts it at $0/token, but self-hosting needs 512GB-class memory or multi-GPU servers at $15–25/hour, so the hosted Contributor rate captures most of the open-weights discount without the hardware.</p>
+
+  <h3>Billing details the rate card doesn't front-page</h3>
+  <ul>
+    <li><b>Flat to full context:</b> the same per-token rate applies whether the window is nearly empty or packed — no long-context surcharge, so a 900K-token prompt bills like a 900-token one.</li>
+    <li><b>Cached input is the quiet multiplier:</b> $0.15/M Standard (75% off fresh input) and an almost-invisible $0.002/M on Contributor. Agent loops and document Q&A that re-send context should be architected around cache hits.</li>
+    <li><b>Web search grounding:</b> $2.50 per 1,000 search queries on top of token costs when the <code>web_search</code> tool fires.</li>
+    <li><b>Steering tokens are free:</b> Meta injects a small system-prompt scaffolding into every request and excludes it from billing and token counts.</li>
+    <li><b>Team-level limits:</b> 3,000 RPM / 4M TPM per model per team (150 RPM / 3M TPM Contributor); every key in a team shares one pool, but traffic to one model doesn't consume another's budget. Background responses add a 600 submissions/min cap per team — above it you get HTTP 429.</li>
+    <li><b>Muse Code ≠ Model API:</b> the consumer app/IDE path bills a monthly subscription; the per-token rates here are the developer API only.</li>
+  </ul>
+
+  <h3 id="naming">Naming traps before you call it</h3>
+  <p>Three things to check before your first bill: there is <b>no bare <code>muse-spark</code> alias</b> — requests target a version (<code>muse-spark-1.3</code>, <code>muse-spark-1.2</code>, <code>muse-spark-1.1</code>), and the API's model list is the source of truth for what's live. The discount is <b>not a parameter</b> — Contributor pricing only applies when you call the <code>-contributor</code> variant (<code>muse-spark-1.3-contributor</code>), which aggregators like OpenRouter mirror under <code>meta/muse-spark-1.3-contributor</code>. And <b>1.1 has no contributor line</b> — if a config template points 1.1 at a contributor alias, the request fails rather than silently downgrading.</p>
+
+  <div class="verdict api"><b>Practical split:</b> run prototypes, batch jobs and retry-tolerant pipelines on <b>Contributor at $0.10/$0.20</b> as long as the training-rights trade and 150 RPM cap fit — nothing else at this capability level comes close on price. Move production and any sensitive traffic to <b>Standard at $1.25/$4.25</b>, which still beats Sonnet 5.5 by ~1.6x/2.4x with 20x the rate ceiling. Keep Opus 5.5 for the frontier slice — and check <a href="/muse-spark-vs-claude-app">the vs-Claude math</a> before routing hard agentic work anywhere.</div>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>How much does the Muse Spark 1.3 API cost?</summary><div class="a">$1.25 input / $4.25 output per million tokens Standard (cached input $0.15), identical for 1.3, 1.2 and 1.1. Contributor variants run $0.10/$0.20 with cached input at $0.002. Verified against Meta's Model API pricing page Oct 23, 2026.</div></details>
+    <details><summary>What is Muse Spark Contributor mode?</summary><div class="a">The same models at ~12.5–21x cheaper rates in exchange for Meta training on your traffic — prompts, code, files and responses. Opt in by calling the -contributor variant; limits drop to 150 RPM / 3M TPM. Keep proprietary or client data on Standard.</div></details>
+    <details><summary>Is Muse Spark cheaper than Claude?</summary><div class="a">At every tier: Standard's $1.25/$4.25 is 3.2x/4.7x under Opus 5.5 ($4/$20) and 1.6x/2.4x under Sonnet 5.5 ($2/$10); Contributor's $0.10/$0.20 is 40x/100x under Opus at list. The 30M+5M daily agent runs $58.75/day Standard vs Opus's $220.</div></details>
+    <details><summary>How do Muse Spark's rate limits work?</summary><div class="a">Per team, not per key, and per model: Standard 3,000 RPM / 4M TPM, Contributor 150 RPM / 3M TPM. Background responses add a 600 submissions/min team cap that returns HTTP 429 when exceeded.</div></details>
+    <details><summary>Is there a long-context surcharge?</summary><div class="a">No — flat per-token rates to a full 1M window, unlike older Qwen tiers that rise up to 4x past 128K. Meta's injected steering context isn't billed or counted.</div></details>
+    <details><summary>Can I get Muse Spark 1.3 cheaper than list?</summary><div class="a">Contributor mode ($0.10/$0.20), the free open weights (realistic only with $15–25/hour of self-host hardware for the 816B MoE), or OpenRouter's contributor listing. Cached input at $0.15 is the only Standard-mode discount.</div></details>
+  </div>
+
+  <p class="hint">Related: <a href="/muse-spark-vs-claude-app">Muse Spark vs Claude — the open-weights cost math</a> · <a href="/deepseek-v4-pricing">DeepSeek V4 pricing</a> · <a href="/qwen-3-8-pricing">Qwen 3.8 pricing</a> · <a href="/kimi-k3-pricing">Kimi K3 pricing</a> · <a href="/claude-token-calculator">Claude token calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Meta's official Model API pricing and rate-limits page on Oct 23, 2026. Not affiliated with Meta or Anthropic. "Claude" is a trademark of Anthropic, PBC. "Muse Spark" rates current as of the verified date — Contributor terms and rate limits can change; check Meta's pricing page before committing production traffic.</p><nav><a href="/">Claude API Pricing</a> · <a href="/muse-spark-vs-claude-app">Muse Spark vs Claude</a> · <a href="/gpt-5-6-pricing">GPT-5.6</a> · <a href="/kimi-k3-pricing">Kimi K3</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
