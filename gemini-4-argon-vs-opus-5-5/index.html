@@ -18,7 +18,7 @@
 {"@type":"Question","name":"Is Gemini 4 Argon cheaper than Claude Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"From December 1, 2026, no — their list prices are identical: $4 per million input tokens and $20 per million output tokens, with cached input at $0.20. Through November 30, 2026, Argon's introductory rate is half of Opus 5.5: $2/$10 with $0.10 cached input. Argon's batch API keeps a permanent 50% discount, so batch workloads stay at $2/$10 even after the increase."}},
 {"@type":"Question","name":"Which model has a bigger context window, Argon or Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"Both expose roughly 1M-token context windows. Argon's ~1M window is shared across input, thinking and output tokens. Opus 5.5 lists a 1M context window. At 1M scale, per-token pricing matters more than the window size itself."}},
 {"@type":"Question","name":"Should I switch to Argon before December 1?","acceptedAnswer":{"@type":"Answer","text":"If your workload runs on either flagship and you can switch providers, the introductory window is free money: identical capability class at half the list price until November 30, 2026. After December 1 the price argument disappears and the choice reverts to quality, latency and ecosystem — so lock in the intro rate now and re-evaluate the rest later."}},
-{"@type":"Question","name":"How do batch and caching change the Argon vs Opus math?","acceptedAnswer":{"@type":"Answer","text":"Batch cuts Argon 50% ($2/$10 intro, $2/$10 after Dec 1 — permanently half of Opus 5.5's list). Prompt caching cuts repetitive input dramatically: $0.10/MTok cached input on intro Argon, $0.20 after; Opus 5.5 cached input is $0.20. A caching-heavy pipeline can shave 90%+ off effective input costs on either model."}}]}
+{"@type":"Question","name":"How do batch and caching change the Argon vs Opus math?","acceptedAnswer":{"@type":"Answer","text":"Batch — and the identically priced Flex tier — cuts Argon 50% ($1/$5 intro, $2/$10 after Dec 1 — permanently half of Opus 5.5's list). Prompt caching cuts repetitive input dramatically: $0.10/MTok cached input on intro Argon, $0.20 after; Opus 5.5 cached input is $0.20. A caching-heavy pipeline can shave 90%+ off effective input costs on either model."}}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Gemini 4 Argon vs Claude Opus 5.5 Cost Calculator","url":"https://claude-api-pricing.vercel.app/gemini-4-argon-vs-opus-5-5","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Interactive side-by-side monthly cost comparison of Gemini 4 Argon and Claude Opus 5.5, including the December 1, 2026 Argon price change and batch/caching levers."}
@@ -28,7 +28,7 @@
 <header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
 
 <div class="hero"><div class="wrap">
-  <div class="badge">Rates verified Oct 16 &amp; 19, 2026 · Argon intro ends Nov 30</div>
+  <div class="badge">Rates verified Oct 24, 2026 · Argon intro ends Nov 30</div>
   <h1>Gemini 4 Argon vs Claude Opus 5.5 — the Dec 1 price fork</h1>
   <p class="sub">Most comparisons score the two flagships on benchmarks. This one does the part that decides your bill: <b>from December 1 they cost exactly the same ($4/$20)</b> — until then Argon is half price. Where the money actually differs, with sliders.</p>
 </div></div>
@@ -37,13 +37,14 @@
 <div class="tbl"><table>
 <thead><tr><th>Rate card</th><th>Input / MTok</th><th>Cached input / MTok</th><th>Output / MTok</th><th>Context</th></tr></thead>
 <tbody>
-<tr><td>Argon — intro (until Nov 30)</td><td>$2.00</td><td>$0.10</td><td>$10.00</td><td rowspan="4">~1M (shared in/thinking/out)</td></tr>
+<tr><td>Argon — intro (until Nov 30)</td><td>$2.00</td><td>$0.10</td><td>$10.00</td><td rowspan="5">~1M (shared in/thinking/out)</td></tr>
 <tr><td>Argon — from Dec 1</td><td>$4.00</td><td>$0.20</td><td>$20.00</td></tr>
-<tr><td>Argon — batch (any date)</td><td>$1.00 → $2.00</td><td>$0.05 → $0.10</td><td>$5.00 → $10.00</td></tr>
+<tr><td>Argon — batch / Flex (any date)</td><td>$1.00 → $2.00</td><td>$0.05 → $0.10</td><td>$5.00 → $10.00</td></tr>
+<tr><td>Argon — priority (any date)</td><td>$3.60 → $7.20</td><td>$0.18 → $0.36</td><td>$18.00 → $36.00</td></tr>
 <tr><td>Claude Opus 5.5 (current list)</td><td>$4.00</td><td>$0.20</td><td>$20.00</td></tr>
 </tbody>
 </table></div>
-<p>Read the fork correctly: <b>after December 1, Argon's list price becomes identical to Opus 5.5</b> — input, output and cached input all match to the cent. The only permanent price difference is batch: Argon's 50% batch discount lands at $2/$10, half of Opus list. Everything else that differentiates the two — reasoning quality, latency, ecosystem, rate limits — is a product decision, not a pricing one.</p>
+<p>Read the fork correctly: <b>after December 1, Argon's list price becomes identical to Opus 5.5</b> — input, output and cached input all match to the cent. The only permanent price difference is batch — and its twin, the Flex processing tier, which bills at the same rates: Argon's 50% discount lands at $2/$10, half of Opus list. Everything else that differentiates the two — reasoning quality, latency, ecosystem, rate limits — is a product decision, not a pricing one.</p>
 </div></section>
 
 <section id="vs-calc"><div class="wrap">
@@ -62,8 +63,8 @@
     <label>Output tokens per day <output id="outVal">100K</output>
       <input type="range" id="outTok" min="5000" max="4000000" step="5000" value="100000">
     </label>
-    <label><input type="checkbox" id="useBatch" style="width:auto;accent-color:var(--acc)"> Use Argon batch pricing (−50%, async)</label>
-    <p class="hint">Flagship-reasoning workloads are input-heavy — context re-reads push input well past output. Cached input (Argon $0.10 intro / $0.20 after; Opus $0.20) can cut the input line by 90%+ on repetitive prompts and isn't modeled here.</p>
+    <label><input type="checkbox" id="useBatch" style="width:auto;accent-color:var(--acc)"> Use Argon batch / Flex pricing (−50%)</label>
+    <p class="hint">Flagship-reasoning workloads are input-heavy — context re-reads push input well past output. Batch and the identically priced Flex tier both halve Argon's rates. Cached input (Argon $0.10 intro / $0.20 after; Opus $0.20) can cut the input line by 90%+ on repetitive prompts and isn't modeled here.</p>
   </div>
   <div class="calc-out">
     <div class="verdict" id="verdict">…</div>
@@ -98,7 +99,7 @@
 <details open><summary>Is Gemini 4 Argon cheaper than Claude Opus 5.5?</summary><div class="a">Only until November 30, 2026: Argon's intro rate is $2/$10 per million tokens vs Opus 5.5's $4/$20. From December 1 the lists are identical ($4/$20, cached input $0.20 both). Argon batch stays permanently half of Opus list at $2/$10.</div></details>
 <details><summary>Which has a bigger context window?</summary><div class="a">Both are ~1M tokens. Argon's window is shared across input, thinking and output; Opus 5.5 lists 1M context. Window size is a wash — price per token and task fit should decide.</div></details>
 <details><summary>Should I lock in the intro rate?</summary><div class="a">If either flagship fits your workload, running on Argon through November 30 is a half-price audition of Google's flagship — and migrating between API providers later costs only integration time, not retraining.</div></details>
-<details><summary>Does either model offer batch or caching discounts?</summary><div class="a">Argon: batch −50% ($2/$10 after Dec 1) and cached input at $0.20/MTok ($0.10 intro). Opus 5.5: cached input at $0.20/MTok. A caching-heavy pipeline cuts the input line by 90%+ on both.</div></details>
+<details><summary>Does either model offer batch or caching discounts?</summary><div class="a">Argon: batch and the identically priced Flex tier −50% ($1/$5 intro, $2/$10 after Dec 1 — permanently half of Opus list), plus cached input at $0.20/MTok ($0.10 intro). Opus 5.5: cached input at $0.20/MTok. A caching-heavy pipeline cuts the input line by 90%+ on both.</div></details>
 </div></div></section>
 
 <footer class="site"><div class="wrap">
