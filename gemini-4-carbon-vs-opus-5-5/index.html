@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Gemini 4 Carbon vs Claude Opus 5.5: Same Price, Different Bets (2026)</title>
+<meta name="description" content="Interactive cost comparison: Gemini 4 Carbon vs Claude Opus 5.5. Both list at $4/$20 per MTok — Carbon launched at parity with no intro window. Sliders, rate card, where each model wins.">
+<meta property="og:title" content="Gemini 4 Carbon vs Claude Opus 5.5: Same Price, Different Bets">
+<meta property="og:description" content="Google's Gemini 4 Carbon launched Oct 28, 2026 at exactly Claude Opus 5.5's list price: $4/$20 per million tokens. No intro discount, unlike sibling Argon. Interactive calculator inside.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gemini-4-carbon-vs-opus-5-5">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gemini-4-carbon-vs-opus-5-5">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Gemini 4 Carbon cheaper than Claude Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"No — Gemini 4 Carbon launched on October 28, 2026 at exactly Opus 5.5's list price: $4 per million input tokens and $20 per million output tokens, with a 1M-token context window. Unlike its sibling Argon, which ran a half-price introductory window through November 30, Carbon shipped with no intro discount."}},
+{"@type":"Question","name":"How does Carbon's pricing differ from Argon's?","acceptedAnswer":{"@type":"Answer","text":"Argon debuted at $2/$10 (half of Opus 5.5) and rises to $4/$20 on December 1, 2026. Carbon skipped the teaser phase entirely and launched at the full $4/$20. Both models are $4/$20 from December onward — at that point Google's two Gemini 4 flagships cost the same as Claude Opus 5.5."}},
+{"@type":"Question","name":"Does Gemini 4 Carbon have batch or caching discounts?","acceptedAnswer":{"@type":"Answer","text":"Not yet published as of October 29, 2026. Argon's batch API bills at a permanent 50% discount ($2/$10 vs its $4/$20 list) with cached input at $0.20/MTok — a similar structure for Carbon is plausible but unconfirmed, so treat any batch/caching math as pending until Google publishes the rate card."}},
+{"@type":"Question","name":"Which should I pick, Carbon or Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"At identical prices the choice is a product bet, not a pricing one: Carbon is positioned around cybersecurity workloads (88.2% on SEC-bench, #1 on BenchAlign at launch) while Opus 5.5 is Anthropic's general reasoning flagship. Run your own 20-task eval — at $4/$20 both, the stronger model for your workload is free to switch to."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Gemini 4 Carbon vs Claude Opus 5.5 Cost Calculator","url":"https://claude-api-pricing.vercel.app/gemini-4-carbon-vs-opus-5-5","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Interactive side-by-side monthly cost comparison of Gemini 4 Carbon and Claude Opus 5.5 at their identical $4/$20 list rates, with breakeven math and the Argon intro-window contrast."}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-vs-claude-opus">V4 vs Opus</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates verified Oct 29, 2026 · Carbon launched Oct 28 · cached/batch pending</div>
+  <h1>Gemini 4 Carbon vs Claude Opus 5.5 — same price, different bets</h1>
+  <p class="sub">Carbon launched at <b>exactly Opus 5.5's list price: $4/$20 per million tokens</b> — and unlike sibling Argon, there is no intro-discount window to game. This page does the cost math that's left, and the one product bet that separates them.</p>
+</div></div>
+
+<section style="padding-top:8px"><div class="wrap prose">
+<div class="tbl"><table>
+<thead><tr><th>Rate card</th><th>Input / MTok</th><th>Cached input / MTok</th><th>Output / MTok</th><th>Context</th></tr></thead>
+<tbody>
+<tr><td>Gemini 4 Carbon (from launch)</td><td>$4.00</td><td>not yet published</td><td>$20.00</td><td rowspan="3">1M</td></tr>
+<tr><td>Claude Opus 5.5 (current list)</td><td>$4.00</td><td>$0.20</td><td>$20.00</td></tr>
+<tr><td>Gemini 4 Argon — intro, until Nov 30 <em>(sibling reference)</em></td><td>$2.00</td><td>$0.10</td><td>$10.00</td></tr>
+</tbody>
+</table></div>
+<p>Read the launch correctly: Google priced Carbon at <b>frontier parity from day one</b>. Argon's half-price opening was a adoption accelerant with a December 1 sunset; Carbon abandons the teaser entirely — if you were waiting for a Carbon intro window to lock in, there isn't one. The cached-input and batch lines are still unpublished, so the only honest rate card today is the four numbers above.</p>
+</div></section>
+
+<section id="vs-calc"><div class="wrap">
+<div class="calc">
+  <div class="calc-inputs">
+    <h2>Side-by-side cost</h2>
+    <label>Input tokens per day <output id="inVal">1M</output>
+      <input type="range" id="inTok" min="50000" max="20000000" step="50000" value="1000000">
+    </label>
+    <label>Output tokens per day <output id="outVal">100K</output>
+      <input type="range" id="outTok" min="5000" max="4000000" step="5000" value="100000">
+    </label>
+    <p class="hint">Flagship-reasoning workloads are input-heavy — context re-reads push input well past output. Both models bill identical list rates, so the slider changes the bill but never the winner. Argon's intro rate ($2/$10 until Nov 30) is half of both — see the Argon vs Opus page for that fork.</p>
+  </div>
+  <div class="calc-out">
+    <div class="verdict" id="verdict">…</div>
+    <div class="bars" id="bars"></div>
+    <div class="breakeven" id="breakeven"></div>
+  </div>
+</div>
+</div></section>
+
+<section><div class="wrap prose">
+<h2>What a real workload costs</h2>
+<p>Monthly bills at a 10:1 input/output mix, 30 days, list rates:</p>
+<div class="tbl"><table>
+<thead><tr><th>Daily volume (in / out)</th><th>Carbon</th><th>Opus 5.5</th><th>Argon intro (until Nov 30)</th></tr></thead>
+<tbody>
+<tr><td>200K / 20K tokens</td><td>$36/mo</td><td>$36/mo</td><td>$18/mo</td></tr>
+<tr><td>1M / 100K tokens</td><td>$180/mo</td><td>$180/mo</td><td>$90/mo</td></tr>
+<tr><td>5M / 500K tokens</td><td>$900/mo</td><td>$900/mo</td><td>$450/mo</td></tr>
+</tbody>
+</table></div>
+<p>Three readings: (1) <b>Carbon vs Opus is a price tie at every volume</b> — there is no breakeven to find, because the lists are identical from launch. (2) <b>The only current price play in the Gemini 4 family is Argon's intro window</b>, which closes November 30 — after that, all three models here cost the same per token. (3) If Carbon publishes batch or caching discounts, the tie breaks for latency-tolerant pipelines; this page updates when the rate card lands.</p>
+
+<h2>Where each model earns its keep</h2>
+<ul>
+<li><b>Carbon's case</b>: built and positioned for cybersecurity workloads — 88.2% on SEC-bench and #1 on BenchAlign (88.37, top of 1003 models) at launch, per Artificial Analysis and BenchLM; Google-ecosystem integrations and the same 1M window class.</li>
+<li><b>Opus 5.5's case</b>: Anthropic's flagship general reasoning tier with a mature caching story ($0.20/MTok cached input) — if your evals show fewer retries or better long-run agent coherence, identical pricing means zero cost penalty for taking it.</li>
+<li><b>The honest tiebreak</b>: at equal prices, run your own 20-task eval on your workload — especially security-flavored ones if you're eyeing Carbon. Cost math got both models to parity; only your tasks pick the winner. For the cheaper sibling, see Argon vs Opus and the Argon rate card.</li>
+</ul>
+</div></section>
+
+<section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
+<details open><summary>Is Gemini 4 Carbon cheaper than Claude Opus 5.5?</summary><div class="a">No — Carbon launched October 28, 2026 at exactly Opus 5.5's list price: $4/$20 per million tokens with a 1M context window. Unlike its sibling Argon, it shipped with no intro discount.</div></details>
+<details><summary>Does Carbon have an intro discount like Argon did?</summary><div class="a">No. Argon debuted at $2/$10 (half of Opus list) through November 30, 2026; Carbon launched directly at the full $4/$20. There is no teaser window to lock in.</div></details>
+<details><summary>Does either model offer batch or caching discounts?</summary><div class="a">Opus 5.5: cached input at $0.20/MTok. Carbon: batch and caching rates not yet published as of October 29, 2026 — Argon's batch runs a permanent −50%, so watch for a similar Carbon structure, and confirm with Google's rate card before modeling it.</div></details>
+<details><summary>Which one is better for security workloads?</summary><div class="a">That's Carbon's stated positioning: 88.2% on SEC-bench and #1 on BenchAlign at launch. For general reasoning, benchmark both on your own tasks — at identical $4/$20 pricing, the stronger model for your workload costs nothing extra to adopt.</div></details>
+</div></div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with Google or Anthropic. Gemini and Claude are trademarks of their respective owners. Rates from public rate cards and Artificial Analysis, verified Oct 29, 2026 — confirm current pricing with each vendor. Related: <a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a> · <a href="/gemini-4-argon-pricing">Argon rate card</a> · <a href="/">Claude API pricing</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var CARBON={pin:4,pout:20,label:"Carbon"};
+  var OPUS={pin:4,pout:20,label:"Opus 5.5"};
+  var $=function(id){return document.getElementById(id)};
+  function fmtTok(n){ if(n>=1e6) return (n/1e6).toFixed(n%1e6?1:0)+"M"; if(n>=1e3) return Math.round(n/1e3)+"K"; return String(n); }
+  function fmtUSD(n){ if(n>=100) return "$"+Math.round(n).toLocaleString(); if(n>=10) return "$"+n.toFixed(0); return "$"+n.toFixed(2); }
+  function render(){
+    var inp=+$("inTok").value, out=+$("outTok").value;
+    $("inVal").textContent=fmtTok(inp); $("outVal").textContent=fmtTok(out);
+    var cCost=((inp/1e6)*CARBON.pin+(out/1e6)*CARBON.pout)*30, oCost=((inp/1e6)*OPUS.pin+(out/1e6)*OPUS.pout)*30;
+    var v=$("verdict");
+    v.innerHTML="⚖️ <b>Dead tie</b> — Carbon and Opus 5.5 both cost "+fmtUSD(cCost)+"/mo at list rates. Pick on task quality, not price.";
+    v.className="verdict plan";
+    var max=Math.max(cCost,oCost,1);
+    var row=function(name,cost,api,win){ var pct=Math.max(4,Math.round(cost/max*100)); return '<div class="bar"><span class="bl">'+name+'</span><span class="bf'+(api?' api':'')+(win?' win':'')+'" style="width:'+pct+'%"></span><span class="bp">'+fmtUSD(cost)+'/mo</span></div>'; };
+    $("bars").innerHTML=row("Carbon",cCost,true,true)+row("Opus 5.5",oCost,false,true);
+    var be=$("breakeven"), lines=[];
+    lines.push("No breakeven exists — the two rate cards are <b>identical from launch</b> ($4/$20, both 1M context).");
+    lines.push("The only live price play: <b>Argon's intro window</b> runs both flagships' workload at half bill until Nov 30.");
+    lines.push("At this volume: "+fmtTok(inp)+" in / "+fmtTok(out)+" out per day.");
+    be.innerHTML=lines.join("<br>");
+  }
+  ["inTok","outTok"].forEach(function(id){$(id).addEventListener("input",render)});
+  render();
+})();
+</script>
+</body>
+</html>
