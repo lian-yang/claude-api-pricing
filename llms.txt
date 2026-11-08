@@ -79,3 +79,10 @@
   with reasoning included; naming trap vs legacy per-token open-weights (Voxtral Small 24B 2507 $0.10/$0.30 per
   M audio tokens on OpenRouter); Claude-pipeline math: 10-min meeting $0.035 to transcribe + sub-cent Haiku 5.5
   summary. Verified Oct 23 2026.
+- [/grok-voice-3-pricing](https://claude-api-pricing.vercel.app/grok-voice-3-pricing): Grok Voice 3.0 API pricing —
+  xAI's realtime speech rates (verified Nov 9 2026): speech-to-speech grok-voice-3.0 $0.08/min ($4.80/hr) flat +
+  $0.004 per text input, grok-voice-2.0 deprecated at same rate; speech-to-text $0.10/hr REST / $0.20/hr streaming;
+  TTS $15/1M chars; released Oct 14 2026, tops early speech-to-speech indexes; cross-vendor table: Gemini 3.8 Live
+  ~$0.023/min combined, GPT-Live 1 $0.05/min session + model separate, gpt-realtime-2.1 ~$0.058/min, Voxtral
+  voice-agent $0.04-0.08/min; three pricing units in one API (min/hr/char); Claude pipeline: $4.80/call-hour voice
+  + sub-cent Haiku 5.5 reasoning on summaries.

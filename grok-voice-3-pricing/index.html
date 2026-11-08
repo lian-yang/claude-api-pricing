@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Grok Voice 3.0 API Pricing (2026): $0.08/min Speech-to-Speech, TTS &amp; STT Rates</title>
+<meta name="description" content="xAI Grok Voice 3.0 API pricing: speech-to-speech at $0.08/min ($4.80/hr) plus $0.004 per text input, speech-to-text $0.10–0.20/hr, TTS $15 per 1M chars. Rates verified Nov 9, 2026 against xAI's published docs.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/grok-voice-3-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grok Voice 3.0 API Pricing — $0.08/min Speech-to-Speech">
+<meta property="og:description" content="Every published Grok Voice API rate: speech-to-speech per minute, text-input surcharge, STT per hour and TTS per million characters — plus how it compares with GPT-Live, gpt-realtime and Gemini Live.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/grok-voice-3-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does the Grok Voice 3.0 API cost?","acceptedAnswer":{"@type":"Answer","text":"Speech-to-speech on grok-voice-3.0 is $0.08 per minute ($4.80 per hour) plus $0.004 per text input, per xAI's published pricing table verified Nov 9, 2026. Speech-to-text is $0.10/hour on REST and $0.20/hour streaming; text-to-speech is $15 per 1M characters. The deprecated grok-voice-2.0 carried the same $0.08/min rate."}},
+{"@type":"Question","name":"Is Grok Voice 3.0 per-minute or per-token billing?","acceptedAnswer":{"@type":"Answer","text":"Per minute — a flat $0.08/min for speech-to-speech sessions regardless of audio tokenization, which makes session costs predictable in a way token-billed realtime APIs are not. The only surcharge is $0.004 per text input (per xAI's rate table). Compare: OpenAI's gpt-realtime-2.1 bills audio as tokens at $32 input / $64 output per million, and Gemini 3.8 Live bills audio tokens at roughly $0.005 in / $0.018 out per minute."}},
+{"@type":"Question","name":"When was Grok Voice 3.0 released?","acceptedAnswer":{"@type":"Answer","text":"October 14, 2026, announced at x.ai/news/grok-voice-3. It is xAI's speech-to-speech model for the Voice API — full-duplex conversations with sub-second latency, built-in reasoning, tool orchestration, and 25+ languages. Early third-party benchmarks put it at the top of speech-to-speech indexes against OpenAI and Google realtime models."}},
+{"@type":"Question","name":"Is grok-voice-2.0 still available?","acceptedAnswer":{"@type":"Answer","text":"No — the docs list Speech to Speech (grok-voice-2.0) as deprecated, at the same $0.08/min + $0.004 text-input rates while it winds down. New builds should target grok-voice-3.0; the pricing did not change between generations, so migration is a model-name swap, not a budget exercise."}},
+{"@type":"Question","name":"How does Grok Voice pricing compare with GPT-Live and Gemini Live?","acceptedAnswer":{"@type":"Answer","text":"On published rates: Grok Voice 3.0 is a flat $0.08/min all-in. Gemini 3.8 Live works out to roughly $0.023/min combined (audio in ~$0.005, out ~$0.018 per minute equivalent). OpenAI's GPT-Live 1 charges $0.05/min for the session layer with the backend model billed separately, and gpt-realtime-2.1 audio tokens land near $0.058/min combined. Grok is the simplest to budget but not the cheapest per minute; Mistral's Voxtral voice-agent stack runs $0.04–0.08/min with reasoning included."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official xAI rates · verified Nov 9, 2026</div>
+  <h1>Grok Voice 3.0 API pricing — $0.08/min speech-to-speech, TTS and STT rates</h1>
+  <p class="sub">xAI's Voice API bills the simplest way in realtime speech: a flat <b>$0.08 per minute</b> ($4.80/hr) for speech-to-speech on grok-voice-3.0, plus <b>$0.004 per text input</b>; <b>$0.10–0.20/hr</b> for speech-to-text and <b>$15 per 1M characters</b> for text-to-speech. Every rate below is from xAI's published pricing table.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Grok Voice API prices</h2>
+  <div class="tbl"><table>
+    <tr><th>Model / mode</th><th>Price</th><th>What it's for</th></tr>
+    <tr><td>Speech to Speech (grok-voice-3.0)</td><td><b>$0.08 / min</b> ($4.80 / hr)<br>+ $0.004 / text input</td><td>Realtime voice agents: full-duplex, sub-second latency, built-in reasoning, tool use, 25+ languages</td></tr>
+    <tr><td>Speech to Speech (grok-voice-2.0) <s>deprecated</s></td><td><b>$0.08 / min</b> + $0.004 / text input</td><td>Previous generation, same rate while it winds down — migrate by model name</td></tr>
+    <tr><td>Speech to Text</td><td><b>$0.10 / hr</b> (REST) · <b>$0.20 / hr</b> (streaming)</td><td>Transcription endpoint; streaming costs 2× the batch path</td></tr>
+    <tr><td>Text to Speech</td><td><b>$15.00 / 1M chars</b></td><td>Telephony and web voices, speech tags for tone/pauses, multiple audio formats</td></tr>
+  </table></div>
+  <p class="hint">Source: xAI's published API pricing table and <a rel="nofollow" href="https://x.ai/api/voice">x.ai/api/voice</a>, verified Nov 9, 2026. The "$0.004 / text input" surcharge is quoted in xAI's table as shown; grok-voice-3.0 was announced Oct 14, 2026 (<a rel="nofollow" href="https://x.ai/news/grok-voice-3">x.ai/news/grok-voice-3</a>) and tops early speech-to-speech indexes — treat leaderboard claims as vendor-adjacent until you test on your own calls.</p>
+
+  <h3>What a voice agent actually costs per hour</h3>
+  <p>Flat per-minute pricing makes the arithmetic boring, which is the point. An hour-long speech-to-speech session is <b>$4.80</b> plus text-input surcharges; a support line handling 40 hours of calls a day budgets to <b>$192/day</b> before telephony. On the other endpoints, transcribing 10 hours of audio is <b>$1.00</b> on REST or $2.00 streaming, and narrating a 40,000-character script at TTS rates costs <b>$0.60</b>. Note the asymmetry: STT is priced per <i>hour</i>, S2S per <i>minute</i>, TTS per <i>character</i> — three units in one API.</p>
+
+  <h2>Grok Voice vs GPT-Live, gpt-realtime and Gemini Live</h2>
+  <div class="tbl"><table>
+    <tr><th>Realtime voice API</th><th>Published price</th><th>Per-minute feel*</th></tr>
+    <tr><td><b>Grok Voice 3.0 (xAI)</b></td><td>$0.08/min flat + $0.004/text input</td><td><b>$0.08/min</b> — one number, no token math</td></tr>
+    <tr><td>Gemini 3.8 Live (Google)</td><td>audio in $3/MTok · out $12/MTok</td><td>~$0.005 in + $0.018 out ≈ <b>$0.023/min</b> combined</td></tr>
+    <tr><td>GPT-Live 1 (OpenAI)</td><td>$0.05/min session + backend model billed separately</td><td><b>$0.05/min+</b> — the plus is the model bill</td></tr>
+    <tr><td>gpt-realtime-2.1 (OpenAI)</td><td>audio $32 in / $64 out per MTok</td><td>≈ <b>$0.058/min</b> combined at 600 audio tokens/min</td></tr>
+    <tr><td>Voxtral voice-agent stack (Mistral)</td><td>$0.04–0.08/min with reasoning included</td><td><b>$0.04–0.08/min</b> — see our <a href="/voxtral-api-pricing">Voxtral API pricing</a> page</td></tr>
+  </table></div>
+  <p class="hint">*Combined in+out equivalents computed from each vendor's published rates (collected Nov 9, 2026 from Google, OpenAI and Mistral pricing pages and verified third-party roundups); vendors tokenize audio differently, so treat per-minute equivalents as budgeting aids, not invoices. Grok is the flattest to budget; Gemini Live is currently the cheapest per minute; OpenAI splits the session layer from the model bill.</p>
+
+  <h2>Where Grok Voice fits next to Claude</h2>
+  <p>Claude has no speech endpoints — the production pattern is a realtime voice layer for the conversation and a text model for the heavy reasoning. A Grok Voice agent that hands structured call summaries to Claude Haiku 5.5 ($0.10/$0.50 per MTok) pays $4.80 per call-hour for the voice plus fractions of a cent for the follow-up reasoning; for the Claude-side math use the <a href="/claude-token-calculator">token calculator</a>. If your workload is recorded-audio transcription rather than live calls, Grok's STT at $0.10/hr competes with <a href="/voxtral-api-pricing">Voxtral's $0.0035–0.0040/min batch</a> ($0.21–0.24/hr) — Mistral is dramatically cheaper for files, Grok's flat rate is about the live loop.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does the Grok Voice 3.0 API cost?</h3>
+  <p>Speech-to-speech is $0.08/min ($4.80/hr) plus $0.004 per text input; speech-to-text is $0.10/hr REST or $0.20/hr streaming; text-to-speech is $15 per 1M characters. Verified Nov 9, 2026 against xAI's published pricing table.</p>
+  <h3>Is Grok Voice billed per token?</h3>
+  <p>No — per minute for speech-to-speech, per hour for speech-to-text, per million characters for TTS. The only per-unit surcharge is the $0.004 text-input charge in xAI's table. That makes it the easiest realtime voice budget in the current field, where OpenAI and Google bill audio as tokens.</p>
+  <h3>What happened to grok-voice-2.0?</h3>
+  <p>It's deprecated at the same $0.08/min rate. Migrating to grok-voice-3.0 is a model-name change, not a repricing event.</p>
+  <h3>Is Grok Voice 3.0 the best speech-to-speech model?</h3>
+  <p>It launched Oct 14, 2026 topping third-party speech-to-speech indexes and xAI cites the #1 spot on the Tau Voice Leaderboard — strong starting evidence, but leaderboards move monthly. Run your own bake: sub-second latency and 25+ languages are the spec-sheet claims that matter for agent deployments; test accents, tool-use turns and barge-in on your traffic before committing.</p>
+  <h3>Cheapest way to transcribe with xAI?</h3>
+  <p>The REST speech-to-text path at $0.10 per hour. For file-transcription-heavy workloads, Mistral's Voxtral batch ($0.21–0.24/hr equivalent) undercuts it substantially — the two APIs win different jobs.</p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against xAI's published API pricing table and x.ai/api/voice on Nov 9, 2026; competitor equivalents from Google, OpenAI and Mistral published rates. Not affiliated with xAI, Anthropic, OpenAI, Google or Mistral.</p><nav><a href="/">Claude API Pricing</a> · <a href="/deepseek-v4-pricing">DeepSeek V4</a> · <a href="/gpt-5-6-pricing">GPT-5.6</a> · <a href="/kimi-k3-pricing">Kimi K3</a> · <a href="/voxtral-api-pricing">Voxtral API</a></nav></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
