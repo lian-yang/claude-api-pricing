@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>GPT-6.1 Terra API Pricing (2026): $1/$5 per MTok, Batch &amp; Cache Rates</title>
+<meta name="description" content="GPT-6.1 Terra API pricing: $1 input / $5 output per MTok — half of GPT-6.1 Sol — plus batch $0.50/$2.50, cache read $0.05, 1.05M context, the &gt;272K long-context surcharge and Fast rates. Verified Nov 10, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gpt-6-1-terra-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT-6.1 Terra API Pricing — $1/$5 per MTok">
+<meta property="og:description" content="Every published GPT-6.1 Terra rate: input, output, batch/flex, cache read/write, Fast tier — plus how the half-price workhorse compares with GPT-6.1 Sol, Astra, Luna and Claude Sonnet 5.5, and the >272K-token surcharge that changes long-context bills.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gpt-6-1-terra-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does GPT-6.1 Terra cost?","acceptedAnswer":{"@type":"Answer","text":"GPT-6.1 Terra costs $1 per million input tokens and $5 per million output tokens (model ID gpt-6.1-terra), verified against OpenAI's rate card on Nov 10, 2026. Batch and Flex run 50% lower at $0.50/$2.50; cached input is $0.05 per MTok (5% of base input); cache writes are $1.25 per MTok for 30-minute and $2.50 for 12-hour retention; the Fast service tier doubles rates to $2/$10."}},
+{"@type":"Question","name":"How does GPT-6.1 Terra compare with GPT-6.1 Sol?","acceptedAnswer":{"@type":"Answer","text":"Terra is exactly half of Sol on every published line: $1/$5 vs $2/$10 standard, $0.50/$2.50 vs $1/$5 batch, $0.05 vs $0.10 cached input. Sol is the stronger model for demanding agentic coding; Terra targets visual reasoning, precise computer use and clear natural writing at half price, with the same 1.05M-token context window and a reasoning effort dial from none to max."}},
+{"@type":"Question","name":"GPT-6.1 Terra vs Claude Sonnet 5.5 — which should I use?","acceptedAnswer":{"@type":"Answer","text":"Terra undercuts Sonnet 5.5 by exactly half on every line: $1/$5 vs $2/$10 per MTok, cache reads $0.05 vs $0.10, batch $0.50/$2.50 vs $1/$5. Both carry ~1M-token context windows. On our standard agent workload (30M input tokens/day at 75% cache hit + 5M output), Terra runs ~$1,009/month vs Sonnet's ~$2,018. Terra's computer-use workflows require OpenAI's Responses API; the right pick still depends on your task mix and benchmarks on your own prompts."}},
+{"@type":"Question","name":"What is the GPT-6.1 Terra long-context surcharge?","acceptedAnswer":{"@type":"Answer","text":"Prompts with more than 272K input tokens are priced at 2x the input and cache rates and 1.5x output for the full request. Terra has a 1,050,000-token context window with 922,000 max input, so big-context jobs hit the multiplier quickly — at >272K input the effective rate becomes $2/$7.50 (in/out) before batch and regional adjustments."}},
+{"@type":"Question","name":"Does GPT-6.1 Terra support audio, video or realtime?","acceptedAnswer":{"@type":"Answer","text":"No. Terra accepts text and image input and produces text output only — audio and video modalities are unsupported, and the Live and Realtime endpoints are not available for this model. Tool calling requires the Responses API; Chat Completions is supported for plain text-and-image requests."}}
+]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official rates · verified Nov 10, 2026</div>
+  <h1>GPT-6.1 Terra API pricing — $1/$5 per MTok, batch, cache and Fast rates</h1>
+  <p class="sub">OpenAI's value workhorse (launched Oct 27, 2026) prices at <b>$1 in / $5 out per MTok</b> — <b>exactly half of GPT-6.1 Sol</b> — for visual reasoning, precise computer use and natural writing. Batch runs half price again, cache reads are $0.05, and the same rates make it the cheapest big-context tier in the GPT-6 family. All rates below are from OpenAI's published rate card.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official GPT-6.1 Terra rates</h2>
+  <div class="tbl"><table>
+    <tr><th>Billing line</th><th>Price</th><th>Notes</th></tr>
+    <tr><td>Input</td><td><b>$1.00 / MTok</b></td><td>Text and images in</td></tr>
+    <tr><td>Output</td><td><b>$5.00 / MTok</b></td><td>Includes reasoning tokens — effort dial runs <code>none</code>→<code>max</code>, default <code>medium</code></td></tr>
+    <tr><td>Batch / Flex</td><td><b>$0.50 / $2.50</b> (50% off in+out)</td><td>Async jobs and latency-tolerant traffic</td></tr>
+    <tr><td>Cache read</td><td><b>$0.05 / MTok</b></td><td>5% of base input — the agentic-workload lever</td></tr>
+    <tr><td>Cache write · 30-minute</td><td>$1.25 / MTok</td><td>1.25× base input</td></tr>
+    <tr><td>Cache write · 12-hour</td><td>$2.50 / MTok</td><td>2.5× base input; for hot context that lives longer than 30 minutes</td></tr>
+    <tr><td>Fast service tier</td><td><b>$2.00 / $10.00</b> (2×)</td><td>Premium-priority output speed</td></tr>
+  </table></div>
+  <p class="hint">Source: OpenAI's GPT-6.1 Terra model doc and API rate card at developers.openai.com, verified Nov 10, 2026. Specs: 1,050,000-token context window, 922,000 max input, 128,000 max output, knowledge cutoff Jun 1, 2026. Model ID <code>gpt-6.1-terra</code>; served on the Responses and Chat Completions APIs — tool calling requires the Responses API. Regional processing endpoints add a 10% uplift (models released on/after Mar 5, 2026).</p>
+
+  <h3>The fine print that changes bills</h3>
+  <ul>
+    <li><b>Long-context surcharge.</b> Prompts over <b>272K input tokens</b> price at <b>2× input/cache and 1.5× output for the entire request</b> — effective $2 in / $7.50 out at 273K+. With a 1.05M window it's easy to cross accidentally; batch's 50% off applies on top and claws much of it back.</li>
+    <li><b>No realtime.</b> Live and Realtime endpoints are unsupported — voice and streaming-audio pipelines need a different model (e.g., <code>gpt-realtime-2.1</code>).</li>
+    <li><b>Reasoning is billed as output.</b> The effort dial (<code>none</code>→<code>max</code>) is your cost dial; hidden reasoning tokens land on the $5 output line.</li>
+    <li><b>Computer use runs through Responses.</b> Terra's headline computer-use skill is only reachable via the Responses API — Chat Completions handles plain text-and-image requests.</li>
+  </ul>
+
+  <h2>Terra in the GPT-6 family — and against Claude's workhorse</h2>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input / MTok</th><th>Output / MTok</th><th>Cache read</th><th>Batch (in/out)</th><th>Position</th></tr>
+    <tr><td>GPT-6 Astra</td><td>$10.00</td><td>$50.00</td><td>$1.00</td><td>$5 / $25</td><td>Family flagship — professional work scenes</td></tr>
+    <tr><td>GPT-6.1 Sol</td><td>$2.00</td><td>$10.00</td><td>$0.10</td><td>$1 / $5</td><td>Near-Astra smarts at ~1/5 the price</td></tr>
+    <tr><td class="win"><b>GPT-6.1 Terra</b> (Oct 27, 2026)</td><td><b>$1.00</b></td><td><b>$5.00</b></td><td><b>$0.05</b></td><td><b>$0.50 / $2.50</b></td><td><b>Half-price workhorse: visual reasoning, computer use, writing</b></td></tr>
+    <tr><td>GPT-6 Luna</td><td>$0.10</td><td>$0.50</td><td>$0.01</td><td>$0.05 / $0.25</td><td>High-volume routing and classification tier</td></tr>
+    <tr><td>Claude Sonnet 5.5</td><td>$2.00</td><td>$10.00</td><td>$0.10</td><td>$1 / $5</td><td>Anthropic's everyday workhorse (cross-vendor anchor)</td></tr>
+  </table></div>
+  <div class="verdict api"><b>Price positioning:</b> Terra is <b>exactly 50% of GPT-6.1 Sol</b> on every published line — and exactly 50% of Claude Sonnet 5.5's rates too ($1/$5 vs $2/$10, cache $0.05 vs $0.10, batch $0.50/$2.50 vs $1/$5). If your workload is visual matching, screen-acting or drafting rather than frontier agentic coding, Terra delivers a ~1M-token context at the lowest per-token rate of any big-context model in either vendor's current lineup.</div>
+
+  <h3>What a real workload costs per month</h3>
+  <p>Agent-shaped traffic: <b>30M input tokens/day at 75% cache hit + 5M output tokens/day</b>, billed over 30 days at list rates:</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Fresh input (7.5M)</th><th>Cached input (22.5M)</th><th>Output (5M)</th><th>Per day</th><th>Per month</th></tr>
+    <tr><td><b>GPT-6.1 Terra</b></td><td>$7.50</td><td>$1.13</td><td>$25.00</td><td>$33.63</td><td><b>~$1,009</b></td></tr>
+    <tr><td>GPT-6.1 Sol</td><td>$15.00</td><td>$2.25</td><td>$50.00</td><td>$67.25</td><td>~$2,018 <span class="hint">(Terra saves ~$1,009/mo)</span></td></tr>
+    <tr><td>GPT-6 Astra</td><td>$75.00</td><td>$22.50</td><td>$250.00</td><td>$347.50</td><td>~$10,425</td></tr>
+    <tr><td>GPT-6 Luna</td><td>$0.75</td><td>$0.23</td><td>$2.50</td><td>$3.48</td><td>~$104</td></tr>
+    <tr><td>Claude Sonnet 5.5</td><td>$15.00</td><td>$2.25</td><td>$50.00</td><td>$67.25</td><td>~$2,018</td></tr>
+  </table></div>
+  <p>Batch halves Terra again: the same workload lands at <b>~$504/month</b> for async jobs. Two caps to watch: the <b>&gt;272K-input surcharge</b> (2× in/cache, 1.5× out) if you stuff the full 1.05M window, and reasoning effort — at <code>max</code> effort the hidden thinking tokens multiply the $5 output line, so keep routine steps at <code>low</code>/<code>none</code>.</p>
+
+  <h2>What Terra is built for</h2>
+  <p>OpenAI's model doc positions Terra as "a fast, efficient model for visual reasoning, precise computer use, and clear, natural writing" — with the worked examples being <b>matching product photos to catalog entries, interpreting technical drawings, acting on application screens, and drafting/revise text</b>. That's an e-commerce and ops-automation brief, not a frontier-research brief: route the hard agentic coding to Sol or Astra, the 24/7 vision-plus-clicks pipeline to Terra, and pure high-volume classification down to Luna at $0.10/$0.50.</p>
+
+  <h3>Subscriptions: when you don't pay these rates at all</h3>
+  <p>ChatGPT subscribers can route overflow work into API credits under OpenAI's "API credits for ChatGPT subscribers" program — check the current terms on OpenAI's docs for your plan's credit amount. For steady unattended volume, the calculator math still favors API: see the <a href="/#calculator">API vs subscription calculator</a>.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does GPT-6.1 Terra cost?</h3>
+  <p>$1 per million input tokens, $5 per million output (model ID <code>gpt-6.1-terra</code>), verified Nov 10, 2026 against OpenAI's rate card. Batch/Flex run $0.50/$2.50; cache reads $0.05/MTok; cache writes $1.25 (30-minute) and $2.50 (12-hour); the Fast service tier doubles everything to $2/$10.</p>
+  <h3>How does GPT-6.1 Terra compare with GPT-6.1 Sol?</h3>
+  <p>Terra is exactly half of Sol on every line — $1/$5 vs $2/$10, batch $0.50/$2.50 vs $1/$5, cache $0.05 vs $0.10. Sol keeps the edge on demanding agentic coding; Terra covers visual reasoning, computer use and writing at half price with the same 1.05M-token context and an effort dial from <code>none</code> to <code>max</code>.</p>
+  <h3>GPT-6.1 Terra vs Claude Sonnet 5.5 — which should I use?</h3>
+  <p>Terra is half of Sonnet 5.5 on every published rate ($1/$5 vs $2/$10; cache $0.05 vs $0.10; batch $0.50/$2.50 vs $1/$5). On our standard agent workload that's ~$1,009 vs ~$2,018 per month. Terra's computer use requires OpenAI's Responses API and it has no realtime endpoints; the capability tiebreak is your own prompt set — but on price alone, Terra now undercuts the Claude workhorse line.</p>
+  <h3>What is the long-context surcharge?</h3>
+  <p>Prompts over 272K input tokens bill at 2× input and cache rates and 1.5× output for the full request — effective $2/$7.50 at the margins. Terra's 1,050,000-token window (922K max input) makes it easy to cross; batching (50% off) and keeping prompts under the threshold are the two levers.</p>
+  <h3>Does GPT-6.1 Terra support audio, video or realtime?</h3>
+  <p>No — text and image in, text out. The Live and Realtime endpoints don't support this model, and tool calling requires the Responses API. Voice pipelines need OpenAI's realtime models instead.</p>
+
+  <p class="hint">Related: <a href="/gpt-6-1-sol-vs-astra">GPT-6.1 Sol vs Astra</a> · <a href="/gpt-6-1-sol-vs-opus-5-5">GPT-6.1 Sol vs Opus 5.5</a> · <a href="/gpt-5-6-pricing">GPT-5.6 API pricing</a> · <a href="/claude-token-calculator">Claude token cost calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against OpenAI's official GPT-6.1 Terra model documentation and API rate card at developers.openai.com on Nov 10, 2026; launch date per OpenAI's announcement. Not affiliated with or endorsed by OpenAI. "GPT" is a trademark of OpenAI — verify current rates on the <a rel="nofollow" href="https://developers.openai.com/api/docs/models/gpt-6.1-terra">official model page</a> and the <a rel="nofollow" href="https://developers.openai.com/api/docs/pricing">official pricing page</a>.</p><nav><a href="/">Claude API Pricing</a> · <a href="/claude-token-calculator">Token Calculator</a> · <a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a> · <a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
