@@ -16,7 +16,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Is the Claude API cheaper than a Claude Pro subscription?","acceptedAnswer":{"@type":"Answer","text":"It depends on volume. On Sonnet 5.5 pricing ($2 per million input, $10 per million output tokens), the API breaks even with the $20/mo Pro plan at roughly 220K input and 22K output tokens per day. Below that, Pro is cheaper; above it, API costs scale linearly while Pro stays flat until you hit its 5-hour and weekly usage caps."}},
-{"@type":"Question","name":"How much does the Claude API cost per million tokens?","acceptedAnswer":{"@type":"Answer","text":"As of November 2026: Claude Fable 5.1 / Mythos 5.1 cost $10 input / $50 output per million tokens, Claude Opus 5.5 costs $4/$20, Claude Opus 5 costs $5/$25, Claude Sonnet 5.5 and Sonnet 5 cost $2/$10, Claude Haiku 4.5 costs $1/$5, and Claude Haiku 5.5 costs $0.10/$0.50 for prompts up to 100K tokens ($0.50/$2.50 beyond that). Prompt caching cuts input costs dramatically - cached input starts at $0.01 per million tokens on Haiku 5.5."}},
+{"@type":"Question","name":"How much does the Claude API cost per million tokens?","acceptedAnswer":{"@type":"Answer","text":"As of November 2026: Claude Fable 5.2 / Mythos 5.2 cost $8 input / $40 output per million tokens (launched Nov 9, 2026, 20% below Fable 5.1's $10/$50), Claude Opus 5.5 costs $4/$20, Claude Opus 5 costs $5/$25, Claude Sonnet 5.5 and Sonnet 5 cost $2/$10, Claude Haiku 4.5 costs $1/$5, and Claude Haiku 5.5 costs $0.10/$0.50 for prompts up to 100K tokens ($0.50/$2.50 beyond that). Prompt caching cuts input costs dramatically - cached input starts at $0.01 per million tokens on Haiku 5.5."}},
 {"@type":"Question","name":"What are Claude's subscription plans in 2026?","acceptedAnswer":{"@type":"Answer","text":"Claude offers Free ($0), Pro at $20/month monthly or $17/month billed annually, Max at $100/month, Ultra at $200/month (no 5-hour session limit, 10x Pro weekly caps), and Team seats from $20-25/month standard up to $100-125/month for Premium seats. Max includes $100/month in API credits and Ultra includes $200/month. All paid plans draw from one usage pool across web, desktop, mobile and Claude Code."}},
 {"@type":"Question","name":"Do Claude Max plans include API credits?","acceptedAnswer":{"@type":"Answer","text":"Yes - as of November 2026, Max ($100/month) includes $100/month in API credits and Ultra ($200/month) includes $200/month, verified on claude.com/pricing. Credits let you keep working at standard API rates after hitting subscription caps, but a subscription still isn't unlimited API access - Team plans can pool up to $500/month in credits."}},
 {"@type":"Question","name":"How do Claude's 5-hour limits work?","acceptedAnswer":{"@type":"Answer","text":"Usage resets in rolling 5-hour session windows, and paid plans add weekly limits on top - Ultra ($200/month) removes the 5-hour window entirely (verified accounts), keeping weekly caps. Every surface — claude.ai chat, desktop app, mobile and Claude Code — draws from the same pool. Heavy Claude Code sessions can exhaust a window in under an hour, which is why API access matters for automation."}},
@@ -31,12 +31,12 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="#calculator">Calculator</a><a href="#api-prices">Claude Prices</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="#calculator">Calculator</a><a href="#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
 
 <div class="hero"><div class="wrap">
-  <div class="badge">Free · No signup · Prices verified Nov 2, 2026</div>
+  <div class="badge">Free · No signup · Prices verified Nov 10, 2026</div>
   <h1>Claude API pricing vs subscription — where's your breakeven?</h1>
-  <p class="sub">A flat $20 Pro plan can cover <b>hundreds of dollars</b> of API tokens — until you hit the caps. Enter your daily usage and see exactly where the API overtakes Pro, Max and Ultra, with live per-model prices for Opus, Sonnet and Haiku.</p>
+  <p class="sub">A flat $20 Pro plan can cover <b>hundreds of dollars</b> of API tokens — until you hit the caps. Enter your daily usage and see exactly where the API overtakes Pro, Max and Ultra, with live per-model prices for Fable, Opus, Sonnet and Haiku.</p>
 </div></div>
 
 <section id="calculator" style="padding-top:8px"><div class="wrap">
@@ -53,6 +53,7 @@
         <option value="sonnet55" selected>Claude Sonnet 5.5 — $2 / $10 per MTok</option>
         <option value="opus55">Claude Opus 5.5 — $4 / $20 per MTok</option>
         <option value="opus5">Claude Opus 5 — $5 / $25 per MTok</option>
+        <option value="fable52">Claude Fable 5.2 / Mythos 5.2 — $8 / $40 per MTok</option>
         <option value="fable51">Claude Fable 5.1 / Mythos 5.1 — $10 / $50 per MTok</option>
         <option value="haiku45">Claude Haiku 4.5 — $1 / $5 per MTok</option>
         <option value="haiku55">Claude Haiku 5.5 — $0.10 / $0.50 per MTok (≤100K-token prompts)</option>
@@ -81,6 +82,7 @@
 <div class="tbl"><table>
 <thead><tr><th>Model</th><th>Input / MTok</th><th>Cached input / MTok</th><th>Output / MTok</th><th>Context</th></tr></thead>
 <tbody>
+<tr><td>Claude Fable 5.2 / Mythos 5.2</td><td>$8.00</td><td>$0.20</td><td>$40.00</td><td>1M</td></tr>
 <tr><td>Claude Fable 5.1 / Mythos 5.1</td><td>$10.00</td><td>$0.25</td><td>$50.00</td><td>—</td></tr>
 <tr><td>Claude Opus 5.5</td><td>$4.00</td><td>$0.20</td><td>$20.00</td><td>1M</td></tr>
 <tr><td>Claude Opus 5</td><td>$5.00</td><td>$0.50</td><td>$25.00</td><td>1M</td></tr>
@@ -93,7 +95,7 @@
 <tr><td>Claude Haiku 5.5 (prompts &gt;100K tokens)</td><td>$0.50</td><td>$0.05</td><td>$2.50</td><td>1M</td></tr>
 </tbody>
 </table></div>
-<p class="hint">Opus 5.5 landed at $4/$20 — roughly a 20% cut from Opus 5's $5/$25 — and Sonnet 5.5 kept its $0.10 cached-input tier. The Fable/Mythos 5.1 flagship research tier runs $10/$50 — the cost math on this page focuses on the Opus/Sonnet/Haiku lines most workloads use. Opus 4.1 and earlier plus Haiku 3.5 are retired. Rates verified on Anthropic's official pricing docs on Nov 2, 2026 — always confirm before budgeting.</p>
+<p class="hint">Opus 5.5 landed at $4/$20 — roughly a 20% cut from Opus 5's $5/$25 — and Sonnet 5.5 kept its $0.10 cached-input tier. Fable 5.2 (Nov 9, 2026) cuts the research-flagship tier to $8/$40, 20% below Fable 5.1 — full rates and workload math on the <a href="/claude-fable-5-2-pricing">Fable 5.2 pricing page</a>. The cost calculator on this page focuses on the Opus/Sonnet/Haiku lines most workloads use. Opus 4.1 and earlier plus Haiku 3.5 are retired. Rates verified on Anthropic's official pricing docs on Nov 10, 2026 — always confirm before budgeting.</p>
 
 <h2 id="plans">Claude subscription plans and what they include</h2>
 <div class="tbl"><table>
@@ -131,17 +133,18 @@
 
 <section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
 <details open><summary>Is the Claude API cheaper than a Claude Pro subscription?</summary><div class="a">It depends on volume. On Sonnet 5.5 pricing ($2/M input, $10/M output), the API breaks even with $20 Pro at roughly 220K input and 22K output tokens per day. Below that, Pro wins; above it, API costs scale linearly while Pro stays flat until you hit the 5-hour and weekly caps.</div></details>
-<details><summary>How much does the Claude API cost per million tokens?</summary><div class="a">November 2026 rates: Fable/Mythos 5.1 $10 in / $50 out; Opus 5.5 $4/$20; Opus 5 $5/$25; Sonnet 5.5 and Sonnet 5 $2/$10; Haiku 4.5 $1/$5; Haiku 5.5 $0.10/$0.50 for prompts ≤100K tokens ($0.50/$2.50 beyond). Cached input runs from $0.01/MTok (Haiku 5.5) to $0.25/MTok on the 5.1 flagship.</div></details>
+<details><summary>How much does the Claude API cost per million tokens?</summary><div class="a">November 2026 rates: Fable/Mythos 5.2 $8 in / $40 out (new Nov 9, 2026); Fable/Mythos 5.1 $10/$50; Opus 5.5 $4/$20; Opus 5 $5/$25; Sonnet 5.5 and Sonnet 5 $2/$10; Haiku 4.5 $1/$5; Haiku 5.5 $0.10/$0.50 for prompts ≤100K tokens ($0.50/$2.50 beyond). Cached input runs from $0.01/MTok (Haiku 5.5) to $0.20-0.25/MTok on the Fable flagship tier.</div></details>
 <details><summary>What are Claude's subscription plans in 2026?</summary><div class="a">Free $0; Pro $20/month ($17 monthly-billed annually); Max $100; Ultra $200 — no 5-hour session limit, 10× Pro weekly caps; Team $20–25/seat standard and $100–125 premium. Max includes $100/month in API credits, Ultra $200/month. All paid plans share one usage pool across web, desktop, mobile and Claude Code.</div></details>
 <details><summary>Do Claude Max plans include API credits?</summary><div class="a">Yes — as of November 2026, Max ($100/mo) includes $100/month in API credits and Ultra ($200/mo) includes $200/month, verified on claude.com/pricing. Credits let you keep working at standard API rates after hitting subscription caps; Team plans can pool up to $500/month. A subscription still isn't unlimited API access.</div></details>
 <details><summary>How do Claude's 5-hour limits work?</summary><div class="a">Usage resets in rolling 5-hour session windows, with weekly limits stacked on top for paid plans — Ultra removes the 5-hour window entirely (verified accounts). Chat, desktop, mobile and Claude Code all draw the same pool. A heavy Claude Code session can drain a Pro window in under an hour.</div></details>
 <details><summary>When does the Claude API win vs a subscription?</summary><div class="a">Unattended automation, 24/7 agents, high daily volume, caching-heavy pipelines, and anything that can't tolerate rate limits. If your work fits in interactive windows, the subscription's flat rate is unbeatable.</div></details>
-<details><summary>Did Claude API prices change recently?</summary><div class="a">Yes — Opus 5.5 launched at $4/$20, about 20% below Opus 5's $5/$25, and Sonnet 5.5 introduced a $0.10 cached-input tier. As of November 2026, the Fable/Mythos 5.1 research flagship sits at $10/$50, Haiku 5.5 added a >100K-token tier at $0.50/$2.50, and the consumer lineup renamed Max 20x to Ultra with monthly API credits included. The trend across 2026 has been flagship prices drifting down while subscriptions bundle API overflow.</div></details>
+<details><summary>Did Claude API prices change recently?</summary><div class="a">Yes — Fable 5.2 launched Nov 9, 2026 at $8/$40, the first Fable base-price cut (20% below Fable 5.1's $10/$50); Opus 5.5 launched at $4/$20, about 20% below Opus 5's $5/$25; and Sonnet 5.5 introduced a $0.10 cached-input tier. Haiku 5.5 added a >100K-token tier at $0.50/$2.50, and the consumer lineup renamed Max 20x to Ultra with monthly API credits included. The trend across 2026 has been flagship prices drifting down while subscriptions bundle API overflow.</div></details>
 </div></div></section>
 
 <section id="guides"><div class="wrap">
   <h2>More pricing guides</h2>
   <div class="tbl"><table>
+    <tr><td><a href="/claude-fable-5-2-pricing">Claude Fable 5.2 pricing →</a></td><td>$8/$40 per MTok — the first Fable price cut; batch $4/$20, cache $0.20, Mythos 5.2 access rules, 30-day retention fine print</td></tr>
     <tr><td><a href="/claude-code-pricing">Claude Code pricing →</a></td><td>What Claude Code costs on Pro/Max vs API-key mode: plan limits, token rates, three worked monthly budgets</td></tr>
     <tr><td><a href="/deepseek-v4-pricing">DeepSeek V4 API pricing →</a></td><td>Official V4-Pro & V4.1-Flash rates, off-peak half-price windows, aggregator comparison</td></tr>
     <tr><td><a href="/deepseek-v4-vs-claude-opus">DeepSeek V4 Pro vs Claude Opus 5.5 →</a></td><td>$3.96 vs $20 per million output: full workload math, 1M context advantage, when Opus wins</td></tr>
@@ -153,7 +156,7 @@
 </div></section>
 
 <footer class="site"><div class="wrap">
-  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with or endorsed by Anthropic. “Claude” is a trademark of Anthropic, PBC. Prices verified against Anthropic's official pricing pages on Nov 2, 2026 — verify current rates at <a rel="nofollow" href="https://claude.com/pricing">claude.com/pricing</a> and the <a rel="nofollow" href="https://platform.claude.com/docs/en/about-claude/pricing">official API pricing docs</a>.</div>
+  <div>© 2026 Claude API Pricing — independent cost calculator. Not affiliated with or endorsed by Anthropic. “Claude” is a trademark of Anthropic, PBC. Prices verified against Anthropic's official pricing pages on Nov 10, 2026 — verify current rates at <a rel="nofollow" href="https://claude.com/pricing">claude.com/pricing</a> and the <a rel="nofollow" href="https://platform.claude.com/docs/en/about-claude/pricing">official API pricing docs</a>.</div>
 </div></footer>
 
 <script>
@@ -162,6 +165,7 @@
     sonnet55:{name:"Sonnet 5.5",pin:2,pout:10},
     opus55:{name:"Opus 5.5",pin:4,pout:20},
     opus5:{name:"Opus 5",pin:5,pout:25},
+    fable52:{name:"Fable 5.2",pin:8,pout:40},
     fable51:{name:"Fable 5.1",pin:10,pout:50},
     haiku45:{name:"Haiku 4.5",pin:1,pout:5},
     haiku55:{name:"Haiku 5.5",pin:0.10,pout:0.50}

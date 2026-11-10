@@ -35,6 +35,8 @@
       <select id="model">
         <option value="opus55" selected>Claude Opus 5.5 — $4 / $20 per MTok</option>
         <option value="opus5">Claude Opus 5 — $5 / $25 per MTok</option>
+        <option value="fable52">Claude Fable 5.2 — $8 / $40 per MTok</option>
+        <option value="fable51">Claude Fable 5.1 — $10 / $50 per MTok</option>
         <option value="sonnet55">Claude Sonnet 5.5 — $2 / $10 per MTok</option>
         <option value="sonnet4">Claude Sonnet 4.x — $3 / $15 per MTok</option>
         <option value="haiku45">Claude Haiku 4.5 — $1 / $5 per MTok</option>
@@ -68,6 +70,8 @@
 <tbody>
 <tr><td>Claude Opus 5.5</td><td>50K tokens</td><td>250K tokens</td><td>5M tokens</td></tr>
 <tr><td>Claude Opus 5</td><td>40K tokens</td><td>200K tokens</td><td>2M tokens</td></tr>
+<tr><td>Claude Fable 5.2</td><td>25K tokens</td><td>125K tokens</td><td>5M tokens</td></tr>
+<tr><td>Claude Fable 5.1</td><td>20K tokens</td><td>100K tokens</td><td>4M tokens</td></tr>
 <tr><td>Claude Sonnet 5.5</td><td>100K tokens</td><td>500K tokens</td><td>10M tokens</td></tr>
 <tr><td>Claude Sonnet 4.x</td><td>66.7K tokens</td><td>333K tokens</td><td>—</td></tr>
 <tr><td>Claude Haiku 4.5</td><td>200K tokens</td><td>1M tokens</td><td>10M tokens</td></tr>
@@ -76,10 +80,12 @@
 </table></div>
 <p>Perspective: a typical novel is ~100K tokens. One dollar of Haiku 5.5 output could write twenty novels; one dollar of Opus 5.5 output writes half of one. That gap is the entire model-tier decision in one row.</p>
 
-<h2>Claude API price per million tokens (October 2026)</h2>
+<h2>Claude API price per million tokens (November 2026)</h2>
 <div class="tbl"><table>
 <thead><tr><th>Model</th><th>Input / MTok</th><th>Cached input / MTok</th><th>Output / MTok</th><th>Context</th></tr></thead>
 <tbody>
+<tr><td>Claude Fable 5.2</td><td>$8.00</td><td>$0.20</td><td>$40.00</td><td>1M</td></tr>
+<tr><td>Claude Fable 5.1</td><td>$10.00</td><td>$0.25</td><td>$50.00</td><td>1M</td></tr>
 <tr><td>Claude Opus 5.5</td><td>$4.00</td><td>$0.20</td><td>$20.00</td><td>1M</td></tr>
 <tr><td>Claude Opus 5</td><td>$5.00</td><td>$0.50</td><td>$25.00</td><td>1M</td></tr>
 <tr><td>Claude Sonnet 5.5</td><td>$2.00</td><td>$0.10</td><td>$10.00</td><td>1M</td></tr>
@@ -88,7 +94,7 @@
 <tr><td>Claude Haiku 5.5</td><td>$0.10</td><td>$0.01</td><td>$0.50</td><td>1M</td></tr>
 </tbody>
 </table></div>
-<p>To turn any row into a per-token price, divide by one million: Sonnet 5.5 output is $10/MTok = <b>$0.00001 per output token</b>. The full decision math — API vs Pro vs Max subscription — lives on the <a href="/">Claude API pricing homepage</a>; per-token mechanics for Gemini's flagship are on the <a href="/gemini-4-argon-pricing">Argon rate card</a>.</p>
+<p>To turn any row into a per-token price, divide by one million: Sonnet 5.5 output is $10/MTok = <b>$0.00001 per output token</b>. The full decision math — API vs Pro vs Max subscription — lives on the <a href="/">Claude API pricing homepage</a>; Fable 5.2's complete rate card, batch/cache lines and workload math are on the <a href="/claude-fable-5-2-pricing">Fable 5.2 pricing page</a>; per-token mechanics for Gemini's flagship are on the <a href="/gemini-4-argon-pricing">Argon rate card</a>.</p>
 </div></section>
 
 <section id="faq"><div class="wrap"><h2>Frequently asked questions</h2><div class="faq">
@@ -109,6 +115,8 @@
   var MODELS={
     opus55:{name:"Opus 5.5",pin:4,pout:20,pc:0.20},
     opus5:{name:"Opus 5",pin:5,pout:25,pc:0.50},
+    fable52:{name:"Fable 5.2",pin:8,pout:40,pc:0.20},
+    fable51:{name:"Fable 5.1",pin:10,pout:50,pc:0.25},
     sonnet55:{name:"Sonnet 5.5",pin:2,pout:10,pc:0.10},
     sonnet4:{name:"Sonnet 4.x",pin:3,pout:15,pc:null},
     haiku45:{name:"Haiku 4.5",pin:1,pout:5,pc:0.10},
