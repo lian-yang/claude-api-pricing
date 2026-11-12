@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Claude API Effort Parameter (2026): What Each Level Costs — low → max</title>
+<meta name="description" content="Claude API effort levels explained: relative token spend ~0.47× at low, 0.74× medium, 1× high, 2.41× xhigh, 5.59× max — plus per-model defaults (Opus 5.5 medium, the rest high), prompt-caching rules, and a worked Opus 5.5 bill from ~$2,445 to ~$17,805 a month. Verified Nov 12, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/claude-api-effort">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude API Effort Parameter — What Each Level Costs">
+<meta property="og:description" content="The effort parameter is Anthropic's cost dial: five levels (low → max) that scale how many tokens Claude spends on text, tool calls and thinking. Real relative-spend numbers, per-model defaults, the prompt-caching trap, and a worked Opus 5.5 monthly bill at every level.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/claude-api-effort">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does the Claude API effort parameter do?","acceptedAnswer":{"@type":"Answer","text":"Effort controls how many tokens Claude spends on a response — text, tool calls and thinking all scale with it. You set output_config.effort on the request (or effort on a Managed Agent's model object) and can trade thoroughness against token cost without switching models. Anthropic describes it as a behavioral signal rather than a strict token budget: at lower levels Claude still thinks on genuinely hard problems, just less."}},
+{"@type":"Question","name":"What are the default effort levels per model?","acceptedAnswer":{"@type":"Answer","text":"Most Claude models default to high effort. Claude Opus 5.5 and Claude Haiku 5.5 default to medium — so an Opus 5.5 request with no effort set runs one level lower than the same request did on Opus 5. Setting effort explicitly to the model's default produces exactly the same behavior as omitting it."}},
+{"@type":"Question","name":"How much more does max effort cost than high?","acceptedAnswer":{"@type":"Answer","text":"The per-model effort cost table Claude Code ships (community-documented, Nov 2026) puts relative token spend at roughly low 0.47×, medium 0.74×, high 1×, xhigh 2.41× and max 5.59× versus high. On our standard agent workload (30M input tokens/day at 75% cache hit + 5M output on Opus 5.5 at $4/$20), that spans ~$2,445/month at low to ~$17,805/month at max, with high at ~$4,035. Treat these as measured approximations — effort is not billed as a separate rate-card line."}},
+{"@type":"Question","name":"Does changing effort break prompt caching?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you change the top-level output_config.effort between requests: it shapes the rendered prompt, so cached prefixes from earlier turns are invalidated. Models that support per-message effort changes (Fable 5.2/5.1, Opus 5.5/5, Sonnet 5.5, Haiku 5.5) let you switch level mid-conversation while keeping the cache. Best practice: pick an effort level at the start and hold it constant across any conversation that relies on cache hits."}},
+{"@type":"Question","name":"Is max effort worth it?","acceptedAnswer":{"@type":"Answer","text":"Usually not on price. Anthropic's own docs say max 'runs slower and costs more than at xhigh, often for only a small gain' and recommend reserving it for measuring the model's ceiling. Artificial Analysis' November 2026 testing reached the same shape of conclusion: stepping up one model tier beats maxing out effort on cost-efficiency. The documented workflow is to run an effort sweep on your own evals and buy the cheapest level that holds quality."}}
+]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/claude-api-effort">Effort</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/gemini-decision-1-pricing">Decision 1</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official docs · verified Nov 12, 2026</div>
+  <h1>Claude API effort parameter — what each level actually costs</h1>
+  <p class="sub">The <code>output_config.effort</code> parameter is Anthropic's single-model cost dial: five levels that scale <b>every output token</b> — text, tool calls and thinking — without changing the rate card. Measured relative spend runs <b>~0.47× at low up to ~5.59× at max versus high</b>, which turns a ~$4,035/month Opus 5.5 agent workload into anything from ~$2,445 to ~$17,805. Here are the levels, the defaults, the caching trap, and the math.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>The five effort levels</h2>
+  <div class="tbl"><table>
+    <tr><th>Level</th><th>What Anthropic says it does</th><th>Default on</th><th>Availability</th></tr>
+    <tr><td><code>max</code></td><td>Absolute maximum capability, no constraint on token spending</td><td>—</td><td>Fable 5.2/5.1/5, Mythos 5.2/5.1/5/Preview, Opus 5.5/5/4.8/4.7/4.6, Sonnet 5.5/5/4.6, Haiku 5.5</td></tr>
+    <tr><td><code>xhigh</code></td><td>Extended capability for long-horizon work (30-minute-plus agentic runs, token budgets in the millions)</td><td>—</td><td>Same as max <b>minus Opus 4.6 and Sonnet 4.6</b> — not every max-capable model supports it</td></tr>
+    <tr><td><code>high</code></td><td>Spends what the task needs for excellent results</td><td><b>Most models</b></td><td>Every effort-capable model</td></tr>
+    <tr><td><code>medium</code></td><td>Balanced; moderate token savings</td><td><b>Opus 5.5, Haiku 5.5</b></td><td>Every effort-capable model</td></tr>
+    <tr><td><code>low</code></td><td>Most efficient; significant savings with some capability reduction — Anthropic's pick for subagents</td><td>—</td><td>Every effort-capable model</td></tr>
+  </table></div>
+  <p class="hint">Source: Anthropic's official Effort documentation at platform.claude.com/docs/en/build-with-claude/effort, verified Nov 12, 2026. Effort is set via <code>output_config.effort</code> on Messages API requests or on a Managed Agent's model object, and works on all cloud platforms (Bedrock, Claude Platform on AWS, Google Cloud, Microsoft Foundry per their availability tables). ZDR- and HIPAA-eligible on /v1/messages with effort.</p>
+
+  <h3>What effort actually bills</h3>
+  <p>Effort changes <b>how many output tokens</b> a request consumes — not the price of any token. Anthropic is explicit that it applies to <b>all tokens in the response</b>: visible text, tool calls and their arguments, and thinking. Thinking tokens bill at output rates (on adaptive-thinking models like Opus 5.5 and Fable 5.2, that's the whole bill). So the cost dial is: effort × your model's $output rate. Input tokens don't move.</p>
+
+  <h2>Measured relative spend per level</h2>
+  <p>Anthropic doesn't publish per-level multipliers on the rate card — effort is "a behavioral signal, not a strict token budget." But Claude Code ships a per-model effort cost table, and the numbers it carries are the best public approximation of what each level spends:</p>
+  <div class="tbl"><table>
+    <tr><th>Level</th><th>Relative token spend vs high</th><th>Opus 5.5 effective output price*</th><th>Sonnet 5.5 effective output price*</th></tr>
+    <tr><td><code>low</code></td><td>~0.47×</td><td>~$9.40 / MTok</td><td>~$4.70 / MTok</td></tr>
+    <tr><td><code>medium</code></td><td>~0.74×</td><td>~$14.80 / MTok</td><td>~$7.40 / MTok</td></tr>
+    <tr><td class="win"><code>high</code> (baseline)</td><td>1×</td><td>$20.00 / MTok</td><td>$10.00 / MTok</td></tr>
+    <tr><td><code>xhigh</code></td><td>~2.41×</td><td>~$48.20 / MTok</td><td>~$24.10 / MTok</td></tr>
+    <tr><td><code>max</code></td><td>~5.59×</td><td>~$111.80 / MTok</td><td>~$55.90 / MTok</td></tr>
+  </table></div>
+  <p class="hint">*Effort acts on token volume, so its multiplier translates into an effective per-token price for budgeting: listed output rate × multiplier. Multipliers from the per-model effort cost table Claude Code ships (community-documented on r/ClaudeAI, November 2026); treat them as measured approximations, not rate-card lines — actual spend varies by task, and Anthropic's docs warn lower levels still think when a problem demands it.</p>
+
+  <h3>The same agent workload at every effort level</h3>
+  <p>Site-standard agent traffic: <b>30M input tokens/day at 75% cache hit + 5M output tokens/day on Opus 5.5</b> ($4/$20, cached input $0.20), billed over 30 days. Input is effort-invariant; the output line is where the dial bites:</p>
+  <div class="tbl"><table>
+    <tr><th>Effort</th><th>Fresh input (7.5M)</th><th>Cached input (22.5M)</th><th>Output (5M)</th><th>Per day</th><th>Per month</th></tr>
+    <tr><td><code>low</code></td><td>$30.00</td><td>$4.50</td><td>$47.00</td><td>$81.50</td><td><b>~$2,445</b></td></tr>
+    <tr><td><code>medium</code> (Opus 5.5 default)</td><td>$30.00</td><td>$4.50</td><td>$74.00</td><td>$108.50</td><td><b>~$3,255</b></td></tr>
+    <tr><td class="win"><code>high</code></td><td>$30.00</td><td>$4.50</td><td>$100.00</td><td>$134.50</td><td><b>~$4,035</b></td></tr>
+    <tr><td><code>xhigh</code></td><td>$30.00</td><td>$4.50</td><td>$241.00</td><td>$275.50</td><td><b>~$8,265</b></td></tr>
+    <tr><td><code>max</code></td><td>$30.00</td><td>$4.50</td><td>$559.00</td><td>$593.50</td><td><b>~$17,805</b></td></tr>
+  </table></div>
+  <p>The high row reproduces the ~$4,035/month Opus 5.5 figure from our <a href="/claude-fable-5-2-pricing">Fable 5.2 comparison math</a> — a sanity check on the multipliers. The spread is the story: <b>low saves ~$1,590/month against high; max costs ~$13,770 more</b>. If a daily sweep shows quality holds at medium, that's real money back.</p>
+
+  <h2>The fine print that changes bills</h2>
+  <ul>
+    <li><b>Defaults dropped on the new line.</b> Opus 5.5 and Haiku 5.5 default to <code>medium</code>; every other effort-capable model defaults to <code>high</code>. An Opus 5.5 request with no effort set runs one level cheaper than the same request on Opus 5 — check you're not comparing bills across different implicit levels.</li>
+    <li><b>The caching trap.</b> Changing <b>top-level</b> effort between requests invalidates prompt caching (it shapes the rendered prompt). <b>Per-message</b> effort changes — supported on Fable 5.2/5.1, Opus 5.5/5, Sonnet 5.5 and Haiku 5.5 — preserve the cache. In cached conversations, pick a level and hold it; on models without per-message support, varying per turn re-pays your input bill.</li>
+    <li><b>Model quirks return 400s.</b> On Opus 5.5, <code>thinking: {"type": "disabled"}</code> errors at every effort level (adaptive thinking is always on). On Sonnet 5.5 and Haiku 5.5, <code>disabled</code> works at high and below but 400s at xhigh/max — use adaptive there. Sonnet 5.5's lowest thinking setting, <code>between_tools</code>, also 400s at xhigh/max and locks effort for the conversation.</li>
+    <li><b>max_tokens is a hard ceiling on thinking + reply.</b> Effort barely changes reply length — prompt for length instead — but higher effort means more thinking, and thinking counts toward max_tokens even when its content isn't returned. Anthropic recommends large max_tokens (e.g. 128K on Sonnet 5.5, from 64K on Opus 5 at xhigh/max).</li>
+    <li><b>Tool calls scale too.</b> Lower effort means fewer, terser tool calls; higher effort means more calls, preambles and summaries. Subagents at <code>low</code> are Anthropic's documented pattern for cost control.</li>
+  </ul>
+
+  <h2>Where to start, per model</h2>
+  <p>Anthropic's own recommendations, condensed: <b>Fable 5.2</b> — start at <code>high</code>, step to <code>xhigh</code> only for measured long-horizon gains, keep <code>max</code> for ceiling measurements. <b>Opus 5.5</b> — it's already at <code>medium</code>; sweep before going higher. <b>Sonnet 5.5</b> — <code>high</code> default on the API, <code>medium</code> for well-specified agentic work and latency-sensitive chat. <b>Haiku 5.5</b> — start at <code>medium</code>, drop to <code>low</code> for chat and short tool tasks. <b>Opus 4.7/4.8</b> — start at <code>xhigh</code> for coding and agentic work. The repeated official warning: effort levels are recalibrated per model, so re-run the sweep rather than carrying settings across upgrades.</p>
+  <div class="verdict api"><b>Cost-efficiency verdict:</b> the expensive end of the dial is rarely where you want to be. Anthropic's docs say <code>max</code> "runs slower and costs more than at xhigh, often for only a small gain"; Artificial Analysis' November 2026 testing reached the mirrored conclusion — stepping up one model tier beats maxing out effort at like-for-like quality. In bill terms: max on Opus 5.5 (~$17,805/month on our workload) buys less than Fable 5.2 or Opus-tier upgrades at high. Run the sweep on your own evals and buy the cheapest level that holds.</div>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>What does the Claude API effort parameter do?</h3>
+  <p>It controls how many tokens Claude spends on a response — visible text, tool calls and thinking all scale with it — letting one model trade thoroughness against token cost. Set <code>output_config.effort</code> on the request (or <code>effort</code> on a Managed Agent's model object). Anthropic describes it as a behavioral signal rather than a strict budget: at lower levels Claude still thinks on genuinely hard problems, just less.</p>
+  <h3>What are the default effort levels per model?</h3>
+  <p><code>high</code> on most models; <code>medium</code> on Claude Opus 5.5 and Claude Haiku 5.5. Setting effort explicitly to the model's default produces exactly the same behavior as omitting it. Opus 5 and earlier default to high, so Opus 5.5's medium default is one level below its predecessor's implicit setting.</p>
+  <h3>How much more does max effort cost than high?</h3>
+  <p>Roughly 5.59× the output tokens versus high, per the effort cost table Claude Code ships (community-documented, November 2026): low ~0.47×, medium ~0.74×, high 1×, xhigh ~2.41×, max ~5.59×. On our standard Opus 5.5 agent workload that's ~$4,035/month at high, ~$8,265 at xhigh and ~$17,805 at max. These are measured approximations, not rate-card lines — effort isn't billed separately, it multiplies output volume.</p>
+  <h3>Does changing effort break prompt caching?</h3>
+  <p>Changing top-level effort between requests invalidates cached prefixes, because effort shapes the rendered prompt. Per-message effort changes on supported models (Fable 5.2/5.1, Opus 5.5/5, Sonnet 5.5, Haiku 5.5) preserve the cache. Hold effort constant across any conversation that relies on cache hits; vary it across workloads instead.</p>
+  <h3>Is max effort worth it?</h3>
+  <p>Usually not on price. Anthropic's docs: max "runs slower and costs more than at xhigh, often for only a small gain" — reserve it for measuring ceilings. Artificial Analysis' November 2026 testing found stepping up one model tier more cost-efficient than maxing effort. The documented workflow is an effort sweep on your own evals, buying the cheapest level that holds quality.</p>
+
+  <p class="hint">Related: <a href="/claude-fable-5-2-pricing">Claude Fable 5.2 pricing</a> · <a href="/claude-code-pricing">Claude Code pricing</a> · <a href="/claude-token-calculator">Claude token cost calculator</a> · <a href="/#calculator">API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Behavior and availability verified against Anthropic's official Effort documentation at platform.claude.com on Nov 12, 2026; relative-spend multipliers are from the effort cost table Claude Code ships (community-documented) and are labeled as approximations. Not affiliated with or endorsed by Anthropic. "Claude" is a trademark of Anthropic, PBC — verify current behavior on the <a rel="nofollow" href="https://platform.claude.com/docs/en/build-with-claude/effort">official effort docs</a> and rates at <a rel="nofollow" href="https://platform.claude.com/docs/en/about-claude/pricing">official API pricing</a>.</p><nav><a href="/">Claude API Pricing</a> · <a href="/claude-fable-5-2-pricing">Fable 5.2</a> · <a href="/claude-code-pricing">Claude Code</a> · <a href="/claude-token-calculator">Token Calculator</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -102,3 +102,22 @@
   forced tool_choice errors, no temperature/top_p/top_k; worked 30M-in@75%-cache + 5M-out daily = ~$7,935/mo on 5.2
   vs $9,919 on 5.1 vs $4,035 Opus 5.5 vs $2,018 Sonnet 5.5; OpenRouter launch-window realized input ~$1.03/MTok at
   ~92% cache hit (~87% below list); AA Intelligence Index 64.6 #1 (Opus 5.5 59.1), HLE 74.3% #1 of 343.
+- [/claude-api-effort](https://claude-api-pricing.vercel.app/claude-api-effort): Claude API effort parameter —
+  what each level costs (verified Nov 12 2026 on platform.claude.com docs): five levels low/medium/high/xhigh/max
+  scaling ALL output tokens (text+tool calls+thinking); defaults high on most models, medium on Opus 5.5 + Haiku 5.5;
+  relative spend per Claude Code's shipped cost table (community-documented): low ~0.47x, medium ~0.74x, high 1x,
+  xhigh ~2.41x, max ~5.59x; worked Opus 5.5 workload (30M in@75% cache + 5M out daily): ~$2,445 low → ~$4,035 high →
+  ~$17,805 max per month; caching trap: top-level effort change invalidates prompt cache, per-message change
+  (Fable 5.2/5.1, Opus 5.5/5, Sonnet 5.5, Haiku 5.5) preserves it; 400s: Opus 5.5 thinking:disabled errors at every
+  level, Sonnet 5.5/Haiku 5.5 disabled works ≤high only, between_tools locks conversation effort; xhigh missing on
+  Opus 4.6 + Sonnet 4.6; verdict: max rarely worth it (official: "often for only a small gain" over xhigh; AA Nov 2026:
+  step up a model tier instead of maxing effort).
+- [/gemini-decision-1-pricing](https://claude-api-pricing.vercel.app/gemini-decision-1-pricing): Gemini Decision 1
+  API pricing (verified Nov 12 2026 on Google's Nov 11 announcement): $0.10/1M input, $0 output — scores up to 1,000
+  yes/no/choice(2-255)/rubric questions over ONE shared multimodal input (text/images/audio/video/PDF, 256K-token cap)
+  in a single forward pass, 150-250 ms end-to-end; input billed once per request regardless of question count (each
+  question adds only its instruction tokens); no thinking/transcription/OCR charges; no-cost tier in Google AI Studio;
+  ~5x cheaper than Gemini 3.5 Flash-Lite via Interactions API (Google's own benchmark-suite claim); worked math
+  2.5K-token request = $0.25/1,000 requests, 100K req/day ≈ $750/mo vs Claude Haiku 5.5 ~$975/mo for the same
+  classification shape; closed-set only — returns probabilities + 0-1 confidence, never generated text; batch/priority
+  unpublished at launch; ecosystem: OpenRouter, LangChain, Vercel, LiteLLM, Pydantic AI, Pipecat, LiveKit, OpenCode.

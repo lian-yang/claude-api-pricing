@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Gemini Decision 1 API Pricing (2026): $0.10/$0 per MTok — Decisions API Fine Print</title>
+<meta name="description" content="Gemini Decision 1 pricing: $0.10 input / $0 output per MTok via the new Decisions API — shared input billed once per request across up to 1,000 questions, a no-cost tier in AI Studio, 150-250 ms latency. Every published rate and limit, verified Nov 12, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gemini-decision-1-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gemini Decision 1 API Pricing — $0.10/$0 per MTok">
+<meta property="og:description" content="Every published Gemini Decision 1 rate: $0.10/MTok input billed once per request, zero output-token billing, AI Studio free tier, 150-250 ms latency, 1,000 questions per pass — plus the limits (256K input cap, no text output) and the worked cost-per-decision math against Claude Haiku 5.5.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gemini-decision-1-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Gemini Decision 1 cost?","acceptedAnswer":{"@type":"Answer","text":"Gemini Decision 1 (model ID gemini-decision-1) costs $0.10 per million input tokens and $0 output tokens, verified against Google's Nov 11, 2026 announcement. The shared multimodal input is billed once per request no matter how many questions you evaluate — each question only adds its own instruction and criteria tokens. There are no output-token, thinking-token, audio-transcription or OCR charges, and a no-cost API tier is available in Google AI Studio."}},
+{"@type":"Question","name":"What is the Gemini Decisions API?","acceptedAnswer":{"@type":"Answer","text":"A new endpoint for fast, closed-set decisions: it takes one multimodal input (text, images, audio, video, PDFs — up to 256K tokens) plus up to 1,000 independent yes/no, multiple-choice (2-255 options) or ordered-rubric questions, and scores every candidate in a single forward pass. It returns probabilities and confidence scores (0-1) in 150-250 ms end-to-end latency instead of generating answer text token by token. Google says it is nearly 5x cheaper than Gemini 3.5 Flash-Lite with the Interactions API across its shared benchmark suite."}},
+{"@type":"Question","name":"Does Gemini Decision 1 have a free tier?","acceptedAnswer":{"@type":"Answer","text":"Yes. Google publishes a no-cost API tier for gemini-decision-1 in Google AI Studio, which covers prototyping. Grab an API key in AI Studio to try it; paid usage starts at $0.10 per 1M input tokens with $0 output."}},
+{"@type":"Question","name":"Gemini Decision 1 vs Claude Haiku 5.5 for classification — which is cheaper?","acceptedAnswer":{"@type":"Answer","text":"On input they tie at $0.10 per MTok; the difference is output. Decision 1 bills $0 — it returns probabilities, not text — while Haiku 5.5 bills generated tokens at $0.50 per MTok. On a worked workload (100K requests/day, 2,500 billable tokens each), Decision 1 runs ~$750/month versus roughly ~$975/month for Haiku 5.5 answering the same five questions with short answers. But Decision 1 only handles bounded choices — if you need generated text, it is not the tool."}},
+{"@type":"Question","name":"What are Gemini Decision 1's limits?","acceptedAnswer":{"@type":"Answer","text":"Multimodal input caps at 256K tokens per request; Google's latency-flat claim (50-100 ms of model compute, nearly flat from 1 to 100 questions) is measured on contexts up to 16K tokens. Multiple choice supports 2-255 options, rubrics are ordered starting at 0, and the endpoint returns probabilities with confidence scores — no prose. Batch and priority tiers were not published at launch, and support in Gemini on Google Cloud is listed as coming soon."}}
+]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/claude-api-effort">Effort</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/gemini-decision-1-pricing">Decision 1</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official rates · verified Nov 12, 2026</div>
+  <h1>Gemini Decision 1 API pricing — $0.10 input, $0 output, billed once per request</h1>
+  <p class="sub">Google's decision endpoint (launched Nov 11, 2026) prices the <code>gemini-decision-1</code> model at <b>$0.10 per MTok of input and nothing at all for output</b> — because it doesn't generate text. It scores up to 1,000 yes/no, choice and rubric questions over one shared multimodal input in a single pass at 150-250 ms, and your input is billed once per request regardless of how many questions you ask. All rates below are from Google's published announcement.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Gemini Decision 1 rates</h2>
+  <div class="tbl"><table>
+    <tr><th>Billing line</th><th>Price</th><th>Notes</th></tr>
+    <tr><td>Input (shared)</td><td><b>$0.10 / MTok</b></td><td>Text, images, audio, video and PDFs in one shared <code>Content</code> block — <b>billed once per request</b>, however many questions you attach</td></tr>
+    <tr><td>Per-question overhead</td><td>Instruction tokens only</td><td>Each of up to 1,000 questions adds just its own instruction and criteria tokens to the bill</td></tr>
+    <tr><td>Output</td><td><b>$0.00</b></td><td>Probabilities and confidence scores (0-1), never generated text — zero output-token billing by design</td></tr>
+    <tr><td>Thinking / transcription / OCR</td><td>$0.00</td><td>Google explicitly lists no variable thinking-token bills and no separate audio-transcription or OCR costs</td></tr>
+    <tr><td>Free tier</td><td><b>Yes</b></td><td>No-cost API tier in Google AI Studio for prototyping</td></tr>
+    <tr><td>Batch / Priority tiers</td><td>Not published</td><td>Nothing announced at launch; Gemini-on-Google-Cloud support "coming soon"</td></tr>
+  </table></div>
+  <p class="hint">Source: Google's "Introducing the Gemini Decisions API" announcement (blog.google, published Nov 11, 2026, 18:00 UTC), verified Nov 12, 2026. Latency: median 50-100 ms of model compute, 150-250 ms end-to-end — nearly flat from 1 to 100 questions per request, measured on contexts up to 16K tokens. Ecosystem support at launch: OpenRouter, LangChain, Vercel, LiteLLM, Pydantic AI, Pipecat, LiveKit and OpenCode, alongside the <code>google-genai</code> SDKs.</p>
+
+  <h3>What one request actually bills</h3>
+  <p>Decision 1's bill has exactly one moving part: the shared input. A representative moderation request — a 2,000-token context (say, a screenshot plus a text note) with five yes/no and rubric questions at ~100 instruction tokens each — bills <b>2,500 input tokens</b>, i.e. <b>$0.00025 per request, or $0.25 per 1,000 requests</b>. Add a sixth question and the bill moves by that question's ~100 tokens, not by a second forward pass over the whole context.</p>
+  <div class="tbl"><table>
+    <tr><th>Requests / day</th><th>Billable tokens / day (2.5K each)</th><th>Per day</th><th>Per month</th></tr>
+    <tr><td>10,000</td><td>25M</td><td>$2.50</td><td><b>~$75</b></td></tr>
+    <tr><td>100,000</td><td>250M</td><td>$25.00</td><td><b>~$750</b></td></tr>
+    <tr><td>1,000,000</td><td>2.5B</td><td>$250.00</td><td><b>~$7,500</b></td></tr>
+  </table></div>
+
+  <h2>The fine print that changes the picture</h2>
+  <ul>
+    <li><b>The output isn't text.</b> You get per-question probabilities and normalized choice distributions with confidence scores — your code routes low-confidence cases to a fallback or human. If the deliverable is prose, this endpoint can't produce it.</li>
+    <li><b>256K-token input cap, but the latency claim is 16K.</b> The shared input accepts up to 256K tokens across modalities; Google's flat-latency figures are measured on contexts up to 16K tokens, so expect compute to grow somewhere between those bounds on very large inputs.</li>
+    <li><b>Three question shapes, one pass.</b> Yes/no (with optional true/false criteria), multiple choice over 2-255 candidates, and ordered rubric scoring from 0 up — mixable in a single request against the same input.</li>
+    <li><b>Compared pricing is official, not ours.</b> Google's own claim: nearly <b>5x cheaper across the shared benchmark suite</b> than Gemini 3.5 Flash-Lite answering through the Interactions API — the savings come from billing input once and never billing output.</li>
+  </ul>
+
+  <h2>Against Claude Haiku 5.5 — the classification workhorse face-off</h2>
+  <p>The closest Claude to this job is Haiku 5.5, which Anthropic positions for exactly this kind of high-volume classification, extraction and routing. Same $0.10 input price; the output line is where they part ways.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input / MTok</th><th>Output / MTok</th><th>What you get back</th><th>100K req/day workload*</th></tr>
+    <tr><td class="win"><b>Gemini Decision 1</b> (Nov 11, 2026)</td><td><b>$0.10</b></td><td><b>$0.00</b></td><td>Probabilities + confidence in 150-250 ms</td><td><b>~$750/mo</b></td></tr>
+    <tr><td>Claude Haiku 5.5 (≤100K prompts)</td><td>$0.10</td><td>$0.50</td><td>Generated answers (text)</td><td>~$975/mo</td></tr>
+    <tr><td>Gemini 3.5 Flash-Lite via Interactions API</td><td colspan="4">Google's benchmark-suite comparison: Decision 1 is nearly 5x cheaper for this job class</td></tr>
+  </table></div>
+  <p class="hint">*Same shape as the worked example: 2,500 billable input tokens per request; Haiku 5.5 additionally generates ~150 output tokens per request (five short answers) at $0.50/MTok → ~$975/mo vs ~$750. Haiku 5.5 rates per Anthropic's published pricing (Nov 2026). Real answers, tool calls and formatting will widen the gap further; the honest tiebreak is capability on your own prompt set.</p>
+  <div class="verdict api"><b>Price positioning:</b> for <b>bounded classification</b> — tool selection, model routing, policy checks, content grading — $0 output is structurally hard to beat, and input billed once across 1,000 questions makes multi-check pipelines cheaper than any per-call generative alternative. Haiku 5.5 stays the pick when the answer must be written text, when you're inside an existing Claude pipeline, or when the task isn't a closed set.</div>
+
+  <h2>What Google built it for</h2>
+  <p>The launch post's worked examples are all control-plane jobs: Gemini Notebook routes queries to the right model tier in milliseconds (up to 40% lower latency on everyday queries), Stitch's rapid canvas turns voice edits into playable wireframes in seconds, Google Labs' CC picks emoji reactions from a 200-plus palette without adding latency, and Google Search uses it as a safety layer for MCP tool calls. That's the template for your own usage: a low-latency router or grader in front of bigger models — not a replacement for them. For the pricing of those bigger Gemini tiers, see <a href="/gemini-4-argon-pricing">Gemini 4 Argon pricing</a> and the <a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus 5.5</a> comparison.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does Gemini Decision 1 cost?</h3>
+  <p>$0.10 per million input tokens, $0 output (model ID <code>gemini-decision-1</code>), verified Nov 12, 2026 against Google's Nov 11 announcement. The shared input bills once per request no matter how many questions you evaluate; each question adds only its own instruction and criteria tokens. No thinking-token, audio-transcription or OCR charges, and a no-cost tier runs in Google AI Studio.</p>
+  <h3>What is the Gemini Decisions API?</h3>
+  <p>A closed-set decision endpoint: one multimodal input (text, images, audio, video, PDFs, up to 256K tokens) plus up to 1,000 yes/no, multiple-choice (2-255) or ordered-rubric questions, scored in a single forward pass with probabilities and 0-1 confidence scores at 150-250 ms end-to-end. Google benchmarks it at nearly 5x cheaper than Gemini 3.5 Flash-Lite via the Interactions API on the shared suite.</p>
+  <h3>Does Gemini Decision 1 have a free tier?</h3>
+  <p>Yes — a no-cost API tier is available in Google AI Studio for prototyping. Paid usage starts at $0.10/MTok input with nothing billed for output.</p>
+  <h3>Gemini Decision 1 vs Claude Haiku 5.5 for classification — which is cheaper?</h3>
+  <p>Input ties at $0.10/MTok; output is the difference. Decision 1 bills $0 (probabilities only), Haiku 5.5 bills generated text at $0.50/MTok. On 100K requests/day with ~150 generated tokens each, that's roughly ~$750 vs ~$975 a month. Decision 1 only handles bounded choices — anything needing written answers stays with Haiku 5.5 or another generative model.</p>
+  <h3>What are Gemini Decision 1's limits?</h3>
+  <p>256K-token multimodal input cap per request (Google's flat-latency claim is measured up to 16K-token contexts), 2-255 multiple-choice options, rubrics ordered from 0, and probability-only output — no prose. Batch and priority tiers weren't published at launch; Gemini-on-Google-Cloud support is "coming soon."</p>
+
+  <p class="hint">Related: <a href="/gemini-4-argon-pricing">Gemini 4 Argon pricing</a> · <a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus 5.5</a> · <a href="/qwen-3-8-pricing">Qwen 3.8 API pricing</a> · <a href="/claude-token-calculator">Claude token cost calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Google's official Gemini Decisions API announcement on blog.google (Nov 11, 2026) on Nov 12, 2026. Not affiliated with or endorsed by Google. "Gemini" is a trademark of Google LLC — verify current rates on the <a rel="nofollow" href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api">official announcement</a> and <a rel="nofollow" href="https://aistudio.google.com/docs/pricing">AI Studio pricing</a>.</p><nav><a href="/">Claude API Pricing</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon</a> · <a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a> · <a href="/claude-token-calculator">Token Calculator</a></nav></div></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
