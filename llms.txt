@@ -121,3 +121,11 @@
   2.5K-token request = $0.25/1,000 requests, 100K req/day ≈ $750/mo vs Claude Haiku 5.5 ~$975/mo for the same
   classification shape; closed-set only — returns probabilities + 0-1 confidence, never generated text; batch/priority
   unpublished at launch; ecosystem: OpenRouter, LangChain, Vercel, LiteLLM, Pydantic AI, Pipecat, LiveKit, OpenCode.
+- [/gemini-4-hydrogen-pricing](https://claude-api-pricing.vercel.app/gemini-4-hydrogen-pricing): Gemini 4 Hydrogen
+  API pricing (verified Nov 13 2026 on Google's Nov 12 announcement + OpenRouter model page): $1.50/$7.50 per MTok,
+  flat across the FULL 1M-token context (no long-context surcharge); batch $0.75/$3.75 (half both lines);
+  context-cache read $0.075/MTok (20x cheaper than fresh input); replaces Gemini 3.8 Flash at claimed 2.5x faster
+  tasks; AI Mode in Search + Antigravity default model; list price = exactly 3.8 Flash's Jan 1 2027 increase
+  (from $0.75/$3.75); AA launch scores above the larger Argon, Code Arena WebDev #10 at 1703 (High); observed
+  throughput ~101-170 tok/s, blended real-world ~$0.38/$7.00 per MTok; worked agent math: 200K ctx/4K out run
+  ≈ $0.31, output tokens ≈ two-thirds of an agent bill; family table vs Argon ($2/$10 intro, doubles Dec 1).

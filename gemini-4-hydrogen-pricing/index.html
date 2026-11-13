@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Gemini 4 Hydrogen API Pricing (2026): $1.50/$7.50 per MTok — 2.5x Faster Than 3.8 Flash</title>
+<meta name="description" content="Gemini 4 Hydrogen pricing: $1.50 input / $7.50 output per MTok, batch $0.75/$3.75, cache read $0.075, flat across the full 1M-token context. Launched Nov 12, 2026 as the AI Mode default, replacing 3.8 Flash at exactly its Jan 2027 price. Every published rate, verified Nov 13, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/gemini-4-hydrogen-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gemini 4 Hydrogen API Pricing — $1.50/$7.50 per MTok">
+<meta property="og:description" content="Every published Gemini 4 Hydrogen rate: $1.50/$7.50 per MTok, batch half price, $0.075 cache reads, flat pricing across the 1M-token context, 2.5x faster tasks than 3.8 Flash — plus worked agent-workload math and the Gemini 4 family table (Hydrogen vs Argon vs 3.8 Flash).">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/gemini-4-hydrogen-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Gemini 4 Hydrogen cost?","acceptedAnswer":{"@type":"Answer","text":"Gemini 4 Hydrogen costs $1.50 per million input tokens and $7.50 per million output tokens, with pricing flat across the entire 1M-token context window — no long-context surcharge. Context-cache reads are $0.075 per MTok and the batch variant is half price at $0.75/$3.75. Rates verified against Google's Nov 12, 2026 announcement and the OpenRouter model page on Nov 13, 2026."}},
+{"@type":"Question","name":"Is Gemini 4 Hydrogen replacing Gemini 3.8 Flash?","acceptedAnswer":{"@type":"Answer","text":"Yes. Google rolled out Gemini 4 Hydrogen on Nov 12, 2026 as the replacement for Gemini 3.8 Flash, claiming tasks complete about 2.5x faster. It is also the default model for Google's AI Mode in Search and the default agent model in Antigravity. Notably, Hydrogen's $1.50/$7.50 rates equal exactly what 3.8 Flash itself rises to on Jan 1, 2027 (from $0.75/$3.75) — you pay Flash's scheduled 2027 price for the speed jump today."}},
+{"@type":"Question","name":"Gemini 4 Hydrogen vs Gemini 4 Argon — which should you use?","acceptedAnswer":{"@type":"Answer","text":"Hydrogen ($1.50/$7.50) is the fast agentic model — 2.5x faster tasks, up to ~127-170 tok/s throughput observed on OpenRouter — while Argon ($2/$10 intro rates through Nov 30, 2026, then $4/$20) is the hard-reasoning flagship. For high-volume, latency-sensitive agent workloads Hydrogen is cheaper on both lines; Argon pays for itself when reasoning depth matters more than speed."}},
+{"@type":"Question","name":"Does Gemini 4 Hydrogen pricing change with context length?","acceptedAnswer":{"@type":"Answer","text":"No — Google's published pricing is flat across the entire 1M-token context window, unlike long-context surcharge schemes (e.g. GPT-6.1 Terra's 2x beyond 272K). Cache reads bill at $0.075 per MTok, roughly 20x cheaper than fresh input, so agent loops that re-read large contexts benefit most."}},
+{"@type":"Question","name":"What is Gemini 4 Hydrogen's benchmark position?","acceptedAnswer":{"@type":"Answer","text":"Per Google's launch materials and Arena data around launch: Gemini 4 Hydrogen (High reasoning) scored 1703 on Code Arena: WebDev (rank #10), and Artificial Analysis measured it outscoring the larger Argon. Blended real-world pricing observed by Artificial Analysis was ~$0.38 input / ~$7.00 output per MTok against the list rates."}}
+]}
+</script>
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Claude API Pricing","url":"https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Claude API Pricing","url":"https://claude-api-pricing.vercel.app/","logo":"https://claude-api-pricing.vercel.app/favicon.svg","description":"Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/claude-api-effort">Effort</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-hydrogen-pricing">Hydrogen</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/gemini-decision-1-pricing">Decision 1</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official rates · verified Nov 13, 2026</div>
+  <h1>Gemini 4 Hydrogen API pricing — $1.50 input, $7.50 output, flat to 1M tokens</h1>
+  <p class="sub">Google's new fast agentic model (launched Nov 12, 2026) prices <code>gemini-4-hydrogen</code> at <b>$1.50 / $7.50 per MTok with no long-context surcharge across the full 1M-token window</b>. It replaces Gemini 3.8 Flash at 2.5x the task speed, serves as the default model for AI Mode in Search and Antigravity agents — and its list price equals exactly what 3.8 Flash itself rises to on Jan 1, 2027. All rates below are from Google's announcement and the OpenRouter model page.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official Gemini 4 Hydrogen rates</h2>
+  <div class="tbl"><table>
+    <tr><th>Billing line</th><th>Price</th><th>Notes</th></tr>
+    <tr><td>Input</td><td><b>$1.50 / MTok</b></td><td>Flat across the entire 1M-token context window — no long-context tiers or surcharges</td></tr>
+    <tr><td>Output</td><td><b>$7.50 / MTok</b></td><td>Including thinking/reasoning tokens</td></tr>
+    <tr><td>Batch</td><td><b>$0.75 / $3.75</b></td><td>Half price on both lines (OpenRouter <code>:batch</code> variant, verified Nov 13)</td></tr>
+    <tr><td>Context-cache read</td><td><b>$0.075 / MTok</b></td><td>20x cheaper than fresh input — the lever for agent loops that re-read large contexts</td></tr>
+    <tr><td>Throughput observed</td><td>~101-170 tok/s</td><td>OpenRouter provider mix, first-token latency ~1.6-8.9s depending on reasoning tier</td></tr>
+    <tr><td>Blended real-world price</td><td>~$0.38 / ~$7.00</td><td>Artificial Analysis observed averages — cache hits pull effective input far below list</td></tr>
+  </table></div>
+  <p class="hint">Sources: Google's "Introducing Gemini 4 Hydrogen" (blog.google, Nov 12, 2026), the Gemini API changelog (Nov 12), and the OpenRouter model page (verified Nov 13, 2026). The 2.5x-faster-tasks claim is Google's own (Sundar Pichai, launch day). Free tier availability was not part of the launch pricing material — check AI Studio for the current free-quota policy.</p>
+
+  <h3>What an agent workload actually bills</h3>
+  <p>A representative agent loop — 200K-token context per run, 10% of it cache-hit on re-reads, 4K output tokens of tool calls and reasoning — bills <b>~184K fresh + 20K cached input and 4K output per run: ≈ $0.31 per run</b>.</p>
+  <div class="tbl"><table>
+    <tr><th>Agent runs / day</th><th>Input billed (fresh+cached) / day</th><th>Output / day</th><th>Per month (list)</th><th>Per month (batch, no cache)</th></tr>
+    <tr><td>1,000</td><td>184M + 20M</td><td>4M</td><td><b>~$923</b></td><td>~$922</td></tr>
+    <tr><td>10,000</td><td>1.84B + 200M</td><td>40M</td><td><b>~$9,230</b></td><td>~$9,225</td></tr>
+  </table></div>
+  <p class="hint">Worked from list rates: (184M×$1.50 + 20M×$0.075 + 4M×$7.50)×30. Batch column prices the same tokens at $0.75/$3.75 without cache. Your mix shifts this — the point of the table is that at these rates <b>output tokens are two-thirds of an agent bill</b>, so output discipline (short tool calls, capped thinking) moves cost more than input trimming.</p>
+
+  <h2>The angle everyone missed: it's 3.8 Flash's 2027 price, today</h2>
+  <p>Gemini 3.8 Flash currently lists at <b>$0.75 / $3.75</b> and rises to <b>$1.50 / $7.50 on Jan 1, 2027</b> — Hydrogen's exact launch rates. So the real offer is: pay what Flash will cost anyway in seven weeks, and get the 2.5x task-speed jump plus the AI-Mode-grade model now. Conversely, every Flash workload still running in January pays Hydrogen prices for Flash speed unless it migrates.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input / MTok</th><th>Output / MTok</th><th>Position</th></tr>
+    <tr><td class="win"><b>Gemini 4 Hydrogen</b> (Nov 12, 2026)</td><td><b>$1.50</b></td><td><b>$7.50</b></td><td>Fast agentic default — AI Mode + Antigravity default model, flat to 1M context</td></tr>
+    <tr><td>Gemini 4 Argon (intro, until Nov 30)</td><td>$2.00</td><td>$10.00</td><td>Hard-reasoning flagship — <a href="/gemini-4-argon-pricing">doubles to $4/$20 on Dec 1</a></td></tr>
+    <tr><td>Gemini 3.8 Flash (until Dec 31)</td><td>$0.75</td><td>$3.75</td><td>Legacy fast tier — rises to $1.50/$7.50 Jan 1, 2027, i.e. Hydrogen's price</td></tr>
+  </table></div>
+  <div class="verdict api"><b>Price positioning:</b> within Google's own lineup Hydrogen undercuts Argon on both lines while claiming Argon-beating benchmark scores at launch (Artificial Analysis: Hydrogen outscores the bigger Argon) — if that holds on your workload, the reasoning flagship needs a reason to exist. Against cross-vendor fast tiers, $1.50/$7.50 sits above 3.8 Flash's current price and roughly level with GPT-6.1 Terra's $1/$5 standard rates, so the pitch is speed and the 1M flat context, not being the cheapest token.</div>
+
+  <h2>Launch facts that matter for billing</h2>
+  <ul>
+    <li><b>Default placements from day one:</b> AI Mode in Google Search and the default agent model in Antigravity — Google is routing its own highest-volume surfaces through this price point.</li>
+    <li><b>Day 0 ecosystem:</b> OpenRouter, LiteLLM and the major agent frameworks list it at launch, so batch and cache discounts are available through aggregators immediately.</li>
+    <li><b>Benchmarks at launch:</b> Code Arena: WebDev #10 at 1703 (High reasoning tier); Artificial Analysis scores it above the larger Argon — a first for a "fast" tier.</li>
+    <li><b>Family roadmap:</b> launches alongside Carbon and Argon as the third Gemini 4 pillar — see our <a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus 5.5</a> and <a href="/gemini-4-argon-pricing">Argon pricing</a> pages for the full family math.</li>
+  </ul>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does Gemini 4 Hydrogen cost?</h3>
+  <p>$1.50 per million input tokens and $7.50 per million output tokens (model ID <code>gemini-4-hydrogen</code>), verified Nov 13, 2026 against Google's Nov 12 announcement and the OpenRouter model page. Pricing is flat across the full 1M-token context; cache reads are $0.075/MTok; the batch variant halves both lines to $0.75/$3.75.</p>
+  <h3>Is Gemini 4 Hydrogen replacing Gemini 3.8 Flash?</h3>
+  <p>Yes — rolled out Nov 12, 2026 as the 3.8 Flash replacement with a claimed 2.5x faster task completion, and it's the default model for AI Mode in Search and for Antigravity agents. Its $1.50/$7.50 rates equal exactly what 3.8 Flash rises to on Jan 1, 2027 (from $0.75/$3.75), so migrating Flash workloads before January avoids paying Hydrogen's price for Flash's speed.</p>
+  <h3>Gemini 4 Hydrogen vs Gemini 4 Argon — which should you use?</h3>
+  <p>Hydrogen ($1.50/$7.50) is the fast agentic tier; Argon ($2/$10 intro through Nov 30, then $4/$20) is the hard-reasoning flagship. Hydrogen is cheaper on both lines and faster per task; Argon is the pick when reasoning depth, not speed, is the constraint.</p>
+  <h3>Does the price go up on long contexts?</h3>
+  <p>No. Google's published pricing is flat across the entire 1M-token context window — no surcharge tiers like some competitors' long-context schemes. Cache reads at $0.075/MTok are the main lever for workflows that re-read large contexts.</p>
+  <h3>Is there a free tier for Gemini 4 Hydrogen?</h3>
+  <p>Launch pricing material didn't publish a free tier. Check the official AI Studio pricing page for the current free-quota policy — Google has historically run no-cost quotas for new Gemini models, but we don't list unverified rates.</p>
+
+  <p class="hint">Related: <a href="/gemini-4-argon-pricing">Gemini 4 Argon pricing</a> · <a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus 5.5</a> · <a href="/gemini-decision-1-pricing">Gemini Decision 1 pricing</a> · <a href="/claude-token-calculator">Claude token cost calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Google's official Gemini 4 Hydrogen announcement (blog.google, Nov 12, 2026) and the OpenRouter model page on Nov 13, 2026. Not affiliated with or endorsed by Google. "Gemini" is a trademark of Google LLC — verify current rates on the <a rel="nofollow" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen">official announcement</a> and <a rel="nofollow" href="https://aistudio.google.com/docs/pricing">AI Studio pricing</a>.</p><nav><a href="/">Claude API Pricing</a> · <a href="/gemini-4-argon-pricing">Gemini 4 Argon</a> · <a href="/gemini-4-hydrogen-pricing">Gemini 4 Hydrogen</a> · <a href="/claude-token-calculator">Token Calculator</a></nav></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
