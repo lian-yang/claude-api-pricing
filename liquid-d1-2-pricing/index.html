@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Liquid d1.2 / d1.2-ultra Pricing (2026): $0.02 &amp; $0.042 Input — Output Always $0</title>
+<meta name="description" content="Liquid AI d1.2 pricing: $0.02 per MTok input, d1.2-ultra $0.042 — and output is always $0 because the models return zero generated tokens. Input-only billing rules for images and audio, the 65,536-token per-question cap, AA Decision Index results, and worked classification math, verified Nov 17, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/liquid-d1-2-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liquid d1.2 / d1.2-ultra Pricing — $0.02 &amp; $0.042 per MTok, Output Always $0">
+<meta property="og:description" content="Every published Liquid d1.2 rate: $0.02 per MTok input for d1.2, $0.042 for d1.2-ultra, output always $0 (zero generated tokens). Image billing ~1.5 tokens per 32×32 patch, audio 10 tokens/second, 65,536-token per-question cap, #1 on AA Decision Index v2.1 — with worked per-question math.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/liquid-d1-2-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Liquid d1.2 cost?","acceptedAnswer":{"@type":"Answer","text":"d1.2 costs $0.02 per million input tokens and d1.2-ultra costs $0.042. There is no output price: the models return calibrated answers with zero generated tokens, so usage.output_tokens is always 0. Launched Nov 16, 2026 on the Liquid API; rates verified against Liquid's blog, docs, and the OpenRouter listing on Nov 17, 2026."}},
+{"@type":"Question","name":"Why is there no output price for d1.2?","acceptedAnswer":{"@type":"Answer","text":"Because there are no output tokens. d1.2 and d1.2-ultra are decision models: instead of generating text, they return a calibrated answer (a value, span, bounding box, numeric range, or multi-select) with a confidence score. Generation is where most LLM bills concentrate, so removing it changes the economics of high-volume question-answering entirely."}},
+{"@type":"Question","name":"How does d1.2 pricing compare to Gemini Decision 1?","acceptedAnswer":{"@type":"Answer","text":"Per MTok of input, d1.2 is 5x cheaper ($0.02 vs $0.10) and d1.2-ultra is ~2.4x cheaper ($0.042 vs $0.10). Both bill input only and return closed-set answers rather than generated text. Note the shapes differ: Gemini Decision 1 bills input once across up to 1,000 questions per request, while Liquid bills state, images, and audio once per request plus each question's own tokens — see our Gemini Decision 1 pricing page for that side of the math."}},
+{"@type":"Question","name":"What are the input limits and media billing rules?","acceptedAnswer":{"@type":"Answer","text":"Each question can use up to 65,536 tokens of context (counting state, images, and audio), with a 250,000-byte text cap per question. Images bill at ~1.5 tokens per 32×32-pixel patch — a 1024×1024 image costs about 1,536 tokens. Audio bills at 10 tokens per second. The shared state, images, and audio bill once per request; additional questions add only their own tokens."}},
+{"@type":"Question","name":"Is d1.2 available on OpenRouter?","acceptedAnswer":{"@type":"Answer","text":"Yes — both models launched on the Liquid API (console.liquid.ai) on Nov 16, 2026, and an OpenRouter listing at the same input-only rates was live by Nov 17, 2026, with Vercel support also announced. Verify current provider coverage on OpenRouter's model pages before routing production traffic."}}
+]}
+</script>
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Claude API Pricing","url":"https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Claude API Pricing","url":"https://claude-api-pricing.vercel.app/","logo":"https://claude-api-pricing.vercel.app/favicon.svg","description":"Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/claude-api-effort">Effort</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-hydrogen-pricing">Hydrogen</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/qwen4-max-pricing">Qwen4 Max</a><a href="/hy4-flash-pricing">Hy4 flash</a><a href="/inkling-2-small-pricing">Inkling 2 Small</a><a href="/liquid-d1-2-pricing">Liquid d1.2</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/gemini-decision-1-pricing">Decision 1</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official rates · verified Nov 17, 2026</div>
+  <h1>Liquid d1.2 pricing — $0.02/$0.042 input, and output is always $0</h1>
+  <p class="sub">Liquid AI's decision models (launched Nov 16, 2026) price <code>d1.2</code> at <b>$0.02 per MTok of input and d1.2-ultra at $0.042 — with no output line at all</b>, because they return calibrated answers with zero generated tokens. Text, images, and audio go in; values, spans, bounding boxes, ranges, and multi-selects come out. d1.2-ultra ranks #1 on Artificial Analysis' Decision Index v2.1. This is the cheapest per-question pricing of any model on this site.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Official d1.2 / d1.2-ultra rates</h2>
+  <div class="tbl"><table>
+    <tr><th>Billing line</th><th>d1.2</th><th>d1.2-ultra</th><th>Notes</th></tr>
+    <tr><td>Input</td><td><b>$0.02 / MTok</b></td><td><b>$0.042 / MTok</b></td><td>Covers text, state, images, and audio — billed once per request</td></tr>
+    <tr><td>Output</td><td><b>$0 — always</b></td><td><b>$0 — always</b></td><td>Zero generated tokens; answers are calibrated spans/values/ranges with confidence</td></tr>
+    <tr><td>Image input</td><td colspan="2">~1.5 tokens per 32×32 patch</td><td>A 1024×1024 image ≈ 1,536 tokens, rounded up per image</td></tr>
+    <tr><td>Audio input</td><td colspan="2">10 tokens / second</td><td>Rounded up per clip; works as queried content or as the spoken question</td></tr>
+    <tr><td>Per-question cap</td><td colspan="2">65,536 tokens</td><td>Counting state + images + audio; 250KB text cap per question (CJK hits it first)</td></tr>
+  </table></div>
+  <p class="hint">Sources: Liquid AI's Nov 16, 2026 launch post (liquid.ai/blog/d1-2) and the official model docs, verified Nov 17, 2026; OpenRouter listing live at the same rates by Nov 17. The Decision Index claims below are Liquid's own reporting of Artificial Analysis' index, and the task benchmarks are Liquid's internal held-out sets — flagged honestly, because the five new answer types have no public benchmark yet.</p>
+
+  <h3>What high-volume classification actually bills</h3>
+  <p>Shape: 30,000 questions a month, each with a 1,000-token document plus a 50-token question — 1,050 billed tokens per request, 31.5M tokens a month.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Rate</th><th>Per month (30K questions)</th><th>Per 1,000 questions</th></tr>
+    <tr><td class="win"><b>Liquid d1.2</b></td><td>$0.02 / MTok in</td><td><b>~$0.63</b></td><td>~$0.021</td></tr>
+    <tr><td>Liquid d1.2-ultra</td><td>$0.042 / MTok in</td><td><b>~$1.32</b></td><td>~$0.044</td></tr>
+    <tr><td>Gemini Decision 1 (same shape)</td><td>$0.10 / MTok in</td><td>~$3.15</td><td>~$0.105</td></tr>
+    <tr><td>Generated-answer LLM, for contrast*</td><td>$0.15 / $0.47</td><td>~$11.78</td><td>~$0.39</td></tr>
+  </table></div>
+  <p class="hint">Worked from the docs' billing rules: state + question billed once per request, each question adds its own tokens. The Decision 1 column holds the request shape identical for comparability — but Decision 1 bills input once across up to 1,000 questions per request, which can shift its math dramatically for batch shapes; see <a href="/gemini-decision-1-pricing">its pricing page</a> for that side. *Contrast row: the same 30K questions on a generate-the-answer model (Qwen 3.8 Flash rates, ~500 output tokens per answer) — the output line alone (~$7.05) is ~11x the entire d1.2 bill. That's what "no output tokens" buys you.</p>
+
+  <h2>Benchmarks at launch — and their fine print</h2>
+  <ul>
+    <li><b>Decision Index v2.1:</b> d1.2-ultra scores <b>75 — #1 among decision models</b>, two points ahead of the previous best, per Artificial Analysis' index as reported by Liquid; no model beats d1.2 for less money on that index.</li>
+    <li><b>Calibration error</b> across 13 benchmarks (~22,505 questions): d1.2-ultra 0.8, d1.2 1.2 — vs 2.7 for Jev 1.14 and 7.2 for GPT-6 Luna per Liquid's table. Low calibration error means the confidence scores can be trusted for routing.</li>
+    <li><b>Internal task benchmarks:</b> receipt value reading 98% (ultra) / 96% (d1.2); RefCOCO grounding 94% both; audio QA 95-97% on ESC-50 and FLEURS across 43 languages.</li>
+    <li><b>The fine print:</b> the five new answer types (values, spans, boxes, ranges, multi-select) have no public benchmarks — those numbers come from Liquid's own held-out sets. Pilot on your data before trusting the 98s.</li>
+  </ul>
+  <div class="verdict api"><b>Price positioning:</b> d1.2 is the cheapest per-question model on this site — several-fold under the cheapest closed-set competitor and ~19x under a generated-answer Flash-tier model on the same shape — and d1.2-ultra buys the #1 decision-model ranking for about one-fifth of a cent per 50 questions. Against Gemini Decision 1 the trade is simple: 5x cheaper input and a 65,536-token per-question window vs Decision 1's once-per-request batch billing. Against generated-answer LLMs there is no comparison on price — the question is only whether closed-set answers fit your task. For document extraction, audio QA, and routing at volume, the answer is increasingly yes.</div>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does Liquid d1.2 cost?</h3>
+  <p>$0.02 per million input tokens for d1.2 and $0.042 for d1.2-ultra, billed input-only, verified Nov 17, 2026 against Liquid's launch post, official docs, and the OpenRouter listing. Output is always $0 — the models emit zero generated tokens.</p>
+  <h3>Why is there no output price?</h3>
+  <p>The models don't generate text. They return calibrated answers — a value, span, bounding box, numeric range, or multi-select — with a confidence score, so <code>usage.output_tokens</code> is always 0. Since generation is the expensive half of most LLM bills, removing it collapses per-question cost.</p>
+  <h3>How does d1.2 compare to Gemini Decision 1?</h3>
+  <p>5x cheaper input for d1.2 ($0.02 vs $0.10), ~2.4x for d1.2-ultra. Both are closed-set answer engines. The structural difference: Decision 1 bills input once across up to 1,000 questions in a single request, while Liquid bills state once per request plus each question's own tokens — for batch-heavy shapes, read <a href="/gemini-decision-1-pricing">our Decision 1 page</a> before choosing.</p>
+  <h3>What are the input limits?</h3>
+  <p>65,536 tokens per question including images and audio, with a 250,000-byte text cap per question. Media pricing: images ~1.5 tokens per 32×32 patch (1024×1024 ≈ 1,536 tokens), audio 10 tokens per second. Shared context bills once per request, not per question.</p>
+  <h3>Is d1.2 on OpenRouter?</h3>
+  <p>Yes — live at the same input-only rates as of Nov 17, 2026, alongside the day-one Liquid API. Vercel support was also announced at launch. Confirm provider coverage before routing production traffic.</p>
+
+  <p class="hint">Related: <a href="/gemini-decision-1-pricing">Gemini Decision 1 pricing</a> · <a href="/hy4-flash-pricing">Hy4 flash pricing</a> · <a href="/inkling-2-small-pricing">Inkling 2 Small pricing</a> · <a href="/claude-token-calculator">Claude token cost calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Liquid AI's Nov 16, 2026 launch post (liquid.ai/blog/d1-2), the official model docs, and the OpenRouter listing on Nov 17, 2026. Not affiliated with or endorsed by Liquid AI. Benchmark figures are Liquid's reported results on Artificial Analysis' index and internal held-out sets. Verify current rates on the <a rel="nofollow" href="https://www.liquid.ai/blog/d1-2">official announcement</a> and <a rel="nofollow" href="https://docs.liquid.ai/lfm/models/d1">model docs</a>.</p><nav><a href="/">Claude API Pricing</a> · <a href="/liquid-d1-2-pricing">Liquid d1.2</a> · <a href="/gemini-decision-1-pricing">Gemini Decision 1</a> · <a href="/claude-token-calculator">Token Calculator</a></nav></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>Inkling 2 Small API Pricing (2026): $0.30/$1.00 per MTok with ARC-AGI-2 at 81.7%</title>
+<meta name="description" content="Inkling 2 Small pricing: $0.30 input / $1.00 output per MTok, identical across DeepInfra, Nebius, Together AI and Thinking Machines' own API. 262K context, open weights, ARC-AGI-2 (Verified) 81.7% per ARC Prize. Provider speed table, blended price, and frontier-rate comparisons, verified Nov 17, 2026.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/inkling-2-small-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inkling 2 Small API Pricing — $0.30/$1.00 per MTok">
+<meta property="og:description" content="Every published Inkling 2 Small rate: $0.30/$1.00 per MTok uniform across four providers, blended $0.18 with cache hits, 262K context, open weights — plus the ARC-AGI-2 81.7% score that puts frontier-tier reasoning at small-model prices, with per-provider speed and cost-per-task data.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/inkling-2-small-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Inkling 2 Small cost?","acceptedAnswer":{"@type":"Answer","text":"Inkling 2 Small costs $0.30 per million input tokens and $1.00 per million output tokens — the same rates on DeepInfra, Nebius, Together AI, and Thinking Machines' own API. With cache hits factored at Artificial Analysis' 7:2:1 blend, the effective price drops to about $0.18 per MTok. Pricing verified against Artificial Analysis' provider table on Nov 17, 2026."}},
+{"@type":"Question","name":"Why do providers cost differently if rates are identical?","acceptedAnswer":{"@type":"Answer","text":"List rates are identical but real-world cost isn't: Artificial Analysis measures blended prices from $0.18 (DeepInfra, Together, Thinking Machines) to $0.20 (Nebius), and cost per Intelligence Index task from $1.15 to $2.01. Time to first answer varies more — 12.6s on Together vs 37.9s on Thinking Machines — so pick by latency and reliability, not list price."}},
+{"@type":"Question","name":"How does Inkling 2 Small's price compare to frontier models?","acceptedAnswer":{"@type":"Answer","text":"At $0.30/$1.00 it undercuts GPT-6.1 Terra ($1/$5) by ~3x on input and 5x on output, Claude Sonnet 5.5 ($2/$10) by ~7x on input, and Kimi K3 ($3/$15) by 10x on input — while ARC Prize published an ARC-AGI-2 (Verified) score of 81.7% for it in mid-November 2026, a frontier-tier abstraction score at small-model prices."}},
+{"@type":"Question","name":"Is there a free or cheaper way to run Inkling 2 Small?","acceptedAnswer":{"@type":"Answer","text":"The model ships as open weights, so self-hosting is the zero-margin-rate option if you have GPUs — Artificial Analysis lists no free hosted tier across the four providers it tracks. Cache hits are the main hosted discount: they carry a significant discount versus fresh input, which is why the blended price ($0.18) sits well below list."}},
+{"@type":"Question","name":"What is Inkling 2 Small's context window?","acceptedAnswer":{"@type":"Answer","text":"Thinking Machines lists a 262K-token context for the model. Context windows for the other three providers weren't rendered in Artificial Analysis' comparison table on Nov 17, 2026 — check each provider's model card before committing long-context workloads."}}
+]}
+</script>
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Claude API Pricing","url":"https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Claude API Pricing","url":"https://claude-api-pricing.vercel.app/","logo":"https://claude-api-pricing.vercel.app/favicon.svg","description":"Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/claude-api-effort">Effort</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-hydrogen-pricing">Hydrogen</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/qwen4-max-pricing">Qwen4 Max</a><a href="/hy4-flash-pricing">Hy4 flash</a><a href="/inkling-2-small-pricing">Inkling 2 Small</a><a href="/liquid-d1-2-pricing">Liquid d1.2</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/gemini-decision-1-pricing">Decision 1</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Official rates · verified Nov 17, 2026</div>
+  <h1>Inkling 2 Small API pricing — $0.30 input, $1.00 output, at every provider</h1>
+  <p class="sub">Thinking Machines' open-weights reasoner prices <code>inkling-2-small</code> at <b>$0.30 / $1.00 per MTok — identical rates on DeepInfra, Nebius, Together AI, and Thinking Machines' own API</b> — with a 262K-token context and, per ARC Prize's mid-November publication, an ARC-AGI-2 (Verified) score of <b>81.7%</b>: frontier-tier abstraction at small-model prices. Blended with cache hits it effectively runs at ~$0.18 per MTok.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>Inkling 2 Small rates by provider</h2>
+  <div class="tbl"><table>
+    <tr><th>Provider</th><th>Input / MTok</th><th>Output / MTok</th><th>Blended*</th><th>Cost / II task</th><th>TTFT</th></tr>
+    <tr><td class="win"><b>DeepInfra</b></td><td>$0.30</td><td>$1.00</td><td>$0.18</td><td>$1.15 / 23.3 min</td><td>—</td></tr>
+    <tr><td><b>Thinking Machines</b> (first-party)</td><td>$0.30</td><td>$1.00</td><td>$0.18</td><td>$1.18 / 21.6 min</td><td>37.9s</td></tr>
+    <tr><td><b>Together AI</b></td><td>$0.30</td><td>$1.00</td><td>$0.18</td><td>$1.31 / 10.5 min</td><td>12.6s</td></tr>
+    <tr><td><b>Nebius</b></td><td>$0.30</td><td>$1.00</td><td>$0.20</td><td>$2.01 / 19.9 min</td><td>25.2s</td></tr>
+  </table></div>
+  <p class="hint">*Blended at Artificial Analysis' 7:2:1 cache-hit/input/output weighting. Source: Artificial Analysis provider table, verified Nov 17, 2026. Identical list rates, materially different real-world costs — Nebius lands ~1.1x pricier blended and ~1.7x pricier per task than DeepInfra, and first-token latency spans 12.6-37.9s. "Cost per II task" is AA's Intelligence Index task benchmark, not your workload.</p>
+
+  <h2>The angle: frontier-tier ARC scores at small-model rates</h2>
+  <p>ARC Prize published Inkling 2 Small's verified results in mid-November 2026: <b>81.7% on ARC-AGI-2 (Verified)</b>, with ARC-AGI-1 and ARC-AGI-3 results published alongside. ARC-AGI-2 is the abstraction benchmark where frontier models historically scored single digits to low tens — an 81.7% at $0.30/$1.00 is the strongest reasoning-per-dollar datapoint of this launch cycle. The catch is speed: this is a reasoning model, and time-to-first-answer runs 12-38 seconds depending on provider.</p>
+  <div class="tbl"><table>
+    <tr><th>Model</th><th>Input / MTok</th><th>Output / MTok</th><th>Position</th></tr>
+    <tr><td class="win"><b>Inkling 2 Small</b></td><td><b>$0.30</b></td><td><b>$1.00</b></td><td>ARC-AGI-2 (Verified) 81.7%; 262K context; open weights</td></tr>
+    <tr><td>GPT-6.1 Terra</td><td>$1.00</td><td>$5.00</td><td>OpenAI small flagship tier — <a href="/gpt-6-1-terra-pricing">2x rates beyond 272K</a></td></tr>
+    <tr><td>Claude Sonnet 5.5</td><td>$2.00</td><td>$10.00</td><td>Frontier workhorse tier</td></tr>
+    <tr><td>Kimi K3</td><td>$3.00</td><td>$15.00</td><td>1M context premium tier — <a href="/kimi-k3-pricing">Kimi K3 pricing</a></td></tr>
+  </table></div>
+  <div class="verdict api"><b>Price positioning:</b> for abstraction-heavy reasoning — puzzle-style planning, hard extraction, agentic decision steps — Inkling 2 Small is 3-10x under the cheapest frontier alternatives at a score point that was frontier-exclusive weeks ago. It is not a latency play (slow TTFT), not a long-context play (262K vs 1M peers), and ARC is one benchmark family, not your workload. The cheap eval makes the decision easy: run your hardest 50 prompts through it for pennies before re-architecting anything around it.</div>
+
+  <h2>Launch facts that matter for billing</h2>
+  <ul>
+    <li><b>Uniform rates, real differences:</b> all four providers list $0.30/$1.00, but blended cost, per-task cost, TTFT, and error rates differ enough to matter — Together is the fast lane (10.5 min per II task, 12.6s TTFT), DeepInfra the cheap lane.</li>
+    <li><b>Cache is the discount lever:</b> cache hits carry a significant discount vs fresh input — the reason the blended price ($0.18) sits ~40% under list. Cache write/storage bill separately per provider.</li>
+    <li><b>Open weights:</b> self-hosting is the floor-cost option; four hosted providers already carry it at identical rates.</li>
+    <li><b>Reliability datapoint:</b> Thinking Machines' first-party endpoint measured a 0.0% error rate on AA's runs — relevant for unattended pipelines.</li>
+  </ul>
+
+  <h2 id="faq">FAQ</h2>
+  <h3>How much does Inkling 2 Small cost?</h3>
+  <p>$0.30 per million input tokens and $1.00 per million output tokens on DeepInfra, Nebius, Together AI, and Thinking Machines' own API, verified Nov 17, 2026 against Artificial Analysis' provider table. Blended with cache hits at AA's 7:2:1 weighting it runs ~$0.18 per MTok.</p>
+  <h3>Why do providers cost differently if rates are identical?</h3>
+  <p>List price is uniform but realized cost isn't: blended prices run $0.18-$0.20 and cost per Intelligence Index task runs $1.15-$2.01 across the four providers. Latency differs most — 12.6s vs 37.9s time-to-first-answer. Choose by latency and reliability, not the rate card.</p>
+  <h3>How does the price compare to frontier models?</h3>
+  <p>~3x under GPT-6.1 Terra's input, ~7x under Sonnet 5.5's, 10x under Kimi K3's — at an ARC-AGI-2 (Verified) score of 81.7% published by ARC Prize in mid-November 2026. If your workload is abstraction-heavy rather than long-context or latency-sensitive, the price-performance gap is the largest in the current lineup.</p>
+  <h3>Is there a free tier?</h3>
+  <p>No free hosted tier appears across the four tracked providers. The model is open-weights, so self-hosting is the cost floor if you have GPU capacity.</p>
+  <h3>What is the context window?</h3>
+  <p>262K tokens on Thinking Machines' endpoint. Other providers' context limits weren't rendered in AA's comparison table on Nov 17 — verify on each provider's model card before long-context commitments.</p>
+
+  <p class="hint">Related: <a href="/gpt-6-1-terra-pricing">GPT-6.1 Terra pricing</a> · <a href="/kimi-k3-pricing">Kimi K3 pricing</a> · <a href="/liquid-d1-2-pricing">Liquid d1.2 pricing</a> · <a href="/claude-token-calculator">Claude token cost calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap"><p>Independent guide. Rates verified against Artificial Analysis' Inkling 2 Small provider table on Nov 17, 2026; ARC-AGI-2 score per ARC Prize's publication. Not affiliated with or endorsed by Thinking Machines Lab. "Inkling" is a trademark of Thinking Machines Lab — verify current rates on the <a rel="nofollow" href="https://www.thinkingmachines.ai">official announcement</a> and the <a rel="nofollow" href="https://artificialanalysis.ai/models/inkling-2-small/providers">Artificial Analysis provider table</a>.</p><nav><a href="/">Claude API Pricing</a> · <a href="/inkling-2-small-pricing">Inkling 2 Small</a> · <a href="/gpt-6-1-terra-pricing">GPT-6.1 Terra</a> · <a href="/claude-token-calculator">Token Calculator</a></nav></footer>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
