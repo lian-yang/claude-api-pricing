@@ -164,3 +164,9 @@
   benchmarks for the five new answer types); worked math: 30K questions/mo × 1,050 tok = $0.63/mo (d1.2), $1.32
   (ultra), $3.15 at Decision 1's $0.10 same-shape, ~$11.78 on a generated-answer Flash tier; live on Liquid API +
   OpenRouter Nov 17.
+
+- [/heygen-avatar-6-pricing](https://claude-api-pricing.vercel.app/heygen-avatar-6-pricing): HeyGen Avatar 6 cost —
+  API from $0.05/sec (Turbo) / $0.10/sec (standard listing) on OpenRouter (listed Nov 17 2026); in-app credits
+  20 cr/min Turbo and 40 cr/min Pro at 720p/1080p, 35/58 cr/min at 2K; plans Creator $29/600cr, Pro from $49/1,000cr,
+  Business $149/1,500cr with $0.05/credit top-ups; at the marginal rate credits render the same video ~3x cheaper
+  than the API ($1.00 vs $3.00/min Turbo, $2.00 vs $6.00/min Pro). Verified Nov 18 2026.

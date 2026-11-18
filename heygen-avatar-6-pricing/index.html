@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Jj22tqGo-pl9SeQwHSe4v5Hwzucg1_tb4j_OhgN8BTA">
+<title>HeyGen Avatar 6 Pricing: $0.05–$0.10/Sec API + Credit Plans</title>
+<meta name="description" content="HeyGen Avatar 6 API runs from $0.05/sec (Turbo) or $0.10/sec; in-app credits cost 20–58/min, about 3x cheaper. Per-minute math, plan credits and a calculator.">
+<link rel="canonical" href="https://claude-api-pricing.vercel.app/heygen-avatar-6-pricing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HeyGen Avatar 6 Pricing — Per-Second API Rates and Credit Plans">
+<meta property="og:description" content="Avatar 6 API from $0.05/sec (Turbo) or $0.10/sec; credits bill 20–58 per minute, about 3x cheaper than the API. Verified Nov 18, 2026.">
+<meta property="og:url" content="https://claude-api-pricing.vercel.app/heygen-avatar-6-pricing">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does HeyGen Avatar 6 cost per second?","acceptedAnswer":{"@type":"Answer","text":"Through API aggregators, Avatar 6 is listed from $0.05 per second for the Turbo engine and from $0.10 per second for the standard listing, charged by actual seconds of generated video. HeyGen's own app does not bill per second — it draws credits at 20–58 credits per minute depending on engine and resolution."}},
+{"@type":"Question","name":"How much is Avatar 6 per minute on HeyGen credits?","acceptedAnswer":{"@type":"Answer","text":"Avatar 6 Turbo uses 20 credits per minute at 720p or 1080p and 35 credits per minute at 2K. Avatar 6 Pro uses 40 credits per minute at 720p or 1080p and 58 credits per minute at 2K. At the marginal top-up rate of $0.05 per credit, that is $1.00–$2.90 per minute."}},
+{"@type":"Question","name":"Is Avatar 6 cheaper with credits or through the API?","acceptedAnswer":{"@type":"Answer","text":"Credits are roughly 3x cheaper at the margin. Turbo renders cost about $1.00 per minute via $0.05 credits versus $3.00 per minute via the API; the Pro engine is about $2.00 versus $6.00. The API earns its premium when you need programmatic access, webhooks or batching — for manual creation inside the app, credits win on cost."}},
+{"@type":"Question","name":"What do HeyGen plans cost in 2026?","acceptedAnswer":{"@type":"Answer","text":"Creator is $29 per month with 600 credits, Pro starts at $49 per month with 1,000 credits and scales to higher tiers, and Business is $149 per month with 1,500 credits plus the ability to buy extra credits at $0.05 per credit in $5 blocks of 100. HeyGen also runs a Free plan for testing."}},
+{"@type":"Question","name":"Avatar 6 Turbo vs Avatar 6 Pro — which should I use?","acceptedAnswer":{"@type":"Answer","text":"Pro draws exactly twice the credits of Turbo at 720p/1080p (40 vs 20 per minute) and costs twice as much per second through the API ($0.10 vs $0.05). Pick Turbo when turnaround and cost dominate, Pro when the extra render quality is the deliverable. At 2K the gap narrows in relative terms: 35 vs 58 credits per minute."}},
+{"@type":"Question","name":"How much does a 3-minute Avatar 6 video cost?","acceptedAnswer":{"@type":"Answer","text":"A 3-minute talking-head video at 720p/1080p draws 60 credits on Turbo (about $3.00 at the $0.05 marginal rate) or 120 credits on Pro (about $6.00). Through the API the same render is $9.00 on Turbo or $18.00 on the standard listing. Add 10–20% for retries on experimental prompts."}}]}
+</script>
+
+  <meta property="og:site_name" content="Claude API Pricing">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Claude API Pricing", "url": "https://claude-api-pricing.vercel.app/", "logo": "https://claude-api-pricing.vercel.app/favicon.svg", "description": "Claude API Pricing — tools and guides by Claude API Pricing."}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/">Claude API<span>Pricing</span></a><nav class="top"><a href="/#calculator">Calculator</a><a href="/#api-prices">Claude Prices</a><a href="/claude-fable-5-2-pricing">Fable 5.2</a><a href="/claude-code-pricing">Claude Code</a><a href="/claude-api-effort">Effort</a><a href="/deepseek-search-api-pricing">Search API</a><a href="/deepseek-v4-pricing">DeepSeek V4</a><a href="/kling-3-0-pricing">Kling 3.0</a><a href="/heygen-avatar-6-pricing">HeyGen Avatar 6</a><a href="/gemini-4-argon-pricing">Gemini 4</a><a href="/gemini-4-hydrogen-pricing">Hydrogen</a><a href="/gemini-4-argon-vs-opus-5-5">Argon vs Opus</a><a href="/gemini-4-carbon-vs-opus-5-5">Carbon vs Opus</a><a href="/gpt-5-6-pricing">GPT-5.6</a><a href="/gpt-6-1-sol-vs-astra">Sol vs Astra</a><a href="/gpt-6-1-terra-pricing">Terra</a><a href="/gpt-6-1-sol-vs-opus-5-5">Sol vs Opus</a><a href="/kimi-k3-pricing">Kimi K3</a><a href="/qwen-3-8-pricing">Qwen 3.8</a><a href="/qwen4-max-pricing">Qwen4 Max</a><a href="/hy4-flash-pricing">Hy4 flash</a><a href="/inkling-2-small-pricing">Inkling 2 Small</a><a href="/liquid-d1-2-pricing">Liquid d1.2</a><a href="/muse-spark-vs-claude-app">Muse Spark</a><a href="/muse-spark-pricing">Muse Pricing</a><a href="/voxtral-api-pricing">Voxtral API</a><a href="/grok-voice-3-pricing">Grok Voice</a><a href="/gemini-decision-1-pricing">Decision 1</a><a href="#faq">FAQ</a><a href="/claude-token-calculator">Token Calc</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="badge">Rates verified · Nov 18, 2026</div>
+  <h1>HeyGen Avatar 6 pricing — per-second API rates and plan credits</h1>
+  <p class="sub">Avatar 6 is HeyGen's newest talking-avatar engine. It has <b>two price tags</b>: per-second API rates ($0.05–$0.10/sec) and in-app credits (20–58 per minute). The gap between them is the whole story — credits render the same video for about <b>a third of the API price</b>.</p>
+</div></div>
+
+<section class="prose"><div class="wrap">
+  <h2>API rates: what Avatar 6 costs per second</h2>
+  <p>HeyGen's Avatar 6 engines are listed on API aggregators at per-second rates, charged by actual seconds generated:</p>
+  <div class="tbl"><table>
+    <tr><th>API listing</th><th>Price / second</th><th>Price / minute</th><th>3-min marketing clip</th></tr>
+    <tr><td>heygen-avatar-6 (standard listing)</td><td>from $0.10</td><td>~$6.00</td><td>~$18.00</td></tr>
+    <tr><td>heygen-avatar-6-turbo</td><td>from $0.05</td><td>~$3.00</td><td>~$9.00</td></tr>
+  </table></div>
+  <p class="hint">Listed on OpenRouter on Nov 17, 2026 (Turbo: "the faster, lower-cost variant"); AI/ML API lists Turbo at the same $0.05/sec, and fal.ai hosts heygen/avatar-6. Third-party rates are the aggregator's own pricing, not HeyGen's direct API price card.</p>
+
+  <h2>Credit rates inside the HeyGen app</h2>
+  <p>HeyGen's credit-based plans don't bill per second — each engine draws credits per minute of finished video <cite><a rel="nofollow" href="https://help.heygen.com/en/articles/15126059-how-to-use-credits-on-heygen">per HeyGen's help center</a></cite>:</p>
+  <div class="tbl"><table>
+    <tr><th>Engine</th><th>720p / 1080p</th><th>2K</th><th>Cost / min at $0.05 per credit</th></tr>
+    <tr><td>Avatar 6 Turbo</td><td>20 credits/min</td><td>35 credits/min</td><td>$1.00 ($1.75 at 2K)</td></tr>
+    <tr><td>Avatar 6 Pro</td><td>40 credits/min</td><td>58 credits/min</td><td>$2.00 ($2.90 at 2K)</td></tr>
+  </table></div>
+  <div class="tbl"><table>
+    <tr><th>Plan</th><th>Price</th><th>Credits / month</th><th>Effective rate</th></tr>
+    <tr><td>Creator</td><td>$29/mo</td><td>600</td><td>~$0.048 / credit</td></tr>
+    <tr><td>Pro</td><td>from $49/mo</td><td>1,000+</td><td>~$0.049 / credit</td></tr>
+    <tr><td>Business</td><td>$149/mo</td><td>1,500</td><td>top-ups $0.05 / credit ($5 blocks of 100)</td></tr>
+  </table></div>
+  <p class="hint">A Free plan exists for testing; the math below starts at Creator. HeyGen notes credit rates can vary by account age and region — the cost shown in-product before generating is the authoritative number.</p>
+
+  <h2>Credits vs API: the same render, two price tags</h2>
+  <p>Convert credits at the marginal $0.05 top-up rate and hold resolution at 720p/1080p, and the comparison is stark:</p>
+  <div class="tbl"><table>
+    <tr><th>Engine</th><th>Via credits</th><th>Via API</th><th>Gap</th></tr>
+    <tr><td>Avatar 6 Turbo, 1 min</td><td>20 credits ≈ $1.00</td><td>$3.00</td><td>API ≈ 3x</td></tr>
+    <tr><td>Avatar 6 Pro, 1 min</td><td>40 credits ≈ $2.00</td><td>$6.00</td><td>API ≈ 3x</td></tr>
+    <tr><td>Turbo, 3-min clip</td><td>60 credits ≈ $3.00</td><td>$9.00</td><td>API ≈ 3x</td></tr>
+  </table></div>
+  <div class="verdict api"><b>Which path pays:</b> for anything you make by hand, credits win by roughly 3x — and subscription credits amortize slightly below the $0.05 marginal rate. The API earns its premium only when a program needs to do the rendering: webhooks, batch jobs, no human in the loop. Budget an extra 10–20% of credits for retries on experimental prompts.</div>
+
+  <h2>Avatar 6 cost calculator</h2>
+  <div class="calc" id="calc">
+    <div class="calc-inputs">
+      <label>Engine
+        <select id="engine">
+          <option value="turbo" selected>Avatar 6 Turbo — 20 credits/min, $0.05/sec API</option>
+          <option value="pro">Avatar 6 Pro — 40 credits/min, $0.10/sec API</option>
+        </select>
+      </label>
+      <label>Resolution
+        <select id="res">
+          <option value="hd" selected>720p / 1080p</option>
+          <option value="2k">2K</option>
+        </select>
+      </label>
+      <label>Video length (minutes) <output id="lenVal">1</output>
+        <input type="range" id="len" min="0.25" max="10" step="0.25" value="1">
+      </label>
+    </div>
+    <div class="calc-out">
+      <div class="verdict" id="calcOut">…</div>
+      <p class="hint">Credits priced at the $0.05 marginal top-up rate (subscription credits amortize a little cheaper); API priced at the per-second listing rates. In-app credits are only usable inside HeyGen's editor — the API is for pipelines.</p>
+    </div>
+  </div>
+
+  <h2>Turbo vs Pro — how to pick</h2>
+  <p>HeyGen's help center names the two Avatar 6 engines <b>Turbo</b> (20 credits/min) and <b>Pro</b> (40 credits/min); OpenRouter's listings carry the same 2x spacing ($0.05 vs $0.10 per second). HeyGen doesn't publish an official mapping between the API listing names and the in-app engine names, so confirm which engine a given API listing renders before you commit a pipeline to it. Rule of thumb: Turbo when turnaround and cost dominate, Pro when render quality is the deliverable. At 2K the credit gap narrows to 35 vs 58 per minute.</p>
+
+  <h3>How that compares with other AI video</h3>
+  <ul>
+    <li><a href="/kling-3-0-pricing">Kling 3.0</a> bills per second in credits too — ~6–12 credits/s at 720p–1080p, so a 5-second clip lands near $0.68 at list; Avatar 6's credit math is closer to Kling's than to token-based LLM pricing</li>
+    <li>Audio-side APIs run per-minute like Avatar 6 credits: see <a href="/voxtral-api-pricing">Voxtral API pricing</a> and <a href="/grok-voice-3-pricing">Grok Voice 3</a></li>
+    <li>Token-based model APIs don't map to per-second video at all — that's why this page keeps both columns in minutes and seconds, not MTok</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details><summary>How much does HeyGen Avatar 6 cost per second?</summary><div class="a">Through API aggregators, from $0.05/sec (Turbo) and from $0.10/sec (standard listing), charged by actual seconds generated. The HeyGen app itself doesn't bill per second — it draws 20–58 credits per minute.</div></details>
+    <details><summary>How much is Avatar 6 per minute on credits?</summary><div class="a">Turbo: 20 credits/min at 720p/1080p, 35/min at 2K. Pro: 40/min at 720p/1080p, 58/min at 2K. At the $0.05 marginal credit rate that's $1.00–$2.90 per minute.</div></details>
+    <details><summary>Credits or API — which is cheaper?</summary><div class="a">Credits, by about 3x at the margin: Turbo ≈ $1.00/min vs $3.00/min API; Pro ≈ $2.00 vs $6.00. The API premium buys programmatic access, webhooks and batching — for manual creation, credits win.</div></details>
+    <details><summary>What do HeyGen plans cost?</summary><div class="a">Creator $29/mo with 600 credits, Pro from $49/mo with 1,000+ credits, Business $149/mo with 1,500 credits and $0.05/credit top-ups in $5 blocks. A Free plan exists for testing.</div></details>
+    <details><summary>Turbo vs Pro — which should I use?</summary><div class="a">Pro draws exactly twice Turbo's credits at 720p/1080p and costs twice as much per second via API. Turbo when cost and turnaround dominate; Pro when render quality is the deliverable.</div></details>
+    <details><summary>How much is a 3-minute Avatar 6 video?</summary><div class="a">60 credits on Turbo ≈ $3.00, or 120 credits on Pro ≈ $6.00, at 720p/1080p via credits. Same render via API: $9.00 (Turbo) or $18.00 (standard listing). Add 10–20% for retries.</div></details>
+  </div>
+
+  <p class="hint">Related: <a href="/kling-3-0-pricing">Kling 3.0 pricing</a> · <a href="/voxtral-api-pricing">Voxtral API pricing</a> · <a href="/grok-voice-3-pricing">Grok Voice 3 pricing</a> · <a href="/#calculator">Claude API vs subscription calculator</a></p>
+</div></section>
+
+<footer class="site"><div class="wrap">
+  <div>© 2026 Claude API Pricing — independent pricing guides. Not affiliated with HeyGen. API rates from OpenRouter model pages and credit rates from HeyGen's help center, verified Nov 18, 2026 — verify current rates on <a rel="nofollow" href="https://www.heygen.com/pricing">HeyGen's pricing page</a> and <a rel="nofollow" href="https://openrouter.ai/heygen/heygen-avatar-6-turbo">OpenRouter</a>.</div>
+</div></footer>
+<script>
+(function(){
+  var CR = 0.05;
+  var RATES = {
+    turbo:{crHD:20, cr2k:35, api:0.05},
+    pro:{crHD:40, cr2k:58, api:0.10}
+  };
+  var engine=document.getElementById('engine'),
+      res=document.getElementById('res'),
+      len=document.getElementById('len'),
+      lenVal=document.getElementById('lenVal'),
+      out=document.getElementById('calcOut');
+  function money(n){ return '$' + (Math.round(n*100)/100).toFixed(2); }
+  function calc(){
+    var r = RATES[engine.value];
+    var mins = parseFloat(len.value);
+    var crPerMin = (res.value==='2k') ? r.cr2k : r.crHD;
+    var credits = crPerMin * mins;
+    var viaCredits = credits * CR;
+    var viaApi = r.api * 60 * mins;
+    lenVal.textContent = mins;
+    var gap = Math.round(viaApi / Math.max(viaCredits, 0.01));
+    out.innerHTML = '<b>' + credits + ' credits ≈ ' + money(viaCredits) +
+      '</b> via app credits &nbsp;·&nbsp; <b>' + money(viaApi) +
+      '</b> via API — about ' + gap + 'x the credit cost at ' +
+      (res.value==='2k' ? '2K' : '720p/1080p') + ', ' + mins + ' min on ' +
+      (engine.value==='turbo' ? 'Avatar 6 Turbo' : 'Avatar 6 Pro') + '.';
+  }
+  engine.addEventListener('change', calc);
+  res.addEventListener('change', calc);
+  len.addEventListener('input', calc);
+  calc();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
